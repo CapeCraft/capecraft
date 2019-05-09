@@ -1,0 +1,16 @@
+.nav-link {
+  color: white !important;
+}
+
+.icon {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+.pagination-nav {
+  background-color: transparent !important;
+}
+
+.pagination {
+  display: inline-flex;
+}

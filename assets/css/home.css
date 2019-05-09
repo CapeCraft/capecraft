@@ -1,0 +1,36 @@
+main {
+  height: 100vh;
+}
+
+nav {
+  background-color: #0275d8 !important;
+}
+
+.nav-item {
+  padding: 0 1vw
+}
+
+body > .nav, body > .primary-color {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+@media(max-width: 992px) {
+  body > .nav, body > .primary-color {
+    background-color: #151625 !important;
+  }
+}
+
+.avatar {
+  transition: filter .3s ease-in-out;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.avatar:hover {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}

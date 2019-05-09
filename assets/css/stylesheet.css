@@ -1,0 +1,42 @@
+body {
+  background: url("/assets/img/homeback.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* CONTENT */
+
+/* NAVBAR */
+
+.nav-item {
+  padding: 0 1vw;
+}
+
+#wrapper {
+  min-height: 70vh;
+  background: white;
+  width: 80%;
+  margin: 4vh auto;
+  padding: 5vh 5vw;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+  color: white;
+  padding: 2vh 2vw;
+  background: #0e0e0e;
+}
+
+/* COLORS */
+
+.primary-color {
+  background-color: #0275d8 !important;
+}
+
+/* UTILS */
+
+.copy {
+  cursor: pointer;
+}

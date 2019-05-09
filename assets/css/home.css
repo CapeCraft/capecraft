@@ -1,0 +1,39 @@
+#menu-wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar {
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+@media(max-width: 992px) {
+  .navbar {
+    background-color: #151625 !important;
+  }
+}
+
+#wrapper {
+  background: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  width: 100%;
+}
+
+section {
+  height: 100vh;
+}
+
+article {
+  color: white;
+  top: 50%;
+  transform: translatey(-50%);
+  position: relative;
+}
+
+footer {
+  margin-top: 0;
+}

@@ -1,0 +1,72 @@
+#server {
+  padding: 5vh 5vw;
+  background: url("/assets/img/dirt.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.serverlogo {
+  width: 70%;
+}
+
+@media(max-width: 992px) {
+  .serverlogo {
+    width: 20%;
+  }
+}
+
+#serverip {
+  padding-left: 2vh;  
+  font-size: 2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+@media(max-width: 992px) {
+  #serverip { 
+    font-size: 1.6rem;
+  }
+  #staff > div {
+    box-sizing: border-box !important;
+  }
+}
+
+#about > .logo {
+  width: 30%;
+}
+
+@media(max-width: 992px) {
+  #about > .logo {
+    width: 100%;
+  }
+}
+
+#staff {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+#staff > div {
+  background: white; 
+  padding: 4vh;
+  box-sizing: content-box;
+  margin-bottom: 1vh;
+}
+
+#staff > .flex-2 >img {
+    margin:  0 auto;
+    display:  block;
+}
+
+#staff > .flex-2 > h1 {
+    text-align: center;
+    margin-bottom:  0;
+}
+
+#staff > .flex-2 > h3 {
+    margin-top: 0;
+    text-align:  center;
+}

@@ -1,0 +1,45 @@
+.content {
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 4vh;
+  background: white;
+  min-height: 90vh;
+}
+
+#admin-menu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0275d8;
+}
+
+#wrapper > .flex-box > .flex-2 {
+  background: #0275d8;
+}
+
+@media(max-width: 992px) {
+  #admin-menu {
+    height: auto !important;
+  }
+}
+
+#admin-menu>ul {
+  margin: 0;
+  padding: 1vh;
+  list-style: none;
+}
+
+#admin-menu>ul>li>a {
+  box-sizing: border-box;
+  color: white;
+  padding: 2vh 1vw;
+  text-decoration: none;
+  transition: 0.25s;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+#admin-menu>ul>li>a:hover {
+  background: #005eaf;
+}

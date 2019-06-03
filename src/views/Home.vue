@@ -19,25 +19,6 @@ main {
   height: 100vh;
 }
 
-.nav-item {
-  padding: 0 1vw
-}
-
-body > .nav, body > .primary-color {
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.3);
-  transition: .3s;
-}
-
-@media(max-width: 992px) {
-  body > .nav, body > .primary-color {
-    background-color: #151625 !important;
-  }
-}
-
 .homelogo {
   width: 40%;
   margin-bottom: -3vh;

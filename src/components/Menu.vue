@@ -16,8 +16,6 @@
         <li class="nav-item"><router-link class="nav-link" target="_blank" to="/merch">Merch</router-link></li>
         <li class="nav-item"><router-link class="nav-link" target="_blank" to="/donate">Donate</router-link></li>
         <li class="nav-item"><router-link class="nav-link" target="_blank" to="/discord">Discord</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" target="_blank" to="/youtube">YouTube</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" target="_blank" to="/youtube">Livestream</router-link></li>
       </ul>
     </div>
   </nav>

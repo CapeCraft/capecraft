@@ -11,11 +11,19 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><router-link class="nav-link" to="/">Home</router-link></li>
         <li class="nav-item"><router-link class="nav-link" to="/blog">Blog</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" to="/rules">Rules</router-link></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Rules</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <router-link class="dropdown-item" to="/rules">Game Rules</router-link>
+            <router-link class="dropdown-item" to="/rules/alts">Alt Rules</router-link>
+            <div class="dropdown-divider"></div>
+            <router-link class="dropdown-item" to="/unban">Unban Request</router-link>
+          </div>
+        </li>
         <li class="nav-item"><router-link class="nav-link" to="/staff">Staff</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" target="_blank" to="/merch">Merch</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" target="_blank" to="/donate">Donate</router-link></li>
-        <li class="nav-item"><router-link class="nav-link" target="_blank" to="/discord">Discord</router-link></li>
+        <li class="nav-item"><a class="nav-link" target="_blank" href="/merch">Merch</a></li>
+        <li class="nav-item"><a class="nav-link" target="_blank" href="/donate">Donate</a></li>
+        <li class="nav-item"><a class="nav-link" target="_blank" href="/discord">Discord</a></li>
       </ul>
     </div>
   </nav>

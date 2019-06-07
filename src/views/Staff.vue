@@ -11,9 +11,10 @@
           <div class="staff-group">
             <img class="img-fluid" src="https://crafatar.com/avatars/ba4161c03a42496c8ae07d13372f3371?helm=true">
             <div>
-              <h2>{{this.staff['ba4161c03a42496c8ae07d13372f3371'].name}}</h2>
+              <h2>{{this.staff['ba4161c03a42496c8ae07d13372f3371'].name}} <i class="fas fa-crown fa-xs" style="color:#DAA520"></i></h2>
               <strong>Founder</strong>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p>I am the founder of the server, I make all of the final decisions. Well, that's a lie. Dylan tells me what to do.</p>
+              <p>I also made the <a href="https://minecraftcapes.co.uk" target="_blank">MinecraftCapes mod!</a></p>
             </div>
           </div>
         </div>
@@ -45,7 +46,7 @@
             <div>
               <h2>{{this.staff['58f1a83b425d4844823ffa04a201facd'].name}}</h2>
               <strong>Admin</strong>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p>The Small yet mighty Admin! I pretty much just hangout with players and keep the community happy while laying down the hammer of justice on those who deserve it!</p>
             </div>
           </div>
         </div>

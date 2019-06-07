@@ -8,15 +8,21 @@
       </div>
       <div class="col text-right">
         <ul class="nav justify-content-end">
-          <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/blog">Blog</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/rules">Rules</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/staff">Staff</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="/unban">Unban</a></li>
+          <li class="nav-item"><router-link class="nav-link text-white" to="/">Home</router-link></li>
+          <li class="nav-item"><router-link class="nav-link text-white" to="/blog">Blog</router-link></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Rules</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <router-link class="dropdown-item" to="/rules">Game Rules</router-link>
+              <router-link class="dropdown-item" to="/rules/alts">Alt Rules</router-link>
+              <div class="dropdown-divider"></div>
+              <router-link class="dropdown-item" to="/unban">Unban Request</router-link>
+            </div>
+          </li>
+          <li class="nav-item"><router-link class="nav-link text-white" to="/staff">Staff</router-link></li>
+          <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/merch">Merch</a></li>
           <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/donate">Donate</a></li>
-          <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/discord"><i class="fab fa-discord"></i> Discord</a></li>
-          <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/youtube"><i class="fab fa-youtube"></i> YouTube</a></li>
-          <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/youtube"><i class="fas fa-video"></i> Livestream</a></li>
+          <li class="nav-item"><a class="nav-link text-white" target="_blank" href="/discord">Discord</a></li>
         </ul>
         <p>Copyright <i class="far fa-copyright"></i> <a class="text-white" href="https://CapeCraft.net">https://CapeCraft.net</a>
           {{new Date().getFullYear()}}

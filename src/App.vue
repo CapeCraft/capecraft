@@ -2,7 +2,7 @@
   <div id="app">
     <Menu/>
     <routerView/>
-    <Footer/>    
+    <Footer/>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   components: {
     Menu,
     Footer
+  },
+  watch:{
+    $route (to, from) {
+      $('body').bootstrapMaterialDesign();      
+    }
   }
 }
 </script>

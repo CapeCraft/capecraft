@@ -16,7 +16,7 @@
           </div>
           <div class="form-group">
             <label class="bmd-label-floating">Confirm Email:</label>
-            <input type="emai" name="email" value="<?= isset($email) ? $email : null; ?>" class="form-control" autocomplete="off">            
+            <input type="emai" name="email" value="<?= isset($email) ? $email : null; ?>" class="form-control" autocomplete="off">
           </div>
           <div class="form-group">
             <label class="bmd-label-floating">Date Banned:</label>
@@ -47,8 +47,7 @@
           </div>
           <hr>
           <div>
-            <div class="g-recaptcha" data-sitekey="6LfvnUgUAAAAAG1J9jDgHb4AHebVaBoVrasEgNVq"></div>
-
+            <div class="g-recaptcha" id="recaptcha-main" data-sitekey="6LfvnUgUAAAAAG1J9jDgHb4AHebVaBoVrasEgNVq"></div>
           </div>
           <hr>
           <div>
@@ -59,3 +58,14 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    name: 'Unban',
+    mounted() {
+      this.$nextTick(function () {
+        grecaptcha.render('recaptcha-main');
+      })
+    }
+  }
+</script>

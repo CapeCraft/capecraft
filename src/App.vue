@@ -16,10 +16,10 @@ export default {
     Menu,
     Footer
   },
-  watch:{
-    $route (to, from) {
-      $('body').bootstrapMaterialDesign();      
-    }
+  created() {
+    $(document).arrive(".dynamic", function() {
+      $('body').bootstrapMaterialDesign();
+    });
   }
 }
 </script>

@@ -40,14 +40,14 @@
           <hr>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="confirmunban" style="width:auto;">
+              <input type="checkbox" class="dynamic" name="confirmunban" style="width:auto;">
               I am in good faith to believe that I deserve to be unbanned and all information supplied is true. I also understand that I can
               submit this form only once every 24 hours.
             </label>
           </div>
           <hr>
           <div>
-            <div class="g-recaptcha" id="recaptcha-main" data-sitekey="6LfvnUgUAAAAAG1J9jDgHb4AHebVaBoVrasEgNVq"></div>
+            <VueRecaptcha sitekey="6LfvnUgUAAAAAG1J9jDgHb4AHebVaBoVrasEgNVq"></VueRecaptcha>
           </div>
           <hr>
           <div>
@@ -60,12 +60,9 @@
 </template>
 
 <script>
+  import VueRecaptcha from 'vue-recaptcha';
   export default {
     name: 'Unban',
-    mounted() {
-      this.$nextTick(function () {
-        grecaptcha.render('recaptcha-main');
-      })
-    }
+    components: { VueRecaptcha }
   }
 </script>

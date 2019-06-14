@@ -8,6 +8,8 @@ Vue.use(VueRouter)
 
 Vue.prototype.$devMode = true
 
+import 'arrive'
+
 const router = new VueRouter({routes})
 
 new Vue({

@@ -1,5 +1,5 @@
 <template>
-  <div id="page" class="content">
+  <div class="content" v-if="!unbanResponse">
     <h1 class="text-center">CapeCraft unban request</h1>
     <div class="row no-gutters justify-content-center">
       <div class="col-10">
@@ -51,15 +51,32 @@
       </div>
     </div>
   </div>
+  <div class="content" v-else>
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="text-center">Thank You!</h1>
+        <hr />
+        <p>
+          Your unban request has been submitted and will be reviewed by a senior member of staff. Please refrain from asking about your unban request on any CapeCraft platforms.
+        </p>
+        <p>
+          If you have any further questions, please direct them to <a href="mailto:staff@capecraft.net">staff@capecraft.net</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+  import axios from 'axios'
   import VueRecaptcha from 'vue-recaptcha';
+
   export default {
     name: 'Unban',
     components: { VueRecaptcha },
     data: function() {
       return {
+        unbanResponse: true,
         form: {
           username: null,
           email: null,
@@ -73,8 +90,10 @@
     },
     methods: {
       sendRequest: function() {
-        console.log(this.form);
-        alert(1);
+        let host = (this.$devMode) ? "http://192.168.129.3" : "https://capecraft.net";
+        axios.get(host + '/admin/api/unban', this.form).then(response => {
+          this.unbanResponse = true;
+        })
       }
     }
   }

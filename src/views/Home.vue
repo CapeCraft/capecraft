@@ -1,4 +1,4 @@
-<template>
+nb<template>
   <main class="text-white">
     <div class="div-mid text-center">
       <img class="homelogo" src="/assets/img/logo/logo.png"/>
@@ -9,8 +9,23 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
-    name: 'Home'
+    name: 'Home',
+    data() {
+      return {
+        loading: true,
+        staff: []
+      }
+    },
+    created() {
+      let host = (this.$devMode) ? "http://192.168.129.3" : "https://capecraft.net";
+      axios.get(host + '/admin/api/server').then(response => {
+        this.staff = response.data;
+        this.loading = false;
+      })
+    }
   }
 </script>
 

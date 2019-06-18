@@ -1,4 +1,4 @@
-nb<template>
+<template>
   <main class="text-white">
     <div class="div-mid text-center">
       <img class="homelogo" src="/assets/img/logo/logo.png"/>

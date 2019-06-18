@@ -76,7 +76,7 @@
     components: { VueRecaptcha },
     data: function() {
       return {
-        unbanResponse: true,
+        unbanResponse: false,
         form: {
           username: null,
           email: null,

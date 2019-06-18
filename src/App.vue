@@ -19,6 +19,7 @@ export default {
   created() {
     $(document).arrive(".dynamic", function() {
       $('body').bootstrapMaterialDesign();
+      $('[data-toggle="tooltip"]').tooltip()
     });
   }
 }

@@ -11,7 +11,7 @@
           <div class="staff-group">
             <img class="img-fluid" src="https://crafatar.com/avatars/ba4161c03a42496c8ae07d13372f3371?helm=true">
             <div>
-              <h2>{{this.staff['ba4161c03a42496c8ae07d13372f3371'].name}} <i class="fas fa-crown fa-xs" style="color:#DAA520"></i></h2>
+              <h2>{{this.staff['ba4161c03a42496c8ae07d13372f3371'].name}} <i class="fas fa-crown fa-xs dynamic" style="color:#DAA520" data-toggle="tooltip" data-placement="right" title="Creator"></i></h2>
               <strong>Founder</strong>
               <p>I am the founder of the server, I make all of the final decisions. Well, that's a lie. Dylan tells me what to do.</p>
               <p>I also made the <a href="https://minecraftcapes.co.uk" target="_blank">MinecraftCapes mod!</a></p>
@@ -79,8 +79,7 @@
       }
     },
     created() {
-      let host = (this.$devMode) ? "http://192.168.129.3" : "https://capecraft.net";
-      axios.get(host + '/admin/api/staff').then(response => {
+      axios.get(this.$hostAPI + '/admin/api/staff').then(response => {
         this.staff = response.data;
         this.loading = false;
       })

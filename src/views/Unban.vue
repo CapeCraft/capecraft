@@ -90,8 +90,7 @@
     },
     methods: {
       sendRequest: function() {
-        let host = (this.$devMode) ? "http://192.168.129.3" : "https://capecraft.net";
-        axios.get(host + '/admin/api/unban', this.form).then(response => {
+        axios.get(this.$hostAPI + '/admin/api/unban', this.form).then(response => {
           this.unbanResponse = true;
         })
       }

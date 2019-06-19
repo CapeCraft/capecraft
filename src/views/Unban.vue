@@ -90,7 +90,7 @@
     },
     methods: {
       sendRequest: function() {
-        axios.get(this.$hostAPI + '/admin/api/unban', this.form).then(response => {
+        axios.get(this.$hostAPI + '/api/unban', this.form).then(response => {
           this.unbanResponse = true;
         })
       }

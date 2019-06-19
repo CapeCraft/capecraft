@@ -79,7 +79,7 @@
       }
     },
     created() {
-      axios.get(this.$hostAPI + '/admin/api/staff').then(response => {
+      axios.get(this.$hostAPI + '/api/staff').then(response => {
         this.staff = response.data;
         this.loading = false;
       })

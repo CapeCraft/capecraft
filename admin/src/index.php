@@ -1,7 +1,10 @@
 <?php
 
-  namespace CapeCraft;
-  use Dotenv\Dotenv;
+  Namespace CapeCraft;
+
+  use \CapeCraft\System\Settings;
+  use \CapeCraft\Routes\WebRoutes;
+  use \Dotenv\Dotenv;
   use \Psr\Http\Message\ServerRequestInterface as Request;
   use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -14,10 +17,10 @@
      */
     private function loadEssentials() {
       spl_autoload_register('self::classAutoloader');
-      $dotenv = new Dotenv(__DIR__, '../.env');
-      $dotenv->load();
       define('DEVELOPMENT_MODE', filter_var(getenv('DEV_MODE'), FILTER_VALIDATE_BOOLEAN));
       Settings::devMode();
+      $dotenv = Dotenv::create(__DIR__, '../.env');
+      $dotenv->load();
     }
     /**
      * This will require a class automatically
@@ -45,7 +48,6 @@
         $config = [];
       }
       $app = new \Slim\App($config);
-      Middleware::start($app);
       WebRoutes::start($app);
       $app->run();
     }

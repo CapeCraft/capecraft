@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Admin Stuff
+/admin/vendor
+/admin/.env

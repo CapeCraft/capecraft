@@ -1,0 +1,14 @@
+{
+    "name": "james090500/capecraft",
+    "type": "project",
+    "authors": [
+        {
+            "name": "James Harrison",
+            "email": "james@fasttortoise.co.uk"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.12",
+        "vlucas/phpdotenv": "^3.4"
+    }
+}

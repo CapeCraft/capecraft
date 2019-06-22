@@ -2,10 +2,15 @@
 
   Namespace CapeCraft;
 
+  use \CapeCraft\Controllers\Controller;
   use \CapeCraft\System\Settings;
   use \CapeCraft\Routes\WebRoutes;
   use \CapeCraft\Routes\Middleware;
   use \Dotenv\Dotenv;
+  use \Slim\Views\Twig;
+  use \Slim\Http\Environment;
+  use \Slim\Views\TwigExtension;
+  use \Slim\Http\Uri;
   use \Psr\Http\Message\ServerRequestInterface as Request;
   use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -18,37 +23,55 @@
      */
     private function loadEssentials() {
       spl_autoload_register('self::classAutoloader');
-      define('DEVELOPMENT_MODE', filter_var(getenv('DEV_MODE'), FILTER_VALIDATE_BOOLEAN));
-      Settings::devMode();
       $dotenv = Dotenv::create(__DIR__, '../.env');
       $dotenv->load();
+      define('DEVELOPMENT_MODE', filter_var(getenv('DEV_MODE'), FILTER_VALIDATE_BOOLEAN));
+      Settings::devMode();
     }
+
     /**
      * This will require a class automatically
      * @param  Class $class The needed class
      */
-    public static function classAutoloader($class) {
+    private static function classAutoloader($class) {
       $class = str_replace("CapeCraft\\", "", $class);
       $class = str_replace("\\", "/", $class);
       $class = "./".$class.".php";
       require_once($class);
     }
+
+    private static function reigisterTwig($container) {
+      $view = new Twig('View', [
+        'cache' => (DEVELOPMENT_MODE) ? false : 'View\cache'
+      ]);
+
+      // Instantiate and add Slim specific extension
+      $router = $container->get('router');
+      $uri = Uri::createFromEnvironment(new Environment($_SERVER));
+      $view->addExtension(new TwigExtension($router, $uri));
+
+      return $view;
+    }
+
     /**
      * Starts the CapeCraft API Service
      * @return Void
      */
     public static function start() {
+      //Load Essential variables
       self::loadEssentials();
+      $container = new \Slim\Container;
       if(DEVELOPMENT_MODE) {
-        $config = [
-          'settings' => [
-            'displayErrorDetails' => true
-          ]
-        ];
-      } else {
-        $config = [];
+        $settings = $container->get('settings');
+        $settings->replace([
+            'displayErrorDetails' => true,
+        ]);
       }
-      $app = new \Slim\App($config);
+
+      //Loads the slim application
+      $container['view'] = self::reigisterTwig($container);
+      $app = new \Slim\App($container);
+      Controller::makeInstance($app);
       Middleware::start($app);
       WebRoutes::start($app);
       $app->run();

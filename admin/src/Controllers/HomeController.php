@@ -4,7 +4,7 @@
 
   class HomeController {
 
-    public static function getHome() {
+    public static function getHome($request, $response, $args) {
       echo "hi";
     }
 

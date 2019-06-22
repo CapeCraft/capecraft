@@ -2,10 +2,14 @@
 
   Namespace CapeCraft\Controllers\Account;
 
-  class LoginController {
+  use \CapeCraft\Controllers\Controller;
 
-    public static function getLogin() {
-      echo "loggin";
+  class LoginController extends Controller {
+
+    public static function getLogin($request, $response, $args) {
+      return self::getView()->render($response, 'pages/account/login.twig', [
+        'name' => "It works!"
+      ]);
     }
 
   }

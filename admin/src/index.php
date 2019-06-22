@@ -4,6 +4,7 @@
 
   use \CapeCraft\System\Settings;
   use \CapeCraft\Routes\WebRoutes;
+  use \CapeCraft\Routes\Middleware;
   use \Dotenv\Dotenv;
   use \Psr\Http\Message\ServerRequestInterface as Request;
   use \Psr\Http\Message\ResponseInterface as Response;
@@ -48,6 +49,7 @@
         $config = [];
       }
       $app = new \Slim\App($config);
+      Middleware::start($app);
       WebRoutes::start($app);
       $app->run();
     }

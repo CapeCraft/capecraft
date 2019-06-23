@@ -10,6 +10,9 @@
     "require": {
         "slim/slim": "^3.12",
         "vlucas/phpdotenv": "^3.4",
-        "slim/twig-view": "^2.5"
+        "slim/twig-view": "^2.5",
+        "catfan/medoo": "^1.6",
+        "geerlingguy/ping": "^1.1",
+        "xpaw/php-minecraft-query": "^2.0"
     }
 }

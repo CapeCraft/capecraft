@@ -12,6 +12,11 @@
         <img class="rounded-circle img-fluid" id="profileImg" src="https://minotar.net/helm/steve/150">
       </div>
       <div class="loginbody">
+        {% if success == false and success is defined %}
+        <div class="alert alert-danger">
+          <strong>{{msg}}</strong>
+        </div>
+        {% endif %}
         <form method="POST">
           <div class="form-group">
             <label class="bmd-label-floating">Username</label>
@@ -24,6 +29,9 @@
           </div>
           <button type="submit" name="login" class="btn btn-info btn-raised ml-auto d-block">Log In</button>
         </form>
+        <div class="alert alert-info">
+          <p>This in an admin only login form. If you're not an admin go away!</p>
+        </div>
       </div>
     </div>
   </div>

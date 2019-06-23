@@ -6,6 +6,7 @@
   use \CapeCraft\System\Settings;
   use \CapeCraft\Routes\WebRoutes;
   use \CapeCraft\Routes\Middleware;
+  use \CapeCraft\System\Database as DB;
   use \Dotenv\Dotenv;
   use \Slim\Views\Twig;
   use \Slim\Http\Environment;
@@ -22,9 +23,15 @@
      * @return Void
      */
     private function loadEssentials() {
+      session_start();
+      
       spl_autoload_register('self::classAutoloader');
+
       $dotenv = Dotenv::create(__DIR__, '../.env');
       $dotenv->load();
+
+      DB::createInstance();
+
       define('DEVELOPMENT_MODE', filter_var(getenv('DEV_MODE'), FILTER_VALIDATE_BOOLEAN));
       Settings::devMode();
     }
@@ -41,6 +48,11 @@
       require_once($class);
     }
 
+    /**
+     * Register the Twig template environment
+     * @param  Container $container The Slim Container
+     * @return View
+     */
     private static function reigisterTwig($container) {
       $view = new Twig('../view', [
         'cache' => (DEVELOPMENT_MODE) ? false : '../view/cache'
@@ -72,7 +84,7 @@
       //Loads the slim application
       $container['view'] = self::reigisterTwig($container);
       $app = new \Slim\App($container);
-      Controller::makeInstance($app);
+      Controller::createInstance($app);
       Middleware::start($app);
       WebRoutes::start($app);
       $app->run();

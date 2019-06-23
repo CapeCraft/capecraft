@@ -6,11 +6,11 @@
 
     private static $app;
 
-    public static function makeInstance($app) {
+    public static function createInstance($app) {
       self::$app = $app;
     }
 
-    public static function getView() {      
+    public static function getView() {
       return self::$app->getContainer()->view;
     }
   }

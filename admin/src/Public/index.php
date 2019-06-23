@@ -42,7 +42,7 @@
      */
     private static function classAutoloader($class) {
       $class = str_replace("CapeCraft\\", "", $class);
-      $class = str_replace("\\", "/", $class);      
+      $class = str_replace("\\", "/", $class);
       $class = "../".$class.".php";
       require_once($class);
     }
@@ -53,8 +53,8 @@
      * @return View
      */
     private static function reigisterTwig($container) {
-      $view = new Twig('../view', [
-        'cache' => (DEVELOPMENT_MODE) ? false : '../view/cache'
+      $view = new Twig('../View', [
+        'cache' => (DEVELOPMENT_MODE) ? false : '../View/Cache'
       ]);
 
       // Instantiate and add Slim specific extension

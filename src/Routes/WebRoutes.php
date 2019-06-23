@@ -1,6 +1,7 @@
 <?php
   Namespace CapeCraft\Routes;
 
+  use \CapeCraft\Routes\Middleware;
   use \CapeCraft\Controllers\HomeController;
   use \CapeCraft\Controllers\StaffController;
   use \CapeCraft\Controllers\RuleController;
@@ -41,14 +42,14 @@
        * Admin Routes
        */
       $app->group('/admin', function($app) {
-        $app->map(['GET'], '/', [ AdminController::class, 'getHome' ]);
+        $app->map(['GET'], '', [ AdminController::class, 'getHome' ]);
 
         //Account Stuff
         $app->group('/account', function($app) {
           $app->map(['GET'], '/login', [ LoginController::class, 'getLogin' ]);
           $app->map(['POST'], '/login', [ LoginController::class, 'doLogin' ]);
         });
-      });
+      })->add([ Middleware::class, 'start' ]);
     }
 
   }

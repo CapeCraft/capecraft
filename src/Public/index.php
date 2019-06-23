@@ -4,8 +4,7 @@
 
   use \CapeCraft\Controllers\Controller;
   use \CapeCraft\System\Settings;
-  use \CapeCraft\Routes\WebRoutes;
-  use \CapeCraft\Routes\Middleware;
+  use \CapeCraft\Routes\WebRoutes;  
   use \CapeCraft\System\Database as DB;
   use \Dotenv\Dotenv;
   use \Slim\Views\Twig;
@@ -84,7 +83,6 @@
       $container['view'] = self::reigisterTwig($container);
       $app = new \Slim\App($container);
       Controller::createInstance($app);
-      Middleware::start($app);
       WebRoutes::start($app);
       $app->run();
     }

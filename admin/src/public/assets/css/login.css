@@ -1,0 +1,54 @@
+.loginform {
+  margin: 4vh;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  min-height: 80vh;
+  border-radius: 0.25rem;
+  background: white;
+  overflow: hidden;
+}
+
+.loginheader {
+  padding: 4vh 4vh 12vh;
+  color: white;
+  background: #03a9f4;
+}
+
+.loginimg {
+  top: 14vh;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  left:  0;
+  right:  0;
+}
+
+.loginbody {
+  padding: 7vh 4vh 4vh;
+  background: white;
+}
+
+@media(max-width: 500px) {
+  .loginimg {
+    top: 18vh;
+  }
+
+  .loginimg > img {
+    width: 30%;
+  }
+
+  .loginbody {
+    padding: 12vh 4vh 4vh;
+  }
+}
+
+@media(min-width: 769px) {
+  .registerbutton {
+    text-align: right;
+  }
+}
+
+@media(max-width: 768px) {
+  .otherbtns {
+    text-align: center;
+  }
+}

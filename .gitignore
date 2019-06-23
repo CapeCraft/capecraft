@@ -22,4 +22,4 @@ yarn-error.log*
 
 # Admin Stuff
 /admin/vendor
-/admin/.env
+/admin/src/.env

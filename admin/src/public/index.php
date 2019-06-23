@@ -14,7 +14,7 @@
   use \Psr\Http\Message\ServerRequestInterface as Request;
   use \Psr\Http\Message\ResponseInterface as Response;
 
-  require '../vendor/autoload.php';
+  require '../../vendor/autoload.php';
 
   class CapeCraft {
     /**
@@ -36,13 +36,14 @@
     private static function classAutoloader($class) {
       $class = str_replace("CapeCraft\\", "", $class);
       $class = str_replace("\\", "/", $class);
-      $class = "./".$class.".php";
+      $class = strtolower($class);
+      $class = "../".$class.".php";
       require_once($class);
     }
 
     private static function reigisterTwig($container) {
-      $view = new Twig('View', [
-        'cache' => (DEVELOPMENT_MODE) ? false : 'View\cache'
+      $view = new Twig('../view', [
+        'cache' => (DEVELOPMENT_MODE) ? false : '../view/cache'
       ]);
 
       // Instantiate and add Slim specific extension

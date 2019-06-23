@@ -16,8 +16,14 @@
       } catch( MinecraftPingException $e ) {
 		    $queryResult = false;
       }
+
+      $message = "join us";
+      if($queryResult['players']['online'] >= 10) {
+        $message = "join " . $queryResult['players']['online'] . " others";
+      }
+
       return self::getView()->render($response, 'Pages/home.twig', [
-        'query' => $queryResult
+        'message' => $message
       ]);
     }
 

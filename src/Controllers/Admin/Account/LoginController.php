@@ -1,6 +1,6 @@
 <?php
 
-  Namespace CapeCraft\Controllers\Account;
+  Namespace CapeCraft\Controllers\Admin\Account;
 
   use \CapeCraft\Controllers\Controller;
   use \CapeCraft\Helpers\MojangAPI;
@@ -9,7 +9,7 @@
   class LoginController extends Controller {
 
     public static function getLogin($request, $response, $args) {
-      return self::getView()->render($response, 'pages/account/login.twig');
+      return self::getView()->render($response, 'Pages/admin/account/login.twig');
     }
 
     public static function doLogin($request, $response, $args) {
@@ -47,7 +47,7 @@
 
       //Verifys the users password
       if(!password_verify($password, $userInfo['password'])) {
-        return self::getView()->render($response, 'pages/account/login.twig',
+        return self::getView()->render($response, 'Pages/admin/account/login.twig',
           ['success' => false, 'msg' => 'Username or password incorrect, have you registered?']
         );
       }
@@ -55,7 +55,7 @@
       $_SESSION['MEMBER']['uuid'] = $uuid;
       $_SESSION['MEMBER']['username'] = $username;
 
-      return $response->withRedirect('/', 301);
+      return $response->withRedirect('/admin', 301);
     }
 
   }

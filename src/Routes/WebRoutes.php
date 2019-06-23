@@ -7,6 +7,7 @@
   use \CapeCraft\Controllers\RuleController;
   use \CapeCraft\Controllers\UnbanController;
   use \CapeCraft\Controllers\Admin\AdminController;
+  use \CapeCraft\Controllers\Admin\BanLogController;
   use \CapeCraft\Controllers\Admin\Account\LoginController;
 
   class WebRoutes {
@@ -43,6 +44,10 @@
        */
       $app->group('/admin', function($app) {
         $app->map(['GET'], '', [ AdminController::class, 'getHome' ]);
+
+        $app->group('/banlog', function($app) {
+          $app->map(['GET'], '[/{page}]', [ BanLogController::class, 'getBanLog' ]);
+        });
 
         //Account Stuff
         $app->group('/account', function($app) {

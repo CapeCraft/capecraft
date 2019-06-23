@@ -1,13 +1,13 @@
 <?php
 
-  Namespace CapeCraft\Controllers;
+  Namespace CapeCraft\Controllers\Admin;
 
   use \CapeCraft\Controllers\Controller;
   use \JJG\Ping;
   use \xPaw\MinecraftPing;
 	use \xPaw\MinecraftPingException;
 
-  class HomeController extends Controller {
+  class AdminController extends Controller {
 
     public static function getHome($request, $response, $args) {
       $host = "play.capecraft.net";
@@ -18,7 +18,7 @@
       } catch( MinecraftPingException $e ) {
 		    $queryResult = false;
       }
-      return self::getView()->render($response, 'pages/home.twig', [
+      return self::getView()->render($response, 'Pages/admin/home.twig', [
         'ping' => $ping->ping(),
         'query' => $queryResult
       ]);

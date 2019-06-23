@@ -24,7 +24,7 @@
      */
     private function loadEssentials() {
       session_start();
-      
+
       spl_autoload_register('self::classAutoloader');
 
       $dotenv = Dotenv::create(__DIR__, '../.env');
@@ -42,8 +42,7 @@
      */
     private static function classAutoloader($class) {
       $class = str_replace("CapeCraft\\", "", $class);
-      $class = str_replace("\\", "/", $class);
-      $class = strtolower($class);
+      $class = str_replace("\\", "/", $class);      
       $class = "../".$class.".php";
       require_once($class);
     }

@@ -1,0 +1,7 @@
+.staff-group {
+  display: inline-flex;
+}
+
+.staff-group > img {
+  margin-right: 1vw;
+}

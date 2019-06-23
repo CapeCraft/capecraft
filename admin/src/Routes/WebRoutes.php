@@ -2,6 +2,9 @@
   Namespace CapeCraft\Routes;
 
   use \CapeCraft\Controllers\HomeController;
+  use \CapeCraft\Controllers\StaffController;
+  use \CapeCraft\Controllers\RuleController;
+  use \CapeCraft\Controllers\UnbanController;
   use \CapeCraft\Controllers\Admin\AdminController;
   use \CapeCraft\Controllers\Admin\Account\LoginController;
 
@@ -9,9 +12,15 @@
 
     public static function start($app) {
 
-      $app->map(['GET'], '/', [ HomeController::class, 'getHome']);
+      //General Pages
+      $app->map(['GET'], '/', [ HomeController::class, 'getHome' ]);
+      $app->map(['GET'], '/staff', [ StaffController::class, 'getStaff' ]);
+      $app->map(['GET'], '/rules', [ RuleController::class, 'getRules' ]);
+      $app->map(['GET'], '/rules/alts', [ RuleController::class, 'getAltRules' ]);
 
-
+      //Unban Request
+      $app->map(['GET'], '/unban', [ UnbanController::class, 'getUnban' ]);
+      $app->map(['POST'], '/unban', [ UnbanController::class, 'doUnban' ]);
 
       /**
        * /merch
@@ -32,7 +41,7 @@
        * Admin Routes
        */
       $app->group('/admin', function($app) {
-        $app->map(['GET'], '/', [ AdminController::class, 'getHome']);
+        $app->map(['GET'], '/', [ AdminController::class, 'getHome' ]);
 
         //Account Stuff
         $app->group('/account', function($app) {

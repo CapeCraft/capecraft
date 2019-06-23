@@ -45,6 +45,23 @@ nav {
   position: relative;
 }
 
+/* HOME */
+main {
+  height: 100vh;
+}
+
+.homelogo {
+  width: 40%;
+  margin-bottom: -3vh;
+}
+
+@media(max-width: 992px) {
+  .homelogo {
+      width: 80%;
+      margin-bottom: -2vh;
+  }
+}
+
 /* BLOG */
 .blogpage {
   width: 80%;

@@ -8,10 +8,24 @@
 
   class LoginController extends Controller {
 
+    /**
+     * Gets the page for the login
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Twig               Returns the View
+     */
     public static function getLogin($request, $response, $args) {
       return self::getView()->render($response, 'Pages/admin/account/login.twig');
     }
 
+    /**
+     * Handle the login request
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Response           Returns the response
+     */
     public static function doLogin($request, $response, $args) {
       /**
        * Make sure a the username and password values are sent in a POST request
@@ -52,9 +66,11 @@
         );
       }
 
+      //Start the session
       $_SESSION['MEMBER']['uuid'] = $uuid;
       $_SESSION['MEMBER']['username'] = $username;
 
+      //Redirects to admin home page
       return $response->withRedirect('/admin', 301);
     }
 

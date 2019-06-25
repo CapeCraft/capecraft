@@ -1,0 +1,46 @@
+{% extends "Templates/admin_layout.twig" %}
+
+{% block body %}
+<div class="content text-center">
+  <h1>{{player['username']}}</h1>
+  <hr />
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <img src="https://crafatar.com/renders/body/{{player['uuid']}}" />
+    </div>
+    <div class="col-7">
+      <h4>Punishments</h4>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Ban ID</th>
+              <th scope="col">Username</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Punishment Type</th>
+              <th scope="col">Issued By</th>
+              <th scope="col">Proof</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for punishment in punishments %}
+            <tr>
+              <th scope="row"><a href="/admin/ban/{{punishment['id']}}">{{punishment['id']}}</a></th>
+              <td><a href="/admin/player/{{punishment['uuid']}}">{{player['username']}}</a></td>
+              <td>{{punishment['reason']}}</td>
+              <td>{{punishment['punishmentType']}}</td>
+              <td>{{punishment['operator']}}</td>
+              {% if punishment['proof'] is not null %}
+                <td><a class="btn btn-warning btn-raised" target="_blank" href="{{punishment['proof']}}">Proof</a></td>
+              {% else %}
+                <td><a class="btn btn-info btn-raised" href="/admin/ban/{{punishment['id']}}">Add Proof</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

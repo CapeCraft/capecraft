@@ -49,6 +49,11 @@
           $app->map(['GET'], '[/{page}]', [ BanLogController::class, 'getBanLog' ]);
         });
 
+        $app->map(['GET'], '/ban/{ban}', [ BanLogController::class, 'getBan' ]);
+        $app->map(['POST'], '/ban/{ban}', [ BanLogController::class, 'doBan' ]);
+
+        $app->map(['GET'], '/player/{uuid}', [ BanLogController::class, 'getPlayer' ]);
+
         //Account Stuff
         $app->group('/account', function($app) {
           $app->map(['GET'], '/login', [ LoginController::class, 'getLogin' ]);

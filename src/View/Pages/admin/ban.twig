@@ -1,0 +1,48 @@
+{% extends "Templates/admin_layout.twig" %}
+
+{% block body %}
+<div class="content text-center">
+  <h1>Ban ID #{{ban['id']}}</h1>
+  <input id="banID" type="text" hidden readonly class="d-none" value="{{ban['id']}}"/>
+  <hr />
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <img src="https://crafatar.com/renders/body/{{ban['uuid']}}" />
+      <hr />
+      <textarea class="form-control" rows="6" placeholder="Notes..." id="bannotes">{{ban['notes']}}</textarea>
+    </div>
+    <div class="col-7">
+      <h4>Ban Info</h4>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th scope="row">Username</th>
+              <td><a href="/admin/player/{{ban['uuid']}}">{{ban['username']}}</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Issued By</th>
+              <td>{{ban['operator']}}<br /><small>{{ban['start']}}</small></td>
+            </tr>
+            <tr>
+              <th scope="row">Punishment Type</th>
+              <td>{{ban['punishmentType']}}<br /><small>{{ban['end']}}</small></td>
+            </tr>
+            <tr>
+              <th scope="row">Reason</th>
+              <td>{{ban['reason']}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Proof</th>
+              <td><input class="form-control" type="url" value="{{ban['proof']}}" id="banproof" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-success btn-raised ml-auto" id="bansave">Save</button>
+      <a href="/admin/banlog" class="btn btn-danger btn-raised ml-auto">Cancel</a>
+    </div>
+  </div>
+</div>
+<script src="/assets/js/ban.js"></script>
+{% endblock %}

@@ -17,15 +17,15 @@
       <tbody>
         {% for ban in banLog %}
         <tr>
-          <th scope="row">{{ban['id']}}</th>
-          <td>{{ban['username']}}</td>
+          <th scope="row"><a href="/admin/ban/{{ban['id']}}">{{ban['id']}}</a></th>
+          <td><a href="/admin/player/{{ban['uuid']}}">{{ban['username']}}</a></td>
           <td>{{ban['reason']}}</td>
           <td>{{ban['punishmentType']}}</td>
           <td>{{ban['operator']}}</td>
           {% if ban['proof'] is not null %}
             <td><a class="btn btn-warning btn-raised" target="_blank" href="{{ban['proof']}}">Proof</a></td>
           {% else %}
-            <td><a class="btn btn-info btn-raised" href="{{ban['proof']}}">Add Proof</a></td>
+            <td><a class="btn btn-info btn-raised" href="/admin/ban/{{ban['id']}}">Add Proof</a></td>
           {% endif %}
         </tr>
         {% endfor %}

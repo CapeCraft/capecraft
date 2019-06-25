@@ -7,6 +7,13 @@
 
   class StaffController extends Controller {
 
+    /**
+     * Shows the staff page
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Twig               Returns the View
+     */
     public static function getStaff($request, $response, $args) {
       $staff = [
         'ba4161c03a42496c8ae07d13372f3371' => MojangAPI::getUsername('ba4161c03a42496c8ae07d13372f3371'),

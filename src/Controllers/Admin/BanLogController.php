@@ -34,6 +34,8 @@
       //Finds the username for each player in the current list
       foreach($banLog as $key => $ban) {
         $banLog[$key]['username'] = MojangAPI::getUsername($ban['uuid']);
+        $banLog[$key]['start'] = date("d/m/Y H:i:s", $ban['start'] / 1000);
+        $banLog[$key]['end'] = ($ban['end'] == -1) ? "PERMANENT" : date("d/m/Y H:i:s", $ban['end'] / 1000);
       }
 
       //Returns the view
@@ -68,8 +70,8 @@
 
       //Sets the username as well as times of the ban
       $ban['username'] = MojangAPI::getUsername($ban['uuid']);
-      $ban['start'] = gmdate("d/m/Y H:i:s", $ban['start'] / 1000);
-      $ban['end'] = ($ban['end'] == -1) ? "PERMANENT" : gmdate("d/m/Y H:i:s", $ban['end'] / 1000);
+      $ban['start'] = date("d/m/Y H:i:s", $ban['start'] / 1000);
+      $ban['end'] = ($ban['end'] == -1) ? "PERMANENT" : date("d/m/Y H:i:s", $ban['end'] / 1000);
 
       //Returns the view
       return self::getView()->render($response, 'Pages/admin/ban.twig', [

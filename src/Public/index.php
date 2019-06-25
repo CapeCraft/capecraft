@@ -4,7 +4,7 @@
 
   use \CapeCraft\Controllers\Controller;
   use \CapeCraft\System\Settings;
-  use \CapeCraft\Routes\WebRoutes;  
+  use \CapeCraft\Routes\WebRoutes;
   use \CapeCraft\System\Database as DB;
   use \Dotenv\Dotenv;
   use \Slim\Views\Twig;
@@ -23,7 +23,7 @@
      */
     private function loadEssentials() {
       session_start();
-
+      date_default_timezone_set('UTC');
       spl_autoload_register('self::classAutoloader');
 
       $dotenv = Dotenv::create(__DIR__, '../.env');

@@ -35,7 +35,13 @@
         {% for ban in banLog %}
         <tr>
           <th scope="row"><a href="/admin/ban/{{ban['id']}}">{{ban['id']}}</a></th>
-          <td><a href="/admin/player/{{ban['uuid']}}">{{ban['username']}}</a></td>
+          <td>
+            <a href="/admin/player/{{ban['uuid']}}">{{ban['username']}}</a>
+            {% if ban['banned'] %}
+              <span class="badge badge-danger">Banned</span></td>
+            {% else %}
+              <span class="badge badge-success">Unbanned</span></td>
+            {% endif %}
           <td>{{ban['reason']}}</td>
           <td>{{ban['punishmentType']}}<br /><small>{{ban['end']}}</small></td>
           <td>{{ban['operator']}}<br /><small>{{ban['start']}}</small></td>

@@ -36,6 +36,13 @@
         $banLog[$key]['username'] = MojangAPI::getUsername($ban['uuid']);
         $banLog[$key]['start'] = date("d/m/Y H:i:s", $ban['start'] / 1000);
         $banLog[$key]['end'] = ($ban['end'] == -1) ? "PERMANENT" : date("d/m/Y H:i:s", $ban['end'] / 1000);
+        $banLog[$key]['banned'] = DB::getInstance()->has('Punishments', [
+          'uuid' => $ban['uuid'],
+          'OR' => [
+            'punishmentType#ban' => "BAN",
+            'punishmentType#tempBan' => "TEMP_BAN"
+          ]
+        ]);
       }
 
       //Returns the view

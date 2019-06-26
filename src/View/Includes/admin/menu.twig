@@ -11,6 +11,16 @@
       <li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
       <li class="nav-item"><a class="nav-link" href="/admin/blog">Blog</a></li>
       <li class="nav-item"><a class="nav-link" href="/admin/banlog">Ban Log</a></li>
+      {% if user.username is defined %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">{{user['username']}}</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/admin/account/profile">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/admin/account/logout">Logout</a>
+        </div>
+      </li>
+      {% endif %}
     </ul>
   </div>
 </nav>

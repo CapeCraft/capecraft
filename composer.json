@@ -13,6 +13,7 @@
         "slim/twig-view": "^2.5",
         "catfan/medoo": "^1.6",
         "geerlingguy/ping": "^1.1",
-        "xpaw/php-minecraft-query": "^2.0"
+        "xpaw/php-minecraft-query": "^2.0",
+        "phpmailer/phpmailer": "^6.0"
     }
 }

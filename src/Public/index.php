@@ -61,6 +61,8 @@
       $uri = Uri::createFromEnvironment(new Environment($_SERVER));
       $view->addExtension(new TwigExtension($router, $uri));
 
+      $view->getEnvironment()->addGlobal('user', $_SESSION['MEMBER']);
+
       return $view;
     }
 

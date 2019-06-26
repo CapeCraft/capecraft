@@ -69,9 +69,15 @@
       //Start the session
       $_SESSION['MEMBER']['uuid'] = $uuid;
       $_SESSION['MEMBER']['username'] = $username;
-
+      
       //Redirects to admin home page
       return $response->withRedirect('/admin', 301);
+    }
+
+    public static function getLogout($request, $response, $args) {
+      $_SESSION['MEMBER'] = null;
+      self::setVariable('user', null);
+      return $response->withRedirect('/', 301);
     }
 
   }

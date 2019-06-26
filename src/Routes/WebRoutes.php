@@ -59,6 +59,8 @@
         $app->group('/account', function($app) {
           $app->map(['GET'], '/login', [ LoginController::class, 'getLogin' ]);
           $app->map(['POST'], '/login', [ LoginController::class, 'doLogin' ]);
+
+          $app->map(['GET'], '/logout', [ LoginController::class, 'getLogout' ]);
         });
       })->add([ Middleware::class, 'start' ]);
     }

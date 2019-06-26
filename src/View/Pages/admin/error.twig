@@ -4,7 +4,7 @@
 <div class="content text-center">
   <h1 class="text-center">{{error['title']}}</h1>
   <p class="text-center">
-    {{error['msg']}}
+    {{error['msg']|raw}}
   </p>
 </div>
 {% endblock %}

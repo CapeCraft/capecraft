@@ -46,6 +46,7 @@
         $app->map(['GET'], '', [ AdminController::class, 'getHome' ]);
 
         $app->group('/banlog', function($app) {
+          $app->map(['POST'], '/search', [ BanLogController::class, 'doSearch' ]);
           $app->map(['GET'], '[/{page}]', [ BanLogController::class, 'getBanLog' ]);
         });
 

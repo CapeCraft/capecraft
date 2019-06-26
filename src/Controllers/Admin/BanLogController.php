@@ -62,7 +62,7 @@
       }
 
       //Tries to get the ban from the database else returns an error
-      $ban = DB::getInstance()->get('PunishmentHistory', '*', [ "id" => $args['ban'] ]);
+      $ban = DB::getInstance()->get('PunishmentHistory', '*', [ 'id' => $args['ban'] ]);
       if(empty($ban)) {
         //// TODO: return error page!
         return;
@@ -115,7 +115,11 @@
       }
 
       //Gets punishment/player information
-      $punishments = DB::getInstance()->select('PunishmentHistory', '*', [ 'uuid' => $uuid ]);
+      $punishments = DB::getInstance()->select('PunishmentHistory', '*', [
+        'uuid' => $uuid,
+        'ORDER' => [ 'id' => 'DESC' ]
+      ]);
+
       $player = [
         'uuid' => $uuid,
         'username' => MojangAPI::getUsername($uuid)
@@ -128,4 +132,8 @@
       ]);
     }
 
+    public static function doSearch($request, $response, $args) {
+      $uuid = MojangAPI::getUUID($request->getParsedBody()['username']);            
+      return $response->withRedirect("/admin/player/$uuid", 301);
+    }
   }

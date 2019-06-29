@@ -5,6 +5,7 @@
   use \CapeCraft\Controllers\Controller;
   use \CapeCraft\System\Settings;
   use \CapeCraft\Helpers\MojangAPI;
+  use \CapeCraft\System\Database as DB;
   use \PHPMailer\PHPMailer\PHPMailer;
   use \PHPMailer\PHPMailer\Exception;
   use \ReCaptcha\ReCaptcha;
@@ -33,6 +34,11 @@
      */
     public static function doUnban($request, $response, $args) {
 
+      //Delete old unban values
+      DB::getInstance()->delete('unbanrequests', [
+        'requestsent[<]' => time() - 86400
+      ]);
+
       //Gets recaptcha response
       $recaptcha = new ReCaptcha(getenv('SECRET_KEY'));
       $recaptchaResponse = isset($request->getParsedBody()['g-recaptcha-response']) ? $recaptcha->verify($request->getParsedBody()['g-recaptcha-response'], Settings::getClientIP()) : false;
@@ -42,7 +48,8 @@
 
       //Checks the username is valid
       $username = filter_var($request->getParsedBody()['username'], FILTER_SANITIZE_STRING);
-      if(empty($username) || MojangAPI::getUUID($username) == null) {
+      $uuid = MojangAPI::getUUID($username);
+      if(empty($username) || $uuid == null) {
         return self::showFailedUnban($request, $response, "That username is not valid!");
       }
 
@@ -59,7 +66,7 @@
       $whatdifferent = filter_var($request->getParsedBody()['whatdifferent'], FILTER_SANITIZE_STRING);
       if(empty($beforeban) || empty($whyunban) || empty($whatdifferent)) {
         return self::showFailedUnban($request, $response, "Please fill in all the boxes!");
-
+      } else {
         if(strlen($beforeban) < 25 || strlen($whyunban) < 25 || strlen($whatdifferent) < 25) {
           return self::showFailedUnban($request, $response, "Your responses must be ATLEAST 25 characters!");
         }
@@ -69,12 +76,29 @@
         }
       }
 
+      //Make sure the users accept all terms
       $confirmunban = isset($request->getParsedBody()['confirmunban']);
       if(!$confirmunban) {
         return self::showFailedUnban($request, $response, "Please check the confirmation box");
       }
 
-      //Return invalid username if wrong and add warning that already submitted ban
+      //Checks the database for a exist unban
+      $userUnbanTime = DB::getInstance()->has('unbanrequests', [ 'uuid' => $uuid, 'requestsent[<]' => (time() - 86400) ]);
+      if(!$userUnbanTime) {
+        return self::getView()->render($response, 'Pages/admin/error.twig', [
+          'error' => [
+            'title' => "Error submitted request",
+            'msg' => "Look's like you've already submitted an unban request today! You must wait at least 24 hours before sending another."
+          ]
+        ]);
+      }
+
+      //Creates a new ban for user
+      DB::getInstance()->updateOrCreate('unbanrequests', [
+        'uuid' => $uuid
+      ],[
+        'requestsent' => time()
+      ]);
 
       $subject = "$username - Unban Request";
 			$body = "

@@ -4,6 +4,7 @@
 
   use \CapeCraft\Controllers\Controller;
   use \CapeCraft\System\Settings;
+  use \CapeCraft\Helpers\MojangAPI;
   use \PHPMailer\PHPMailer\PHPMailer;
   use \PHPMailer\PHPMailer\Exception;
   use \ReCaptcha\ReCaptcha;
@@ -34,30 +35,45 @@
 
       //Gets recaptcha response
       $recaptcha = new ReCaptcha(getenv('SECRET_KEY'));
-      if(isset($request->getParsedBody()['g-recaptcha-response'])) {
-        $resp = $recaptcha->verify($request->getParsedBody()['g-recaptcha-response'], Settings::getClientIP());
-      } else {
-        $resp = false;
+      $recaptchaResponse = isset($request->getParsedBody()['g-recaptcha-response']) ? $recaptcha->verify($request->getParsedBody()['g-recaptcha-response'], Settings::getClientIP()) : false;
+      if($recaptchaResponse == null || !$recaptchaResponse) {
+        return self::showFailedUnban($request, $response, "Please confirm the ReCaptcha!");
       }
 
-      //Gets post data as variables
+      //Checks the username is valid
       $username = filter_var($request->getParsedBody()['username'], FILTER_SANITIZE_STRING);
+      if(empty($username) || MojangAPI::getUUID($username) == null) {
+        return self::showFailedUnban($request, $response, "That username is not valid!");
+      }
+
+      //Checks the email is valid
       $email = $request->getParsedBody()['email'];
       $cemail = $request->getParsedBody()['cemail'];
+      if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $email !== $cemail) {
+        return self::showFailedUnban($request, $response, "Please check that email and make sure they match!");
+      }
+
+      //Check lenghth of large text areas
       $beforeban = filter_var($request->getParsedBody()['beforeban'], FILTER_SANITIZE_STRING);
       $whyunban = filter_var($request->getParsedBody()['whyunban'], FILTER_SANITIZE_STRING);
       $whatdifferent = filter_var($request->getParsedBody()['whatdifferent'], FILTER_SANITIZE_STRING);
-      $confirmunban = isset($request->getParsedBody()['confirmunban']);
+      if(empty($beforeban) || empty($whyunban) || empty($whatdifferent)) {
+        return self::showFailedUnban($request, $response, "Please fill in all the boxes!");
 
-      //Check if any values are empty, if emails match and checks the checkbox/recaptcha has been done
-      if(empty($username) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $email !== $cemail || empty($beforeban) || empty($whyunban) || empty($whatdifferent) || !$confirmunban || ($resp == false || !$resp->isSuccess())) {
-        return self::getView()->render($response, 'Pages/unban.twig', [
-          'siteKey' => getEnv('SITE_KEY'),
-          'error' => true,
-          'post' => $request->getParsedBody()
-        ]);
+        if(strlen($beforeban) < 25 || strlen($whyunban) < 25 || strlen($whatdifferent) < 25) {
+          return self::showFailedUnban($request, $response, "Your responses must be ATLEAST 25 characters!");
+        }
+
+        if(strlen($beforeban) > 1500 || strlen($whyunban) > 15000 || strlen($whatdifferent) > 1500) {
+          return self::showFailedUnban($request, $response, "Your responses can not be more than 1500 characters");
+        }
       }
-    
+
+      $confirmunban = isset($request->getParsedBody()['confirmunban']);
+      if(!$confirmunban) {
+        return self::showFailedUnban($request, $response, "Please check the confirmation box");
+      }
+
       //Return invalid username if wrong and add warning that already submitted ban
 
       $subject = "$username - Unban Request";
@@ -109,4 +125,18 @@
       ]);
     }
 
+    /**
+     * Shows a failed unban with error
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  String $error      The error message
+     * @return Twig               Returns the View
+     */
+    private static function showFailedUnban($request, $response, $error) {
+      return self::getView()->render($response, 'Pages/unban.twig', [
+        'siteKey' => getEnv('SITE_KEY'),
+        'error' => $error,
+        'post' => $request->getParsedBody()
+      ]);
+    }
   }

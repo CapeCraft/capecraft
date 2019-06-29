@@ -5,10 +5,12 @@
   <h1 class="text-center">CapeCraft unban request</h1>
   <div class="row no-gutters justify-content-center">
     <div class="col-10">
-      {% if error %}
+      {% if error is defined %}
+      <hr />
       <div class="alert alert-danger">
-        Oops, something went wrong. Please make sure all details are filled in correctly then try again!
+        <strong>Error!</strong> {{error}}
       </div>
+      <hr />
       {% endif %}
       <form method="POST">
         <div class="form-group">
@@ -40,7 +42,11 @@
           <textarea rows="6" name="whatdifferent" class="form-control">{{post.whatdifferent}}</textarea>
           <small class="bmd-help">Include as much detail as you can about what you'll do to stop being banned</small>
         </div>
-        <hr>
+        <hr />
+        <div class="alert alert-info">
+            Please read through your answers carefully! <strong>DO NOT LIE!</strong> We store proof/evidence of every ban and will not tolerate liars. We recommend reading through our rules so you understand what you did wrong!
+        </div>
+        <hr />
         <div class="checkbox">
           <label>
             <input type="checkbox" class="dynamic" name="confirmunban" style="width:auto;">

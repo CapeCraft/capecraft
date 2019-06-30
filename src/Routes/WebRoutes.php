@@ -8,6 +8,7 @@
   use \CapeCraft\Controllers\UnbanController;
   use \CapeCraft\Controllers\Admin\AdminController;
   use \CapeCraft\Controllers\Admin\BanLogController;
+  use \CapeCraft\Controllers\Admin\BlogController;
   use \CapeCraft\Controllers\Admin\Account\LoginController;
 
   class WebRoutes {
@@ -45,15 +46,21 @@
       $app->group('/admin', function($app) {
         $app->map(['GET'], '', [ AdminController::class, 'getHome' ]);
 
+        //Ban Log Stuff
         $app->group('/banlog', function($app) {
           $app->map(['POST'], '/search', [ BanLogController::class, 'doSearch' ]);
           $app->map(['GET'], '[/{page}]', [ BanLogController::class, 'getBanLog' ]);
         });
-
         $app->map(['GET'], '/ban/{ban}', [ BanLogController::class, 'getBan' ]);
         $app->map(['POST'], '/ban/{ban}', [ BanLogController::class, 'doBan' ]);
-
         $app->map(['GET'], '/player/{uuid}', [ BanLogController::class, 'getPlayer' ]);
+
+        //Blog Stuff
+        $app->group('/blog', function($app) {
+          $app->map(['GET'], '/edit/{blog}', [ BlogController::class, 'getEditBlog' ]);
+          $app->map(['GET'], '/delete/{blog}', [ BlogController::class, 'getDeleteBlog' ]);
+          $app->map(['GET'], '[/{page}]', [ BlogController::class, 'getBlog' ]);
+        });
 
         //Account Stuff
         $app->group('/account', function($app) {

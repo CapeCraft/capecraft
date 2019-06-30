@@ -110,7 +110,7 @@
 					<td>$username</td>
 				</tr>
 			</table>
-			<strong>What happened before you was banned?</strong>
+			<strong>What happened before you were banned?</strong>
 			<p>$beforeban</p>
       <strong>Why should we unban you</strong>
       <p>$whyunban</p>

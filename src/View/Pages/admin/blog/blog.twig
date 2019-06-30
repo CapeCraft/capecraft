@@ -1,0 +1,48 @@
+{% extends "Templates/admin_layout.twig" %}
+
+{% block body %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<div class="content">
+  {% if blog is defined %}
+    <h1 class="text-center">Edit Blog</h1>
+  {% else %}
+    <h1 class="text-center">New Blog</h1>
+  {% endif %}
+  <hr />
+  <form>
+    <div class="form-group">
+      <label for="title" class="bmd-label-floating">Title</label>
+      <input type="text" class="form-control" id="title" value="{{blog['title']}}" maxlength="75">
+    </div>
+    <div class="form-group">
+      <label for="title" class="bmd-label-floating">Content</label>
+      <div id="summernote"></div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputFile" class="bmd-label-floating">File input</label>
+      <input type="file" class="form-control-file" id="exampleInputFile">
+      <small class="text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+    </div>
+    <button class="btn btn-default">Cancel</button>
+    <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+  </form>
+  <!-- SummerNote Stuff -->
+  <style>
+    .note-toolbar {
+      background: #009688 !important;
+    }
+    .note-btn-group {
+      margin: 0px !important;
+    }
+  </style>
+  <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        tabsize: 2,
+        height: 300
+      });
+    });
+  </script>
+</div>
+{% endblock %}

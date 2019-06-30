@@ -1,0 +1,36 @@
+{% extends "Templates/admin_layout.twig" %}
+
+{% block body %}
+<div class="content text-center">
+  <h1>Blogs</h1>
+  <hr />
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+          <th scope="col">Author</th>
+          <th scope="col">Post Time</th>
+          <th scope="col">Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for blog in blogList %}
+        <tr>
+          <td>{{blog['title']}}</td>
+          <td>{{blog['content']}}</td>
+          <td>{{blog['username']}}</td>
+          <td>{{blog['posttime']|date('F j Y')}}<br /><small>{{blog['posttime']|date('G:i:s')}} UTC</small></td>
+          <td>
+            <a href="/blog/{{blog['id']}}" target="_blank" class="btn btn-info btn-raised">View</a>
+            <a href="/admin/blog/edit/{{blog['id']}}" class="btn btn-warning btn-raised">Edit</a>
+            <a href="/admin/blog/delete/{{blog['id']}}" class="btn btn-danger btn-raised"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

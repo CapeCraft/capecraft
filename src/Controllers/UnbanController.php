@@ -20,7 +20,7 @@
      * @return Twig               Returns the View
      */
     public static function getUnban($request, $response, $args) {
-      return self::getView()->render($response, 'Pages/unban.twig', [
+      return self::getView()->render($response, 'Pages/rules/unban.twig', [
         'siteKey' => getEnv('SITE_KEY')
       ]);
     }
@@ -157,7 +157,7 @@
      * @return Twig               Returns the View
      */
     private static function showFailedUnban($request, $response, $error) {
-      return self::getView()->render($response, 'Pages/unban.twig', [
+      return self::getView()->render($response, 'Pages/rules/unban.twig', [
         'siteKey' => getEnv('SITE_KEY'),
         'error' => $error,
         'post' => $request->getParsedBody()

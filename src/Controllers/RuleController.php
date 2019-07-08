@@ -14,7 +14,7 @@
      * @return Twig               Returns the View
      */
     public static function getRules($request, $response, $args) {
-      return self::getView()->render($response, 'Pages/rules.twig');
+      return self::getView()->render($response, 'Pages/rules/rules.twig');
     }
 
     /**
@@ -25,7 +25,7 @@
      * @return Twig               Returns the View
      */
     public static function getAltRules($request, $response, $args) {
-      return self::getView()->render($response, 'Pages/altrules.twig');
+      return self::getView()->render($response, 'Pages/rules/altrules.twig');
     }
 
   }

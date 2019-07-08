@@ -3,12 +3,13 @@
 
   use \CapeCraft\Routes\Middleware;
   use \CapeCraft\Controllers\HomeController;
+  use \CapeCraft\Controllers\BlogController;
   use \CapeCraft\Controllers\StaffController;
   use \CapeCraft\Controllers\RuleController;
   use \CapeCraft\Controllers\UnbanController;
   use \CapeCraft\Controllers\Admin\AdminController;
   use \CapeCraft\Controllers\Admin\BanLogController;
-  use \CapeCraft\Controllers\Admin\BlogController;
+  use \CapeCraft\Controllers\Admin\AdminBlogController;
   use \CapeCraft\Controllers\Admin\Account\LoginController;
 
   class WebRoutes {
@@ -17,13 +18,21 @@
 
       //General Pages
       $app->map(['GET'], '/', [ HomeController::class, 'getHome' ]);
-      $app->map(['GET'], '/staff', [ StaffController::class, 'getStaff' ]);
+
+      //Blog
+      $app->map(['GET'], '/blog', [ BlogController::class, 'getBlogs' ]);
+      $app->map(['GET'], '/blog/{page}', [ BlogController::class, 'getBlogs' ]);
+      $app->map(['GET'], '/blog/id/{blog}', [ BlogController::class, 'getBlog' ]);
+
+      //Rules
       $app->map(['GET'], '/rules', [ RuleController::class, 'getRules' ]);
       $app->map(['GET'], '/rules/alts', [ RuleController::class, 'getAltRules' ]);
 
       //Unban Request
       $app->map(['GET'], '/unban', [ UnbanController::class, 'getUnban' ]);
       $app->map(['POST'], '/unban', [ UnbanController::class, 'doUnban' ]);
+
+      $app->map(['GET'], '/staff', [ StaffController::class, 'getStaff' ]);
 
       /**
        * /merch
@@ -57,9 +66,9 @@
 
         //Blog Stuff
         $app->group('/blog', function($app) {
-          $app->map(['GET'], '/edit/{blog}', [ BlogController::class, 'getEditBlog' ]);
-          $app->map(['GET'], '/delete/{blog}', [ BlogController::class, 'getDeleteBlog' ]);
-          $app->map(['GET'], '[/{page}]', [ BlogController::class, 'getBlog' ]);
+          $app->map(['GET'], '/edit/{blog}', [ AdminBlogController::class, 'getEditBlog' ]);
+          $app->map(['GET'], '/delete/{blog}', [ AdminBlogController::class, 'getDeleteBlog' ]);
+          $app->map(['GET'], '[/{page}]', [ AdminBlogController::class, 'getBlog' ]);
         });
 
         //Account Stuff

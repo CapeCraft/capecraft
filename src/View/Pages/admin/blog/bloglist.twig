@@ -19,7 +19,7 @@
         {% for blog in blogList %}
         <tr>
           <td>{{blog['title']}}</td>
-          <td>{{blog['content']}}</td>
+          <td>{{blog['content']|slice(0,65)}}...</td>
           <td>{{blog['username']}}</td>
           <td>{{blog['posttime']|date('F j Y')}}<br /><small>{{blog['posttime']|date('G:i:s')}} UTC</small></td>
           <td>

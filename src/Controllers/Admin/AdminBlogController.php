@@ -6,7 +6,7 @@
   use \CapeCraft\System\Database as DB;
   use \CapeCraft\Helpers\MojangAPI;
 
-  class BlogController extends Controller {
+  class AdminBlogController extends Controller {
 
     /**
      * Shows the blog list page
@@ -67,7 +67,7 @@
         ]);
       }
 
-      return self::getView()->render($response, 'Pages/admin/blog/blog.twig', [
+      return self::getView()->render($response, 'Pages/admin/blog/edit.twig', [
         'blog' => $blog
       ]);
     }

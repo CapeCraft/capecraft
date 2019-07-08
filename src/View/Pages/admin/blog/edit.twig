@@ -1,19 +1,22 @@
 {% extends "Templates/admin_layout.twig" %}
 
 {% block body %}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/ui/trumbowyg.min.css" integrity="sha256-X5UWaGp+SiusJ9TA2ShymJz5VPE+oTl88TNI47fqOTs=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/trumbowyg.min.js" integrity="sha256-9fPnxiyJ+MnhUKSPthB3qEIkImjaWGEJpEOk2bsoXPE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/plugins/upload/trumbowyg.upload.min.js" integrity="sha256-HebkeoJdrHA4HfNJa5xaDCf9QPR4v9wBo/axJjHsjhU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/plugins/cleanpaste/trumbowyg.cleanpaste.min.js" integrity="sha256-GGXtZ0tz4DfEMvShclGiegXJZt9r49+KqwWUvZ6+nlY=" crossorigin="anonymous"></script>
 <div class="content">
   <h1 class="text-center">Edit Blog</h1>
   <hr />
-  <form>
+  <form method="POST">
+    <input type="text" name="blogid" value="{{blog['id']}}" hidden readonly/>
     <div class="form-group">
       <label for="title" class="bmd-label-floating">Title</label>
       <input type="text" class="form-control" id="title" value="{{blog['title']}}" maxlength="75" name="title">
     </div>
     <div class="form-group">
-      <label for="summernote" class="bmd-label-floating">Content</label>
-      <textarea id="summernote" name="content"></textarea>
+      <label for="trumbowyg" class="bmd-label">Content</label>
+      <textarea id="trumbowyg" name="content"></textarea>
     </div>
     <div class="form-group">
       <label for="thumbnail" class="bmd-label-floating">Thumbnail</label>
@@ -22,22 +25,10 @@
     <a href="/admin/blog" class="btn btn-default">Cancel</a>
     <button type="submit" class="btn btn-primary btn-raised">Submit</button>
   </form>
-  <!-- SummerNote Stuff -->
-  <style>
-    .note-toolbar {
-      background: #009688 !important;
-    }
-    .note-btn-group {
-      margin: 0px !important;
-    }
-  </style>
   <script>
     $(document).ready(function() {
-      $('#summernote').summernote({
-        tabsize: 2,
-        height: 300,
-      });
-      $('#summernote').summernote('code', "{{blog['content']}}")
+      $('#trumbowyg').trumbowyg({ autogrow: true })
+      $('#trumbowyg').trumbowyg('html', "{{blog['html_content']|raw}}");
     });
   </script>
 </div>

@@ -22,6 +22,7 @@
 
       //Adds author username to blog
       foreach($blogList as $key => $blog) {
+        $blogList[$key]['html_content'] = base64_decode($blogList[$key]['content']);
         $blogList[$key]['username'] = MojangAPI::getUsername($blog['author']);
       }
 
@@ -39,6 +40,7 @@
         return; //Error
       }
 
+      $blog['html_content'] = base64_decode($blog['content']);
       $blog['username'] = MojangAPI::getUsername($blog['author']);
 
       return self::getView()->render($response, 'Pages/blog/blog.twig', [

@@ -29,6 +29,7 @@
 
       //Adds author username to blog
       foreach($blogList as $key => $blog) {
+        $blogList[$key]['html_content'] = base64_decode($blogList[$key]['content']);
         $blogList[$key]['username'] = MojangAPI::getUsername($blog['author']);
       }
 
@@ -39,7 +40,7 @@
     }
 
     /**
-     * Shows the ban log page
+     * Shows the blog edit page
      * @param  Request $request   The Request Object
      * @param  Response $response The Response Object
      * @param  Array $args        Args from the URL (If any)
@@ -67,8 +68,30 @@
         ]);
       }
 
+      $blog['html_content'] = base64_decode($blog['content']);
+
       return self::getView()->render($response, 'Pages/admin/blog/edit.twig', [
         'blog' => $blog
+      ]);
+    }
+
+    /**
+     * Actually edits the blog
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Twig               Returns the View
+     */
+    public static function doEditBlog($request, $response, $args) {
+      $blogid = $request->getParsedBody()['blogid'];
+      $title = $request->getParsedBody()['title'];
+      $content = $request->getParsedBody()['content'];
+
+      DB::getInstance()->update('blogs', [
+        'title' => $title,
+        'content' => base64_encode($content)
+      ], [
+        'id' => $blogid
       ]);
     }
   }

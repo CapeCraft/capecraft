@@ -31,7 +31,7 @@
        * Make sure a the username and password values are sent in a POST request
        */
       if(!isset($request->getParsedBody()['username']) || !isset($request->getParsedBody()['password'])) {
-        return self::getView()->render($response, 'Pages/account/login.twig',
+        return self::getView()->render($response, 'Pages/admin/account/login.twig',
           ['success' => false, 'msg' => 'Username or password incorrect, have you registered?']
         );
       }
@@ -43,7 +43,7 @@
       //Trys to get a UUID from the username
       $uuid = MojangAPI::getUUID($username);
       if($uuid == null) {
-        return self::getView()->render($response, 'Pages/account/login.twig',
+        return self::getView()->render($response, 'Pages/admin/account/login.twig',
           ['success' => false, 'msg' => 'Username or password incorrect, have you registered?']
         );
       }
@@ -51,7 +51,7 @@
       //Checks if the user exists
       $userExist = DB::getInstance()->has('users', [ 'uuid' => $uuid ]);
       if(!$userExist) {
-        return self::getView()->render($response, 'Pages/account/login.twig',
+        return self::getView()->render($response, 'Pages/admin/account/login.twig',
           ['success' => false, 'msg' => 'Username or password incorrect, have you registered?']
         );
       }

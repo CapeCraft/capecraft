@@ -85,7 +85,7 @@
 
       //Sets the username as well as times of the ban
       $ban['username'] = MojangAPI::getUsername($ban['uuid']);
-      $ban['notes'] = base64_decode($ban['notes']);
+      $ban['notes'] = urldecode(base64_decode($ban['notes']));
       $ban['start'] = date("d/m/Y H:i:s", $ban['start'] / 1000);
       $ban['end'] = ($ban['end'] == -1) ? "PERMANENT" : date("d/m/Y H:i:s", $ban['end'] / 1000);
 
@@ -106,6 +106,7 @@
       $banID = $args['ban'];
       $banProof = empty($request->getParsedBody()['banProof']) ? null : filter_var($request->getParsedBody()['banProof'], FILTER_SANITIZE_STRING);
       $banNotes = empty($request->getParsedBody()['banNotes']) ? null : filter_var($request->getParsedBody()['banNotes'], FILTER_SANITIZE_STRING);
+      $banNotes = urlencode($banNotes);
 
       DB::getInstance()->update('PunishmentHistory', [
         'proof' => $banProof,

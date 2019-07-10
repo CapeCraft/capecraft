@@ -1,2 +1,6 @@
 /vendor
 /src/.env
+/src/View/Cache
+
+ssl.crt
+ssl.key

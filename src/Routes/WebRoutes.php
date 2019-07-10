@@ -53,6 +53,19 @@
         return $response->withRedirect('https://discord.gg/62MCajz', 301);
       });
 
+      //Votes
+      $app->map(['GET'], '/vote1', function($request, $response, $args) {
+        return $response->withRedirect('https://www.planetminecraft.com/server/capecraft-minecraft-survival-at-its-best/vote', 301);
+      });
+
+      $app->map(['GET'], '/vote2', function($request, $response, $args) {
+        return $response->withRedirect('http://minecraft-mp.com/server/189099/vote/', 301);
+      });
+
+      $app->map(['GET'], '/vote3', function($request, $response, $args) {
+        return $response->withRedirect('http://minecraftservers.org/vote/488669', 301);
+      });
+
       /**
        * Admin Routes
        */

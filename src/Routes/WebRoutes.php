@@ -7,6 +7,7 @@
   use \CapeCraft\Controllers\StaffController;
   use \CapeCraft\Controllers\RuleController;
   use \CapeCraft\Controllers\UnbanController;
+  use \CapeCraft\Controllers\MerchController;
   use \CapeCraft\Controllers\Admin\AdminController;
   use \CapeCraft\Controllers\Admin\BanLogController;
   use \CapeCraft\Controllers\Admin\AdminBlogController;
@@ -39,9 +40,12 @@
        * /donate
        * /discord
        */
-      $app->map(['GET'], '/merch', function($request, $response, $args) {
-        return $response->withRedirect('https://shop.spreadshirt.co.uk/capecraft/all', 301);
+      $app->group('/merch', function($app) {
+        $app->map(['GET'], '', [ MerchController::class, 'getMerch' ]);
+        $app->map(['GET'], '/uk', [ MerchController::class, 'getMerchUK' ]);
+        $app->map(['GET'], '/us', [ MerchController::class, 'getMerchUS' ]);
       });
+
       $app->map(['GET'], '/donate', function($request, $response, $args) {
         return $response->withRedirect('https://capecraftserver.buycraft.net/', 301);
       });

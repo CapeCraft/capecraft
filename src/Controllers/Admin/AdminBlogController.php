@@ -93,5 +93,7 @@
       ], [
         'id' => $blogid
       ]);
+
+      return $response->withRedirect("/admin/blog", 301);
     }
   }

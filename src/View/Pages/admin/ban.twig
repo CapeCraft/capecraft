@@ -3,7 +3,6 @@
 {% block body %}
 <div class="content text-center">
   <h1>Ban ID #{{ban['id']}}</h1>
-  <input id="banID" type="text" hidden readonly class="d-none" value="{{ban['id']}}"/>
   <hr />
   <div class="row justify-content-center">
     <div class="col-md-2">
@@ -32,6 +31,9 @@
               <th scope="row">Reason</th>
               <td>{{ban['reason']}}</td>
             </tr>
+            <div class="alert alert-success" style="display:none;" id="success">
+              Changes have been saved
+            </div>
             <tr>
               <th scope="row">Proof</th>
               <td><input class="form-control" type="url" value="{{ban['proof']}}" id="banproof" /></td>

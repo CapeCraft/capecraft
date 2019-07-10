@@ -1,28 +1,19 @@
 /* global $ */
-
-$('#banproof').on('keydown', function () {
-  let banProof = $('#banproof').val()
-  $('#bansave').prop('disabled', !banProof.startsWith('http'));
-})
-
 $('#bansave').on('click', function () {
-  let banID = $('#banID').val()
   let banProof = $('#banproof').val()
   let banNotes = $('#bannotes').val()
 
-  if (!banProof.startsWith('http')) {
-    return
-  }
-
   $.ajax({
     type: 'POST',
-    url: '/admin/ban/' + banID,
+    url: window.location.pathname,
     data: {
       banProof,
       banNotes
     },
-    success: function () {
-      window.location.href = '/admin/banlog'
+    success: function (response) {
+      if (response.success) {
+        $('#success').show()
+      }
     }
   })
 })

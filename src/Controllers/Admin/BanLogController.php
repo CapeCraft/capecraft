@@ -108,8 +108,8 @@
       $banNotes = empty($request->getParsedBody()['banNotes']) ? null : filter_var($request->getParsedBody()['banNotes'], FILTER_SANITIZE_STRING);
 
       DB::getInstance()->update('PunishmentHistory', [
-        'proof' => base64_encode($banProof),
-        'notes' => $banNotes
+        'proof' => $banProof,
+        'notes' => base64_encode($banNotes)
       ], [ 'id' => $banID ]);
 
       return $response->withJson([ 'success' => true ]);

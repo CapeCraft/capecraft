@@ -103,14 +103,14 @@
      * @return Response               Returns the View
      */
     public static function doBan($request, $response, $args) {
+
       $banID = $args['ban'];
       $banProof = empty($request->getParsedBody()['banProof']) ? null : filter_var($request->getParsedBody()['banProof'], FILTER_SANITIZE_STRING);
-      $banNotes = empty($request->getParsedBody()['banNotes']) ? null : filter_var($request->getParsedBody()['banNotes'], FILTER_SANITIZE_STRING);
-      $banNotes = urlencode($banNotes);
+      $banNotes = empty($request->getParsedBody()['banNotes']) ? null : base64_encode($request->getParsedBody()['banNotes']);
 
       DB::getInstance()->update('PunishmentHistory', [
         'proof' => $banProof,
-        'notes' => base64_encode($banNotes)
+        'notes' => $banNotes,
       ], [ 'id' => $banID ]);
 
       return $response->withJson([ 'success' => true ]);

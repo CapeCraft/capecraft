@@ -159,12 +159,22 @@
 
       //Check username is legit
       if(!preg_match("/^[a-zA-Z0-9_]{1,17}$/", $username)) {
-        return null;
+        return self::getView()->render($response, 'Pages/admin/error.twig', [
+          'error' => [
+            'title' => "That's not a valid username!",
+            'msg' => "Look likes you inputed a non-valid username!"
+          ]
+        ]);
       }
 
       $uuid = MojangAPI::getUUID($username);
       if($uuid === null) {
-        return null;
+        return self::getView()->render($response, 'Pages/admin/error.twig', [
+          'error' => [
+            'title' => "That's not a valid username!",
+            'msg' => "Look likes you inputed a non-valid username!"
+          ]
+        ]);
       }
 
       return $response->withRedirect("/admin/player/$uuid", 301);

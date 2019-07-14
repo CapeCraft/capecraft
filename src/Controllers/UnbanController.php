@@ -85,10 +85,10 @@
       //Checks the database for a exist unban
       $userUnban = DB::getInstance()->has('unbanrequests', [ 'uuid' => $uuid ]);
       if($userUnban) {
-        if($userUnban['requestsent'] < (time() - 86400)) {  
+        if($userUnban['requestsent'] < (time() - 86400)) {
           return self::getView()->render($response, 'Pages/admin/error.twig', [
             'error' => [
-              'title' => "Error submitted request",
+              'title' => "Error submitting request",
               'msg' => "Look's like you've already submitted an unban request today! You must wait at least 24 hours before sending another."
             ]
           ]);

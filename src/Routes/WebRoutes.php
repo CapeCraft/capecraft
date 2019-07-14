@@ -12,6 +12,7 @@
   use \CapeCraft\Controllers\Admin\BanLogController;
   use \CapeCraft\Controllers\Admin\AdminBlogController;
   use \CapeCraft\Controllers\Admin\Account\LoginController;
+  use \CapeCraft\Controllers\Admin\Account\ProfileController;
 
   class WebRoutes {
 
@@ -97,6 +98,9 @@
           $app->map(['POST'], '/login', [ LoginController::class, 'doLogin' ]);
 
           $app->map(['GET'], '/logout', [ LoginController::class, 'getLogout' ]);
+
+          $app->map(['GET'], '/profile', [ ProfileController::class, 'getProfile' ]);
+          $app->map(['POST'], '/profile/password', [ ProfileController::class, 'doPasswordReset' ]);
         });
       })->add([ Middleware::class, 'start' ]);
     }

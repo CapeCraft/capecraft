@@ -84,6 +84,7 @@
 
         //Blog Stuff
         $app->group('/blog', function($app) {
+          $app->map(['GET'], '/new', [ AdminBlogController::class, 'getNewBlog' ]);
           $app->map(['GET'], '/edit/{blog}', [ AdminBlogController::class, 'getEditBlog' ]);
           $app->map(['GET'], '/delete/{blog}', [ AdminBlogController::class, 'getDeleteBlog' ]);
           $app->map(['GET'], '[/{page}]', [ AdminBlogController::class, 'getBlog' ]);

@@ -33,12 +33,7 @@
       $cpassword = $request->getParsedBody()['confirmpassword'];
 
       if($password != $cpassword) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "Those don't match!",
-            'msg' => "Look likes those passwords don't match!"
-          ]
-        ]);
+        return self::doError($response, "Those don't match!", "Look likes those passwords don't match!");
       }
 
       DB::getInstance()->update('users', [

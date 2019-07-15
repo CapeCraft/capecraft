@@ -64,23 +64,13 @@
 
       //Checks the ban is valid, else returns an error page
       if(empty($args['ban']) || !is_numeric($args['ban'])) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "That's not a valid ban!",
-            'msg' => "Look likes you inputed a non-valid ban number!"
-          ]
-        ]);
+        return self::doError($response, "That's not a valid ban!", "Look likes you inputed a non-valid ban number!");
       }
 
       //Tries to get the ban from the database else returns an error
       $ban = DB::getInstance()->get('PunishmentHistory', '*', [ 'id' => $args['ban'] ]);
       if(empty($ban)) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "That's not a valid ban!",
-            'msg' => "Look likes that ban wasn't found!"
-          ]
-        ]);
+        return self::doError($response, "That's not a valid ban!", "Look likes that ban wasn't found!");
       }
 
       //Sets the username as well as times of the ban
@@ -127,12 +117,7 @@
 
       $uuid = $args['uuid'];
       if(!preg_match("/[a-fA-F0-9]{32}/", $uuid)) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "That's not a valid UUID!",
-            'msg' => "Look likes you inputed a non-valid UUID!"
-          ]
-        ]);
+        return self::doError($response, "That's not a valid UUID!", "Look likes you inputed a non-valid UUID!");
       }
 
       //Gets punishment/player information
@@ -159,22 +144,12 @@
 
       //Check username is legit
       if(!preg_match("/^[a-zA-Z0-9_]{1,17}$/", $username)) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "That's not a valid username!",
-            'msg' => "Look likes you inputed a non-valid username!"
-          ]
-        ]);
+        return self::doError($response, "That's not a valid username!", "Look likes you inputed a non-valid username!");
       }
 
       $uuid = MojangAPI::getUUID($username);
       if($uuid === null) {
-        return self::getView()->render($response, 'Pages/admin/error.twig', [
-          'error' => [
-            'title' => "That's not a valid username!",
-            'msg' => "Look likes you inputed a non-valid username!"
-          ]
-        ]);
+        return self::doError($response, "That's not a valid username!", "Look likes you inputed a non-valid username!");
       }
 
       return $response->withRedirect("/admin/player/$uuid", 301);

@@ -55,15 +55,15 @@
       });
 
       //Votes
-      $app->map(['GET'], '/Vote1', function($request, $response, $args) {
+      $app->map(['GET'], '/{_:vote1|Vote1}', function($request, $response, $args) {
         return $response->withRedirect('https://www.planetminecraft.com/server/capecraft-minecraft-survival-at-its-best/vote', 301);
       });
 
-      $app->map(['GET'], '/Vote2', function($request, $response, $args) {
+      $app->map(['GET'], '/{_:vote2|Vote2}', function($request, $response, $args) {
         return $response->withRedirect('http://minecraft-mp.com/server/189099/vote/', 301);
       });
 
-      $app->map(['GET'], '/Vote3', function($request, $response, $args) {
+      $app->map(['GET'], '/{_:vote3|Vote3}', function($request, $response, $args) {
         return $response->withRedirect('http://minecraftservers.org/vote/488669', 301);
       });
 

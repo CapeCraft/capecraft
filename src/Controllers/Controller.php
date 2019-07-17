@@ -22,4 +22,20 @@
     public static function getView() {
       return self::$app->getContainer()->view;
     }
+
+    /**
+     * Shows the error page
+     * @param  Response $response The Response Object
+     * @param  String $title    The title of the error page
+     * @param  String $content  The description of the error page
+     * @return Twig The Error page
+     */
+    public static function doError($response, $title, $content) {
+      return self::getView()->render($response, 'Pages/admin/error.twig', [
+        'error' => [
+          'title' => $title,
+          'msg' => $content
+        ]
+      ]);
+    }
   }

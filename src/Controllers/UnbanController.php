@@ -86,12 +86,7 @@
       $userUnban = DB::getInstance()->has('unbanrequests', [ 'uuid' => $uuid ]);
       if($userUnban) {
         if($userUnban['requestsent'] < (time() - 86400)) {
-          return self::getView()->render($response, 'Pages/admin/error.twig', [
-            'error' => [
-              'title' => "Error submitting request",
-              'msg' => "Look's like you've already submitted an unban request today! You must wait at least 24 hours before sending another."
-            ]
-          ]);
+          return self::doError($response, "Error submitting request", "Look's like you've already submitted an unban request today! You must wait at least 24 hours before sending another.");
         }
       }
 
@@ -143,12 +138,7 @@
           echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
 
-      return self::getView()->render($response, 'Pages/admin/error.twig', [
-        'error' => [
-          'title' => "Thank You!",
-          'msg' => "Your unban request has been submitted and will be reviewed by a senior member of staff. Please refrain from asking about your unban request on any CapeCraft platforms.</br>If you have any further questions, please direct them to <a href=\"mailto:staff@capecraft.net\">staff@capecraft.net</a>"
-        ]
-      ]);
+      return self::doError($response, "Thank You!", "Your unban request has been submitted and will be reviewed by a senior member of staff. Please refrain from asking about your unban request on any CapeCraft platforms.</br>If you have any further questions, please direct them to <a href=\"mailto:staff@capecraft.net\">staff@capecraft.net</a>");
     }
 
     /**

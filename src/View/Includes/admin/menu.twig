@@ -9,7 +9,13 @@
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item"><a class="nav-link" href="/admin">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="/admin/blog">Blog</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Blog</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/admin/blog">Blog List</a>
+          <a class="dropdown-item" href="/admin/blog/new">New Blog</a>
+        </div>
+      </li>
       <li class="nav-item"><a class="nav-link" href="/admin/banlog">Ban Log</a></li>
       {% if user.username is defined %}
       <li class="nav-item dropdown">

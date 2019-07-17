@@ -1,0 +1,33 @@
+{% extends "Templates/admin_layout.twig" %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/ui/trumbowyg.min.css" integrity="sha256-X5UWaGp+SiusJ9TA2ShymJz5VPE+oTl88TNI47fqOTs=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/trumbowyg.min.js" integrity="sha256-9fPnxiyJ+MnhUKSPthB3qEIkImjaWGEJpEOk2bsoXPE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/plugins/upload/trumbowyg.upload.min.js" integrity="sha256-HebkeoJdrHA4HfNJa5xaDCf9QPR4v9wBo/axJjHsjhU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.18.0/plugins/cleanpaste/trumbowyg.cleanpaste.min.js" integrity="sha256-GGXtZ0tz4DfEMvShclGiegXJZt9r49+KqwWUvZ6+nlY=" crossorigin="anonymous"></script>
+<div class="content">
+  <h1 class="text-center">New Blog</h1>
+  <hr />
+  <form method="POST">
+    <div class="form-group">
+      <label for="title" class="bmd-label-floating">Title</label>
+      <input type="text" class="form-control" id="title" maxlength="75" name="title">
+    </div>
+    <div class="form-group">
+      <label for="trumbowyg" class="bmd-label">Content</label>
+      <textarea id="trumbowyg" name="content"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="thumbnail" class="bmd-label-floating">Thumbnail</label>
+      <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+    </div>
+    <a href="/admin/blog" class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+  </form>
+  <script>
+    $(document).ready(function() {
+      $('#trumbowyg').trumbowyg({ autogrow: true })      
+    });
+  </script>
+</div>
+{% endblock %}

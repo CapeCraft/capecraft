@@ -48,7 +48,7 @@
       });
 
       $app->map(['GET'], '/donate', function($request, $response, $args) {
-        return $response->withRedirect('https://capecraftserver.buycraft.net/', 301);
+        return $response->withRedirect('https://donate.capecraft.net/', 301);
       });
       $app->map(['GET'], '/discord', function($request, $response, $args) {
         return $response->withRedirect('https://discord.gg/62MCajz', 301);

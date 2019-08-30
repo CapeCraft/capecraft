@@ -54,8 +54,8 @@
       }
 
       //Checks the email is valid
-      $email = $request->getParsedBody()['email'];
-      $cemail = $request->getParsedBody()['cemail'];
+      $email = strtolower($request->getParsedBody()['email']);
+      $cemail = strtolower($request->getParsedBody()['cemail']);
       if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || $email !== $cemail) {
         return self::showFailedUnban($request, $response, "Please check that email and make sure they match!");
       }

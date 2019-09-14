@@ -28,6 +28,7 @@
 
       //Rules
       $app->map(['GET'], '/rules', [ RuleController::class, 'getRules' ]);
+      $app->map(['GET'], '/rules/afk', [ RuleController::class, 'getAfkRules' ]);
       $app->map(['GET'], '/rules/alts', [ RuleController::class, 'getAltRules' ]);
 
       //Unban Request

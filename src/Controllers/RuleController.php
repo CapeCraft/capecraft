@@ -28,4 +28,15 @@
       return self::getView()->render($response, 'Pages/rules/altrules.twig');
     }
 
+    /**
+     * Shows the afk rules
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Twig               Returns the View
+     */
+    public static function getAfkRules($request, $response, $args) {
+      return self::getView()->render($response, 'Pages/rules/afkrules.twig');
+    }
+
   }

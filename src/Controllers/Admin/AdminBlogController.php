@@ -97,14 +97,34 @@
     public static function getDeleteBlog($request, $response, $args) {
       $blogID = $args['blog'];
 
+      $blogExist = DB::getInstance()->get('blogs', '*', [ 'id' => $blogID ]);
+      if(!$blogExist) {
+        return self::doError($response, "That's not a valid blog!", "Look likes you inputed a invalid blog id!");
+      }
+
+      self::getView()->render($response, 'Pages/admin/blog/delete.twig', [
+        'blog' => $blogExist
+      ]);
+    }
+
+    /**
+     * Delete blog
+     * @param  Request $request   The Request Object
+     * @param  Response $response The Response Object
+     * @param  Array $args        Args from the URL (If any)
+     * @return Twig               Returns the View
+     */
+    public static function doDeleteBlog($request, $response, $args) {
+      $blogID = $args['blog'];
+
       $blogExist = DB::getInstance()->has('blogs', [ 'id' => $blogID ]);
       if(!$blogExist) {
         return self::doError($response, "That's not a valid blog!", "Look likes you inputed a invalid blog id!");
       }
 
-      return self::getView()->render($response, 'Pages/admin/blog/delete.twig', [
-        'blogID' => $blogID
-      ]);
+      DB::getInstance()->delete('blogs', [ 'id' => $blogID ]);
+
+      return $response->withRedirect("/admin/blog", 301);
     }
 
     /**
@@ -125,6 +145,22 @@
       $blogid = str_replace(' ', '', $title);
       $blogid = preg_replace('/[^A-Za-z0-9\-]/', '', $title);
       $blogid = substr($blogid, 0, 20);
-      $blogid = $blogid.rand(10000, 99999);
+      $blogid = $blogid . rand(10000, 99999);
+
+      $uploadedFiles = $request->getUploadedFiles();
+      $uploadedFile = $uploadedFiles['thumbnail'];
+      $fileName = sha1_file($uploadedFile->getFilename());
+      $uploadedFile->moveTo(__DIR__ . "/assets/blog/", $fileName);
+
+      DB::getInstance()->insert('blogs', [
+        'id' => $blogid,
+        'title' => $title,
+        'content' => base64_encode($content),
+        'thumbnail' => $fileName,
+        'author' => $_SESSION['MEMBER']['uuid'],
+        'posttime' => time()
+      ]);
+
+      return $response->withRedirect("/blog/id/$blogid", 301);
     }
   }

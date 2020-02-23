@@ -90,6 +90,7 @@
           $app->map(['GET'], '/delete/{blog}', [ AdminBlogController::class, 'getDeleteBlog' ]);
           $app->map(['GET'], '[/{page}]', [ AdminBlogController::class, 'getBlog' ]);
 
+          $app->map(['POST'], '/new', [ AdminBlogController::class, 'doNewBlog' ]);
           $app->map(['POST'], '/edit/{blog}', [ AdminBlogController::class, 'doEditBlog' ]);
           $app->map(['POST'], '/delete/{blog}', [ AdminBlogController::class,'doDeleteBlog' ]);
         });

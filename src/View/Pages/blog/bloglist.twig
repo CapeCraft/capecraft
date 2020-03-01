@@ -7,7 +7,7 @@
   {% for blog in blogList %}
   <div class="row">
     <div class="col-4">
-      <img class="img-fluid" src="{{blog['thumbnail']}}"/><br />
+      <img class="img-fluid" src="/assets/blog/{{blog['thumbnail']}}"/><br />
       <strong>{{blog['username']}}</strong><br />
       <small>{{blog['posttime']|date('F j Y')}}</small>
     </div>

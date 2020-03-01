@@ -1,6 +1,7 @@
 /vendor
 /src/.env
 /src/View/Cache
+/src/Public/assets/blog/*
 
 ssl.crt
 ssl.key

@@ -149,8 +149,8 @@
 
       $uploadedFiles = $request->getUploadedFiles();
       $uploadedFile = $uploadedFiles['thumbnail'];
-      $fileName = sha1_file($uploadedFile->getFilename());
-      $uploadedFile->moveTo(__DIR__ . "/assets/blog/", $fileName);
+      $fileName = sha1_file($uploadedFile->file);
+      $uploadedFile->moveTo("assets/blog/" . $fileName);
 
       DB::getInstance()->insert('blogs', [
         'id' => $blogid,

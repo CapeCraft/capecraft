@@ -1,13 +1,7 @@
 .staff-group {
-  display: inline-flex;
+  text-align: center;
 }
 
 .staff-group > img {
   margin-right: 1vw;
-}
-
-@media(max-width: 992px) {
-  .staff-group {
-      display: block;
-  }
 }

@@ -12,7 +12,7 @@
       </div>
       <hr />
       {% endif %}
-      <form method="POST">
+      <form method="POST" id="unbanForm">
         <div class="form-group">
           <label class="bmd-label-floating">Username:</label>
           <input type="text" name="username" class="form-control" autocomplete="off" value="{{post.username}}">
@@ -44,25 +44,29 @@
         </div>
         <hr />
         <div class="alert alert-info">
-            Please read through your answers carefully! <strong>DO NOT LIE!</strong> We store proof/evidence of every ban and will not tolerate liars. We recommend reading through our rules so you understand what you did wrong!
+          Please read through your answers carefully! <strong>DO NOT LIE!</strong> We store proof/evidence of every ban
+          and will not tolerate liars. We recommend reading through our rules so you understand what you did wrong!
         </div>
         <hr />
         <div class="checkbox">
           <label>
             <input type="checkbox" class="dynamic" name="confirmunban" style="width:auto;">
-            I am in good faith to believe that I deserve to be unbanned and all information supplied is true. I also understand that I can
+            I am in good faith to believe that I deserve to be unbanned and all information supplied is true. I also
+            understand that I can
             submit this form only once every 24 hours.
           </label>
         </div>
         <hr>
         <div>
-          <div class="g-recaptcha" data-sitekey="{{siteKey}}"></div>
-        </div>
-        <hr>
-        <div>
-          <button type="submit" class="btn btn-success btn-raised">Submit Unban Request</button>
+          <button class="btn btn-success btn-raised g-recaptcha" data-sitekey="{{siteKey}}" data-callback='onSubmit'
+            data-action='submit'>Submit Unban Request</button>
         </div>
       </form>
+      <script>
+        function onSubmit(token) {
+          document.getElementById("unbanForm").submit();
+        }
+      </script>
     </div>
   </div>
 </div>

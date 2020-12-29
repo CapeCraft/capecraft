@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 //Pages
 import HomePage from './views/pages/HomePage'
 
+import StaffPage from './views/pages/StaffPage'
+
 import NotFoundPage from './views/errors/NotFoundPage'
 
 const routes = [
@@ -13,6 +15,14 @@ const routes = [
             title: 'Home'
         },
         component: HomePage
+    },
+    {
+        path: '/staff',
+        name: 'staff',
+        meta: {
+            title: 'Staff'
+        },
+        component: StaffPage
     },
     {
         path: '*',

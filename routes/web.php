@@ -2,16 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/discord', function() {
+    return redirect('https://discord.gg/62MCajz');
+});
+
+Route::get('/donate', function() {
+    return redirect('https://capecraft.buycraft.net');
+});
 
 Route::get('/{any}', function () {
     return view('base');

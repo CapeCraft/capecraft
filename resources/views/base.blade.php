@@ -24,29 +24,17 @@
         <meta name="google-site-verification" content="nsFumLAEmn8YANJYupL8XCnCOQGcNRwQfWlgzt5pTuc" />
 
         <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/images/favicon/site.webmanifest">
+        <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
         <link rel="shortcut icon" href="/images/favicon/favicon.ico">
-        <link rel="icon" sizes="16x16 32x32 64x64" href="/images/favicon/favicon.ico">
-        <link rel="icon" type="image/png" sizes="196x196" href="/images/favicon/favicon-192.png">
-        <link rel="icon" type="image/png" sizes="160x160" href="/images/favicon/favicon-160.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96.png">
-        <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon/favicon-64.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
-        <link rel="apple-touch-icon" href="/images/favicon/favicon-57.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/favicon-114.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/favicon-72.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/favicon-144.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/favicon-60.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/favicon-120.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/favicon-76.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/favicon-152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/favicon-180.png">
-        <meta name="msapplication-TileColor" content="#FFFFFF">
-        <meta name="msapplication-TileImage" content="/images/favicon/favicon-144.png">
-        <meta name="msapplication-config" content="/browserconfig.xml">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
 
         <!-- CSS/JS -->
-        <script src="/js/adblocker.js"></script>
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
         <!-- Google Analytics -->

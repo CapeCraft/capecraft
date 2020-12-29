@@ -9,18 +9,12 @@ import {
 library.add(faDiscord);
 
 // Solid
-// import {
-
-// } from '@fortawesome/free-solid-svg-icons'
-// library.add(
-
-// );
+import { faAngleDown, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
+library.add(faAngleDown, faMoneyBillWave);
 
 // Regular
-// import {
-
-// } from '@fortawesome/free-regular-svg-icons';
-// library.add();
+import { faCopyright } from '@fortawesome/free-regular-svg-icons';
+library.add(faCopyright);
 
 // Export
 export { FontAwesomeIcon, FontAwesomeLayers };

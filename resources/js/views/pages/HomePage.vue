@@ -1,8 +1,8 @@
 <template>
-    <section class="row">
+    <section class="row justify-content-center">
         <div class="d-flex align-items-center text-center">
             <div class="d-block">
-                <img class="w-half" src="/images/logo/logo.png"/>
+                <img class="w-half" src="/images/logo/logo-grass.png"/>
                 <h3>Come and join {{message}} on <kbd class="pl-3">Play.CapeCraft.Net</kbd></h3>
                 <a class="btn btn-lg btn-discord" target="_blank" href="/discord"><font-awesome-icon :icon="['fab', 'discord']"/> Discord</a>
                 <a class="btn btn-lg btn-secondary" target="_blank" href="/donate"><font-awesome-icon icon="money-bill-wave"/> Store</a>
@@ -13,7 +13,7 @@
 
 <style scoped>
     img {
-        margin-bottom: -4rem;
+        margin-bottom: -2.5rem;
     }
 </style>
 

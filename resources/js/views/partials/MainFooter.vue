@@ -3,8 +3,8 @@
         <div class="row p-20">
             <div class="col-lg-3">
                 <img class="img-fluid" src="/images/logo/logo.png">
-                <h1>CapeCraft.net</h1>
                 <p>Minecraft survival at its best</p>
+                <a class="text-white" href="mailto:staff@capecraft.net">staff@capecraft.net</a>
             </div>
             <div class="col text-right">
                 <ul class="navbar-nav d-inline-flex">
@@ -33,9 +33,10 @@
                         <a class="nav-link" href="/discord">Discord</a>
                     </li>
                 </ul>
-                <p>Copyright <font-awesome-icon :icon="[ 'far', 'copyright' ]"/> <a class="text-white" href="https://CapeCraft.net">https://CapeCraft.net</a> {{new Date().getFullYear()}}</p>
-                <a class="text-white" href="mailto:staff@capecraft.net">staff@capecraft.net</a>
             </div>
+        </div>
+        <div class="p-30 text-center" style="background: #0f0f0f;">
+            <small class="text-light"><font-awesome-icon icon="copyright"/> {{new Date().getFullYear()}}. CapeCraft.net | All Rights Reserved. This website is not affiliated with Mojang</small>
         </div>
     </footer>
 </template>

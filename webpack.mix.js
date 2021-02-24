@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.disableNotifications();
 
-mix.js("resources/js/app.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css")
-    .copyDirectory("resources/images", "public/images")
-    .version();
+mix.js("resources/js/app.js", "public/js").vue();
+mix.sass("resources/sass/app.scss", "public/css");
+mix.copyDirectory("resources/images", "public/images");
+mix.version();

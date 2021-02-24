@@ -14,7 +14,27 @@
     </main>
 </template>
 
-<style>
+<style lang="scss">
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .25s;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+
+    .btn-discord {
+        background-color: #7289da !important;
+    }
+
+    kbd {
+        background: #191c20 !important;
+        font-size: inherit !important;
+        -webkit-user-select: all !important;
+        -moz-user-select: all !important;
+        -ms-user-select: all !important;
+        user-select: all !important;
+    }
+
     #content {
         background-image: url("/images/home.jpg");
         background-repeat: no-repeat;
@@ -34,7 +54,7 @@
     export default {
         watch: {
             $route: {
-                handler: function(to, from) {
+                handler: function(to) {
                     document.title = to.meta.title + ' | CapeCraft.Net'
                     if(this.user && this.user.notification) {
                         this.showNotification = true;

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Site Maintenance | MinecraftCapes.net</title>
+        <title>Site Maintenance | CapeCraft.net</title>
         <meta http-equiv="refresh" content="10">
         <style>
             body {

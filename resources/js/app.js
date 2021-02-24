@@ -1,8 +1,5 @@
 require("./bootstrap");
 
-// SkinView3D
-import SkinView3D from './skinview3d.bundle'
-
 // VueJS
 require("./vue")
 

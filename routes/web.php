@@ -10,6 +10,10 @@ Route::get('/donate', function() {
     return redirect('https://capecraft.buycraft.net');
 });
 
+Route::get('/capecraft', function() {
+    return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+});
+
 Route::get('/{any}', function () {
     return view('base');
 })->where('any', '.*');

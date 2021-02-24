@@ -7,18 +7,24 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Meta for Sending links on platforms -->
-        <meta name="og:url" content="{{config('app.url')}}">
-        <meta name="og:title" content="@yield('title') | CapeCraft.net">
-        <meta name="twitter:title" content="@yield('title') | CapeCraft.net">
-        <meta name="description" name="description" content="CapeCraft is a minecraft server focussed around having a friendly community.">
-        <meta name="og:description" name="description" content="CapeCraft is a minecraft server focussed around having a friendly community.">
-        <meta name="twitter:description" name="description" content="CapeCraft is a minecraft server focussed around having a friendly community.">
-        <meta name="twitter:image" content="{{config('app.url')}}/images/meta.jpg">
-        <meta name="og:image" content="{{config('app.url')}}/images/meta.jpg">
-        <meta name="fb:app_id" content="966242223397117">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@james090500">
+        <!-- Primary Meta Tags -->
+        <title>CapeCraft.Net</title>
+        <meta name="title" content="CapeCraft.Net">
+        <meta name="description" content="CapeCraft is a minecraft server with survival, creative and focussed around having a friendly community.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{config('app.url')}}">
+        <meta property="og:title" content="CapeCraft.Net">
+        <meta property="og:description" content="CapeCraft is a minecraft server with survival, creative and focussed around having a friendly community.">
+        <meta property="og:image" content="{{config('app.url')}}/images/banner.jpg">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{config('app.url')}}">
+        <meta property="twitter:title" content="CapeCraft.Net">
+        <meta property="twitter:description" content="CapeCraft is a minecraft server with survival, creative and focussed around having a friendly community.">
+        <meta property="twitter:image" content="{{config('app.url')}}/images/banner.jpg">
 
         <!-- Google Site Verification -->
         <meta name="google-site-verification" content="nsFumLAEmn8YANJYupL8XCnCOQGcNRwQfWlgzt5pTuc" />

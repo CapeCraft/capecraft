@@ -9,8 +9,10 @@ import {
 library.add(faDiscord);
 
 // Solid
-import { faAngleDown, faMoneyBillWave, faCopyright } from '@fortawesome/free-solid-svg-icons'
-library.add(faAngleDown, faMoneyBillWave, faCopyright);
+import {
+    faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown
+} from '@fortawesome/free-solid-svg-icons'
+library.add(faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown);
 
 // Regular
 // import { faCopyright } from '@fortawesome/free-regular-svg-icons';

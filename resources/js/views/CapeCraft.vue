@@ -2,7 +2,8 @@
     <main>
         <div class="page-wrapper">
             <div class="content-wrapper">
-                <MainMenu/>
+                <MainMenu v-if="user == null"/>
+                <AdminMenu v-else/>
                 <div id="content" class="container-fluid">
                     <transition name="fade" mode="out-in">
                         <router-view/>
@@ -36,7 +37,7 @@
     }
 
     #content {
-        background-image: url("/images/home.jpg");
+        background-image: url("/images/home-dark.jpg");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -50,6 +51,7 @@
 <script>
     import { mapState } from 'vuex'
     import MainMenu from './partials/MainMenu'
+    import AdminMenu from './partials/AdminMenu'
     import MainFooter from './partials/MainFooter'
     export default {
         watch: {
@@ -78,6 +80,7 @@
         },
         components: {
             MainMenu,
+            AdminMenu,
             MainFooter,
         },
         computed: mapState(['user'])

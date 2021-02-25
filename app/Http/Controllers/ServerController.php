@@ -12,7 +12,7 @@ class ServerController extends Controller {
      *
      * @return void
      */
-    private function getServerResponse() {
+    public static function getServerResponse() {
         $value = cache()->remember('server:capecraft', 300, function () {
             $result = null;
 

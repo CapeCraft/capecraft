@@ -2,25 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Classes\PlayerCache;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
+class User extends Authenticatable {
+    use HasApiTokens, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,12 +21,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [ 'username' ];
+
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * Add the username to the player
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getUsernameAttribute() {
+        return PlayerCache::get($this->uuid)->username;
+    }
 }

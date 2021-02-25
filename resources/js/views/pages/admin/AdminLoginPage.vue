@@ -18,7 +18,6 @@
                     <div class="form-group">
                         <label>Password</label>
                         <input class="form-control" type="password" v-model="password" autocomplete="current-password">
-                        <router-link :to="{ name: 'account-register'}">Forgot your password?</router-link>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" v-model="remember_me" id="remember_me">
@@ -28,11 +27,38 @@
                         <button type="submit" class="btn btn-primary" :disabled="loading"><font-awesome-icon v-if="loading" icon="circle-notch" spin/> Login</button>
                     </div>
                 </form>
-                <hr>
-                <div class="text-center">
-                    <span class="text-muted">Don't have an account? <router-link :to="{ name: 'account-register'}">Register here</router-link></span>
-                </div>
             </div>
         </div>
     </section>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                errors: null,
+                loading: false,
+                username: null,
+                password: null,
+                remember_me: false,
+            }
+        },
+        methods: {
+            doLogin() {
+                this.loading = true;
+                axios.post('/api/admin/login', {
+                    username: this.username,
+                    password: this.password,
+                    remember_me: this.remember_me
+                }).then((response) => {
+                    this.$store.dispatch('login', response.data);
+                    this.$router.push({ name: 'admin' })
+                    this.loading = false;
+                }).catch((errors) => {
+                    this.errors = errors.response.data.errors;
+                    this.loading = false;
+                })
+            }
+        }
+    }
+</script>

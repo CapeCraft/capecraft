@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-4 pr-10">
-                            <img class="img-fluid" :src="'https://minecraftapi.net/api/v1/uuid/' + member.uuid + '/avatar'">
+                            <img class="img-fluid" :src="`https://minecraftapi.net/api/v1/uuid/${member.uuid}/avatar?size=256&overlay=true`">
                         </div>
                         <div class="col-8 pl-5">
                             <h3 class="m-0">{{member.username}}</h3>

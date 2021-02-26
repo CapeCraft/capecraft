@@ -10,7 +10,7 @@
         </ul>
         <ul class="navbar-nav ml-auto h-auto flex-wrap" style="min-width:15rem">
             <li class="nav-item dropdown with-arrow">
-				<a class="nav-link" data-toggle="dropdown"><img :src="`https://crafatar.com/avatars/${user.uuid}?overlay&size=24&default=https://minotar.net/helm/${user.uuid}/24.png`" class="mr-10"> {{user.username}}<font-awesome-icon icon="angle-down" class="ml-5"/></a>
+				<a class="nav-link" data-toggle="dropdown"><img :src="`https://minecraftapi.net/api/v1/uuid/${user.uuid}/avatar?size=8&overlay=true`" class="mr-10"> {{user.username}}<font-awesome-icon icon="angle-down" class="ml-5"/></a>
 				<div class="dropdown-menu dropdown-menu-right">
                     <router-link class="dropdown-item" to="/admin/account">My Profile</router-link>
 					<a href="" class="dropdown-item" @click="$store.dispatch('logout')">Log out</a>

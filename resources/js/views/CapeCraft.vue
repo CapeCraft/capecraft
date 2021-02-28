@@ -2,7 +2,7 @@
     <main>
         <div class="page-wrapper">
             <div class="content-wrapper">
-                <MainMenu v-if="!this.$route.path.includes('/admin')"/>
+                <MainMenu v-if="!user || !this.$route.path.includes('/admin')"/>
                 <AdminMenu v-else/>
                 <div id="content" class="container-fluid">
                     <transition name="fade" mode="out-in">

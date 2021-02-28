@@ -6,28 +6,7 @@
                 <hr>
                 <transition name="fade" mode="out-in">
                     <div key=1 v-if="data != null">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Reason</th>
-                                        <th>Punishement</th>
-                                        <th>Issued By</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="ban in data.data" :key="ban.id">
-                                        <th>{{ban.id}}</th>
-                                        <td>{{ban.name}}</td>
-                                        <td>{{ban.reason}}</td>
-                                        <td>{{ban.punishmentType}}</td>
-                                        <td>{{ban.operator}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <AdminBanList :bans="data.data"/>
                         <hr>
                         <nav>
                             <ul class="pagination text-center">
@@ -67,6 +46,8 @@
 </style>
 
 <script>
+    import AdminBanList from '../../../partials/admin/AdminBanList'
+
     export default {
         data() {
             return {
@@ -91,6 +72,9 @@
                     this.data = response.data;
                 })
             }
+        },
+        components: {
+            AdminBanList
         }
     }
 </script>

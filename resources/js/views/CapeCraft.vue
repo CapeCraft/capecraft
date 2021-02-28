@@ -2,7 +2,7 @@
     <main>
         <div class="page-wrapper">
             <div class="content-wrapper">
-                <MainMenu v-if="user == null"/>
+                <MainMenu v-if="!this.$route.path.includes('/admin')"/>
                 <AdminMenu v-else/>
                 <div id="content" class="container-fluid">
                     <transition name="fade" mode="out-in">
@@ -51,7 +51,7 @@
 <script>
     import { mapState } from 'vuex'
     import MainMenu from './partials/MainMenu'
-    import AdminMenu from './partials/AdminMenu'
+    import AdminMenu from './partials/admin/AdminMenu'
     import MainFooter from './partials/MainFooter'
     export default {
         watch: {

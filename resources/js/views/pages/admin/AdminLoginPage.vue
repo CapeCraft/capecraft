@@ -52,7 +52,7 @@
                     remember_me: this.remember_me
                 }).then((response) => {
                     this.$store.dispatch('login', response.data);
-                    this.$router.push({ name: 'admin' })
+                    this.$router.push('/admin')
                     this.loading = false;
                 }).catch((errors) => {
                     this.errors = errors.response.data.errors;

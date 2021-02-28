@@ -16,9 +16,9 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::get('/init', [ AdminController::class, 'getInit']);
     Route::post('/login', [AccountController::class, 'doLogin'])->withoutMiddleware('auth:sanctum');
 
-    Route::group(['prefix' => '/bans'], function() {
-        Route::get('/', [ BanController::class, 'getBans']);
-    });
+    Route::get('/bans', [ BanController::class, 'getBans']);
+    Route::get('/ban/{id}', [ BanController::class, 'getBan'])->whereNumber('id');
+    Route::get('/player/{uuid}', [ BanController::class, 'getPlayer']);
 });
 
 Route::get('/server', [ ServerController::class, 'getServer' ]);

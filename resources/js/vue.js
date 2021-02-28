@@ -15,14 +15,6 @@ import { FontAwesomeIcon, FontAwesomeLayers } from './fontawesome'
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('font-awesome-layers', FontAwesomeLayers);
 
-/**
- * Common Components
- */
-
-// Player Model
-import PlayerModel from './views/partials/PlayerModel';
-Vue.component('player-model', PlayerModel);
-
 // Layout
 import CapeCraft from './views/CapeCraft'
 

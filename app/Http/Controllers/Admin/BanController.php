@@ -43,4 +43,8 @@ class BanController extends Controller {
         return response()->json(['profile' => $profile, 'bans' => $bans]);
     }
 
+    public function doAddProof(Request $request) {
+        dd($request);
+    }
+
 }

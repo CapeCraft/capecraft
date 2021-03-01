@@ -78,16 +78,17 @@ class PlayerCache {
                 'X-Authorization' => config('services.xbox.key')
             ])->retry(3, 100)->get("https://xbl.io/api/v2/account/$xuid");
             if($response->successful()) {
+                // dd($response->json());
                 $username = $response->json()['profileUsers'][0]['settings'][2]['value'];
 
                 $result = (object) [
+                    "bedrock" => true,
                     "username" => $username,
                     "uuid" => $value
                 ];
 
                 //Cache for username and uuid
-                cache()->put("cache:$username", $result, 600);
-                cache()->put("cache:$value", $result, 600);
+                cache()->put("cache:$value", $result, 3600);
 
                 return $result;
             } else {

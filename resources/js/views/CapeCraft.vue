@@ -1,5 +1,6 @@
 <template>
     <main>
+        <ModalElement/>
         <div class="page-wrapper">
             <div class="content-wrapper">
                 <MainMenu v-if="!user || !this.$route.path.includes('/admin')"/>
@@ -50,6 +51,7 @@
 
 <script>
     import { mapState } from 'vuex'
+    import ModalElement from './partials/ModalElement'
     import MainMenu from './partials/MainMenu'
     import AdminMenu from './partials/admin/AdminMenu'
     import MainFooter from './partials/MainFooter'
@@ -79,6 +81,7 @@
             });
         },
         components: {
+            ModalElement,
             MainMenu,
             AdminMenu,
             MainFooter,

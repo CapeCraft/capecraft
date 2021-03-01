@@ -7,8 +7,13 @@
                 <transition name="fade" mode="out-in">
                     <div key=1 v-if="player != null">
                         <div class="row">
-                            <div class="col-md">
-                                <img :src="'https://crafatar.com/renders/body/' + player.profile.uuid">
+                            <div class="col-md p-10">
+                                <img class="img-fluid" :src="'https://crafatar.com/renders/body/' + player.profile.uuid">
+                                <hr>
+                                <strong>UUID: <kbd>{{player.profile.uuid}}</kbd></strong>
+                                <hr>
+                                <a v-if="player.profile.bedrock" class="btn btn-primary btn-block" :href="'https://account.xbox.com/profile?gamertag=' + player.profile.username" target="_blank">View Profile</a>
+                                <a v-else class="btn btn-primary btn-block" :href="'https://namemc.com/profile/' + player.profile.uuid" target="_blank">View Profile</a>
                             </div>
                             <div class="col-md-8">
                                 <AdminBanList :bans="player.bans"/>
@@ -36,6 +41,8 @@
         created() {
             axios.get(`/api/admin/player/${this.$route.params.uuid}`).then((response) => {
                 this.player = response.data;
+            }).catch(() => {
+                location.reload();
             })
         },
         components: {

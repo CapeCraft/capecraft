@@ -17,6 +17,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::post('/login', [AccountController::class, 'doLogin'])->withoutMiddleware('auth:sanctum');
 
     Route::get('/bans', [ BanController::class, 'getBans']);
+    Route::post('/ban/proof', [ BanController::class, 'doAddProof']);
     Route::get('/ban/{id}', [ BanController::class, 'getBan'])->whereNumber('id');
     Route::get('/player/{uuid}', [ BanController::class, 'getPlayer']);
 });

@@ -32,7 +32,14 @@
                                             </tr>
                                             <tr>
                                                 <th>Proof</th>
-                                                <td><img :src="ban.proof"/></td>
+                                                <td>
+                                                    <ul>
+                                                        <li v-for="item in ban.proof" :key="item.id">
+                                                            <a :href="item.url" target="_blank">{{item.label}}</a>
+                                                        </li>
+                                                        <button class="btn btn-sm btn-primary" @click="$store.dispatch('modal', { type: 'PROOF_MODAL', id: ban.id })">Upload Proof</button>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -1,10 +1,12 @@
+import { now } from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        user: null
+        user: null,
+        modal: null
     },
     mutations: {
         setUserData(state, userData) {
@@ -15,6 +17,13 @@ export default new Vuex.Store({
         clearUserData() {
             sessionStorage.removeItem('user')
             location.reload()
+        },
+        openModal(state, data) {
+            if(data == 'close') {
+                halfmoon.toggleModal('modal')
+            } else {
+                state.modal = { id: new Date(), data }
+            }
         }
     },
     actions: {
@@ -24,8 +33,12 @@ export default new Vuex.Store({
         logout({ commit }) {
             commit('clearUserData')
         },
+        modal({ commit }, data) {
+            commit('openModal', data)
+        }
     },
     getters : {
         user: state => state.user,
+        modal: state => state.modal
     }
 })

@@ -7,6 +7,10 @@
                 <label for="external-proof">External Proof</label>
             </div>
         </div>
+        <div class="form-group">
+            <label for="prooflabel" class="required">Label</label>
+            <input type="text" class="form-control" id="prooflabel" v-model="proofLabel">
+        </div>
         <div v-if="externalProof">
             <div class="form-group">
                 <label for="externalurl" class="required">External Proof</label>
@@ -22,6 +26,7 @@
         data() {
             return {
                 externalProof: false,
+                proofLabel: "",
                 externalUrl: ""
             }
         },
@@ -29,6 +34,8 @@
             addExternal() {
                 axios.post('/api/admin/ban/proof', {
                     type: 'external',
+                    id: this.data.id,
+                    label: this.proofLabel,
                     url: this.externalUrl
                 }).then(() => {
                     this.$store.dispatch('modal', 'close')

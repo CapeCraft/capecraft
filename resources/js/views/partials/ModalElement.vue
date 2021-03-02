@@ -1,7 +1,7 @@
 <template>
     <div class="modal" id="modal" tabindex="-1" role="dialog" data-overlay-dismissal-disabled="true">
         <div class="modal-dialog" role="document" v-if="modal">
-            <ProofModal v-if="modal.data.type == 'PROOF_MODAL'" @data="modal.data"/>
+            <ProofModal v-if="modal.data.type == 'PROOF_MODAL'" :data="modal.data"/>
             <small class="text-center">Hit <kbd>esc</kbd> to leave the modal</small>
         </div>
     </div>

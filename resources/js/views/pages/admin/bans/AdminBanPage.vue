@@ -35,7 +35,7 @@
                                                 <td>
                                                     <ul>
                                                         <li v-for="item in ban.proof" :key="item.id">
-                                                            <a :href="item.url" target="_blank">{{item.label}}</a>
+                                                            <a :href="item.proof" target="_blank">{{item.label}}</a>
                                                         </li>
                                                         <button class="btn btn-sm btn-primary" @click="$store.dispatch('modal', { type: 'PROOF_MODAL', id: ban.id })">Upload Proof</button>
                                                     </ul>

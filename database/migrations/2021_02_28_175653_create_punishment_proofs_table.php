@@ -16,7 +16,9 @@ class CreatePunishmentProofsTable extends Migration
         Schema::create('punishment_proofs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('punishment_history_id');
-            $table->string('hash');
+            $table->string('label', 50);
+            $table->string('proof');
+            $table->boolean('external')->default(false);
             $table->timestamps();
         });
     }

@@ -1,4 +1,3 @@
-import { now } from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
@@ -11,11 +10,11 @@ export default new Vuex.Store({
     mutations: {
         setUserData(state, userData) {
             state.user = userData.user
-            sessionStorage.setItem('user', JSON.stringify(userData))
+            localStorage.setItem('user', JSON.stringify(userData))
             axios.defaults.headers.common.Authorization = `Bearer ${userData.token}`
         },
         clearUserData() {
-            sessionStorage.removeItem('user')
+            localStorage.removeItem('user')
             location.reload()
         },
         openModal(state, data) {

@@ -9,8 +9,7 @@
                         <div class="row">
                             <div class="col-md">
                                 <img :src="'https://crafatar.com/renders/body/' + ban.uuid">
-                            </div>
-                            <div class="col-md-8">
+                                <hr>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
@@ -31,19 +30,20 @@
                                                 <td>{{ban.operator}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Proof</th>
-                                                <td>
-                                                    <ul>
-                                                        <li v-for="item in ban.proof" :key="item.id">
-                                                            <a :href="item.proof" target="_blank">{{item.label}}</a>
-                                                        </li>
-                                                        <button class="btn btn-sm btn-primary" @click="$store.dispatch('modal', { type: 'PROOF_MODAL', id: ban.id })">Upload Proof</button>
-                                                    </ul>
-                                                </td>
+                                                <th>Date Issued</th>
+                                                <td :alt="ban.start">{{ban.start | formatDate}}</td>
+                                            </tr>
+                                            <tr v-if="ban.end > 0">
+                                                <th>Date Expires</th>
+                                                <td>{{ban.end | formatDate}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                            <div class="col-md-8">
+                                <strong>Proof</strong>
+                                <AdminBanProof :ban="ban"/>
                             </div>
                         </div>
                     </div>
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+    import AdminBanProof from '../../../partials/admin/AdminBanProof'
     export default {
         data() {
             return {
@@ -67,6 +68,17 @@
             axios.get(`/api/admin/ban/${this.$route.params.id}`).then((response) => {
                 this.ban = response.data;
             })
+        },
+        filters: {
+            formatDate: function(value) {
+                let date = new Date(+value);
+                let banDate = `${date.getFullYear()}-${('0' + (date.getMonth()+1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+                let banTime = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`
+                return `${banDate} ${banTime}`
+            }
+        },
+        components: {
+            AdminBanProof
         }
     }
 </script>

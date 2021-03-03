@@ -14,6 +14,7 @@
                                 <hr>
                                 <a v-if="player.profile.bedrock" class="btn btn-primary btn-block" :href="'https://account.xbox.com/profile?gamertag=' + player.profile.username" target="_blank">View Profile</a>
                                 <a v-else class="btn btn-primary btn-block" :href="'https://namemc.com/profile/' + player.profile.uuid" target="_blank">View Profile</a>
+                                <button class="btn btn-danger btn-block mt-10" @click="unbanUser">Unban User</button>
                             </div>
                             <div class="col-md-8">
                                 <AdminBanList :bans="player.bans"/>
@@ -44,6 +45,13 @@
             }).catch(() => {
                 location.reload();
             })
+        },
+        methods: {
+            unbanUser() {
+                axios.post(`/api/admin/player/${this.$route.params.uuid}/unban`).then((response) => {
+                    console.log(response);
+                })
+            }
         },
         components: {
             AdminBanList

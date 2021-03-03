@@ -8,6 +8,7 @@ class PunishmentHistory extends Model {
 
     protected $table = "PunishmentHistory";
     protected $connection = "capecraft";
+    public $timestamps = false;
 
     protected $with = ['proof'];
 

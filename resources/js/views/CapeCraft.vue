@@ -68,7 +68,7 @@
             }
         },
         created() {
-            const userInfo = sessionStorage.getItem('user')
+            const userInfo = localStorage.getItem('user')
             if (userInfo) {
                 const userData = JSON.parse(userInfo)
                 this.$store.commit('setUserData', userData)

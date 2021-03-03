@@ -10,7 +10,7 @@ Route::get('/donate', function() {
     return redirect('https://capecraft.buycraft.net');
 });
 
-Route::get('/capecraft', function() {
+Route::get('/mockdesign4', function() {
     return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 });
 

@@ -30,6 +30,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'panel' => [
+        'url' => env('PANEL_URL'),
+        'key' => env('PANEL_API')
+    ],
+
     'xbox' => [
         'key' => env('XBOX_API')
     ]

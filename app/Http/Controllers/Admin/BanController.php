@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Models\PunishmentHistory;
 use App\Models\PunishmentProof;
@@ -14,10 +15,14 @@ class BanController extends Controller {
     /**
      * Get all bans
      *
+     * @param  mixed $request
      * @return void
      */
-    public function getBans() {
-        return PunishmentHistory::orderBy('id', 'DESC')->paginate(10);
+    public function getBans(Request $request) {
+        $page = $request->input('page');
+        return cache()->remember("banlist_$page", 60, function() {
+            return PunishmentHistory::orderBy('id', 'DESC')->paginate(10);
+        });
     }
 
     /**
@@ -28,7 +33,24 @@ class BanController extends Controller {
      * @return void
      */
     public function getBan(Request $request, $id) {
-        return PunishmentHistory::find($id);
+        return cache()->remember("ban_$id", 86400, function() use ($id) {
+            return PunishmentHistory::find($id);
+        });
+    }
+
+    /**
+     * Unbans a player with a command
+     *
+     * @param  mixed $request
+     * @param  mixed $uuid
+     * @return void
+     */
+    public function doUnban(Request $request, $uuid) {
+        $response = Http::withToken(config('services.panel.key'))->post(config('services.panel.url'), [
+            'command' => "unban $uuid"
+        ]);
+
+        return response()->json(['success' => $response->successful()]);
     }
 
     /**
@@ -39,11 +61,19 @@ class BanController extends Controller {
      * @return void
      */
     public function getPlayer(Request $request, $uuid) {
-        $profile = PlayerCache::get($uuid);
-        $bans = PunishmentHistory::where(['uuid' => $uuid])->get();
-        return response()->json(['profile' => $profile, 'bans' => $bans]);
+        return cache()->remember("player_$uuid", 300, function() use ($uuid) {
+            $profile = PlayerCache::get($uuid);
+            $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC')->get();
+            return response()->json(['profile' => $profile, 'bans' => $bans]);
+        });
     }
 
+    /**
+     * Add proof to the ban
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function doAddProof(Request $request) {
         $request->validate([
             'id' => 'exists:capecraft.PunishmentHistory,id',

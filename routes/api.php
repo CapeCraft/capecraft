@@ -19,7 +19,8 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::get('/bans', [ BanController::class, 'getBans']);
     Route::post('/ban/proof', [ BanController::class, 'doAddProof']);
     Route::get('/ban/{id}', [ BanController::class, 'getBan'])->whereNumber('id');
-    Route::get('/player/{uuid}', [ BanController::class, 'getPlayer']);
+    Route::get('/player/{uuid}', [ BanController::class, 'getPlayer'])->where(['uuid' => '[a-fA-F0-9]{32}']);
+    Route::post('/player/{uuid}/unban', [ BanController::class, 'doUnban'])->where(['uuid' => '[a-fA-F0-9]{32}']);
 });
 
 Route::get('/server', [ ServerController::class, 'getServer' ]);

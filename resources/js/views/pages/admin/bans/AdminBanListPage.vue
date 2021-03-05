@@ -29,6 +29,7 @@
                                 </li>
                             </ul>
                         </nav>
+                        <small class="text-muted">Data can be cached for up to 5 minutes</small>
                     </div>
                     <div key=2 v-else>
                         <h3><font-awesome-icon icon="cog" spin/> Loading...</h3>

@@ -20,7 +20,7 @@ class BanController extends Controller {
      */
     public function getBans(Request $request) {
         $page = $request->input('page');
-        return cache()->remember("banlist_$page", 60, function() {
+        return cache()->remember("banlist_$page", 150, function() {
             return PunishmentHistory::orderBy('id', 'DESC')->paginate(10);
         });
     }
@@ -47,7 +47,7 @@ class BanController extends Controller {
      */
     public function doUnban(Request $request, $uuid) {
         $response = Http::withToken(config('services.panel.key'))->post(config('services.panel.url'), [
-            'command' => "unban $uuid"
+            'command' => config('app.debug') ? "bungee" : "unban $uuid"
         ]);
 
         return response()->json(['success' => $response->successful()]);

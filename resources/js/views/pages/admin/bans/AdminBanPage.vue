@@ -7,39 +7,37 @@
                 <transition name="fade" mode="out-in">
                     <div key=1 v-if="ban != null">
                         <div class="row">
-                            <div class="col-md">
-                                <img :src="'https://crafatar.com/renders/body/' + ban.uuid">
+                            <div class="col-md-4">
+                                <img :src="`https://crafatar.com/renders/body/${ban.uuid}?overlay=true`">
                                 <hr>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th>Username</th>
-                                                <td><router-link :to="'/admin/player/' + ban.uuid">{{ban.name}}</router-link></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Reason</th>
-                                                <td>{{ban.reason}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Punishment Type</th>
-                                                <td>{{ban.punishmentType}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Issued By</th>
-                                                <td>{{ban.operator}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Date Issued</th>
-                                                <td :alt="ban.start">{{ban.start | formatDate}}</td>
-                                            </tr>
-                                            <tr v-if="ban.end > 0">
-                                                <th>Date Expires</th>
-                                                <td>{{ban.end | formatDate}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td><router-link :to="'/admin/player/' + ban.uuid">{{ban.name}}</router-link></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Reason</th>
+                                            <td>{{ban.reason}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Punishment Type</th>
+                                            <td>{{ban.punishmentType}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Issued By</th>
+                                            <td>{{ban.operator}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date Issued</th>
+                                            <td :alt="ban.start">{{ban.start | formatDate}}</td>
+                                        </tr>
+                                        <tr v-if="ban.end > 0">
+                                            <th>Date Expires</th>
+                                            <td>{{ban.end | formatDate}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="col-md-8">
                                 <strong>Proof</strong>

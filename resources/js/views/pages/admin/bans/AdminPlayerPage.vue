@@ -7,20 +7,38 @@
                 <transition name="fade" mode="out-in">
                     <div v-if="player != null">
                         <div class="row">
-                            <div class="col-md p-10">
-                                <img class="img-fluid" :src="'https://crafatar.com/renders/body/' + player.profile.uuid">
+                            <div class="col-md-4 p-10">
+                                <img class="img-fluid" :src="`https://crafatar.com/renders/body/${player.profile.uuid}?overlay=true`">
                                 <hr>
-                                <strong>UUID: <kbd>{{player.profile.uuid}}</kbd></strong>
+                                <table class="table">
+                                    <tr>
+                                        <th>UUID</th>
+                                        <td><kbd>{{player.profile.uuid}}</kbd></td>
+                                    </tr>
+                                </table>
+                                <div class="alert text-left" v-if="player.profile.name_history.length > 1">
+                                    <strong>Name History</strong>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr v-for="(name_history, index) in player.profile.name_history" :key="index">
+                                                <th>{{index}}</th>
+                                                <td>{{name_history.name}}</td>
+                                                <td>{{name_history.changedToAt | formatDate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <hr>
-                                <a v-if="player.profile.bedrock" class="btn btn-primary btn-block" :href="'https://account.xbox.com/profile?gamertag=' + player.profile.username" target="_blank">View Profile</a>
-                                <a v-else class="btn btn-primary btn-block" :href="'https://namemc.com/profile/' + player.profile.uuid" target="_blank">View Profile</a>
+                                <a class="btn btn-primary btn-block" :href="profile" target="_blank">
+                                    <font-awesome-icon icon="id-badge"/> View Profile
+                                </a>
                                 <button class="btn btn-danger btn-block mt-10" @click="unbanUser">
-                                    <span v-if="!unbanned">Unban User</span>
+                                    <span v-if="!unbanned"><font-awesome-icon icon="eraser"/> Unban User</span>
                                     <CheckAnimation v-else/>
                                 </button>
                             </div>
                             <div class="col-md-8">
-                                <AdminBanList :bans="player.bans"/>
+                                <AdminBanList :bans="player.bans" @remove="removeBan"/>
                             </div>
                         </div>
                     </div>
@@ -48,7 +66,7 @@
             axios.get(`/api/admin/player/${this.$route.params.uuid}`).then((response) => {
                 this.player = response.data;
             }).catch(() => {
-                location.reload();
+                alert("error");
             })
         },
         methods: {
@@ -62,6 +80,28 @@
                         }, 5000)
                     }
                 })
+            },
+            removeBan() {
+                this.player.bans = this.player.bans.filter(item => item.id != id);
+            }
+        },
+        filters: {
+            formatDate: function(value) {
+                if(value != null) {
+                    let date = new Date(+value);
+                    let banDate = `${date.getFullYear()}-${('0' + (date.getMonth()+1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+                    let banTime = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`
+                    return `${banDate} ${banTime}`
+                }
+            }
+        },
+        computed: {
+            profile: function() {
+                if(this.player.profile.bedrock) {
+                    return `https://account.xbox.com/profile?gamertag=${this.player.profile.username}`
+                 } else {
+                     return `https://namemc.com/profile/${this.player.profile.uuid}`
+                 }
             }
         },
         components: {

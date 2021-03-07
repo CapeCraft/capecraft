@@ -42,4 +42,39 @@ class AccountController extends Controller {
         return response()->json([ 'success' => true, 'user' => $user, 'token' => $token ], 200);
     }
 
+    /**
+     * Update a users bio
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doBioUpdate(Request $request) {
+        $request->validate([
+            'bio' => 'required|min:1|max:255'
+        ]);
+
+        $user = Auth()->user();
+        $user->bio = $request->bio;
+        $user->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    /**
+     * Update the users password
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doPasswordUpdate(Request $request) {
+        $request->validate([
+            'password' => [ 'required', 'confirmed', 'min:6', 'max:50', 'regex:/^(?:(?=.*?[A-Z])(?:(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\])|(?=.*?[a-z])(?:(?=.*?[0-9])|(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\])))|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\]))[A-Za-z0-9-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\]{6,50}$/' ],
+        ]);
+
+        Auth()->user()->forceFill([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return response()->json(['success' => true]);
+    }
 }

@@ -6,6 +6,7 @@ import UnbanPage from './views/pages/UnbanPage'
 import StaffPage from './views/pages/StaffPage'
 
 import AdminPage from './views/pages/admin/AdminPage'
+import AdminAccountPage from './views/pages/admin/AdminAccountPage'
 import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
 import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
 import AdminPlayerPage from './views/pages/admin/bans/AdminPlayerPage'
@@ -46,6 +47,15 @@ const routes = [
             auth: true
         },
         component: AdminPage
+    },
+    {
+        path: '/admin/account',
+        name: 'My Profile',
+        meta: {
+            title: 'Admin',
+            auth: true
+        },
+        component: AdminAccountPage
     },
     {
         path: '/admin/bans/:page?',

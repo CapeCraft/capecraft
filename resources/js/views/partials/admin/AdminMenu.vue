@@ -10,6 +10,9 @@
             <li class="nav-item">
                 <router-link class="nav-link" to="/admin/bans">Bans</router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/admin/staff">Staff</router-link>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto h-auto flex-wrap" style="min-width:15rem">
             <li class="nav-item dropdown with-arrow">

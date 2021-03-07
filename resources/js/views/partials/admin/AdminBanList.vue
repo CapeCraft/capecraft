@@ -1,5 +1,5 @@
 <template>
-    <div class="table-responsive">
+    <div class="table-responsive" v-if="bans.length > 0">
         <table class="table">
             <thead>
                 <tr>
@@ -8,6 +8,7 @@
                     <th>Reason</th>
                     <th>Punishement</th>
                     <th>Issued By</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,14 +18,25 @@
                     <td>{{ban.reason}}</td>
                     <td>{{ban.punishmentType}}</td>
                     <td>{{ban.operator}}</td>
+                    <td><button class="btn btn-sm btn-danger" @click="removeBan(ban.id)"><font-awesome-icon icon="trash"/></button></td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div v-else>
+        <h3>No bans found</h3>
     </div>
 </template>
 
 <script>
     export default {
+        methods: {
+            removeBan(id) {
+                axios.post(`/api/admin/ban/${id}/delete`).then((response) => {
+                    this.$emit('remove', id)
+                })
+            }
+        },
         props: {
             bans: Array
         }

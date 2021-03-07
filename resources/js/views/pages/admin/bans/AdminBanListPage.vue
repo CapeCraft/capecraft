@@ -3,10 +3,13 @@
         <div class="col-10 text-center">
             <div class="card">
                 <h1 class="card-title">Bans</h1>
+                <div>
+                    <input type="text" class="form-control" placeholder="ID, Username, UUID, Reason" v-model="search">
+                </div>
                 <hr>
                 <transition name="fade" mode="out-in">
                     <div key=1 v-if="data != null">
-                        <AdminBanList :bans="data.data"/>
+                        <AdminBanList :bans="data.data" @remove="removeBan"/>
                         <hr>
                         <nav>
                             <ul class="pagination text-center">
@@ -22,9 +25,11 @@
                                     <button @click="page = data.current_page" class="btn page-link">{{data.current_page}}</button>
                                 </li>
                                 <li class="page-item" v-for="index in 5" :key="index + data.current_page">
-                                    <button @click="page = index + data.current_page" class="btn page-link">{{index + data.current_page}}</button>
+                                    <span v-if="data.current_page + index < data.last_page">
+                                        <button @click="page = index + data.current_page" class="btn page-link">{{index + data.current_page}}</button>
+                                    </span>
                                 </li>
-                                <li class="page-item" v-if="data.current_page <= data.last_page">
+                                <li class="page-item" v-if="data.current_page < data.last_page">
                                     <button @click="page++" class="btn page-link"><font-awesome-icon icon="angle-right" class="h-30"/></button>
                                 </li>
                             </ul>
@@ -53,14 +58,38 @@
         data() {
             return {
                 page: 1,
-                data: null
+                data: null,
+                search: null,
+                stillTyping: null
             }
         },
         watch: {
             page: function() {
-                this.$router.push(`/admin/bans/${this.page}`)
-                this.loadBans();
-                document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
+                if(this.data != null) {
+                    this.$router.push(`/admin/bans/${this.page}`)
+                    this.loadBans();
+                    document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            },
+            search: function() {
+                clearInterval(this.stillTyping);
+                this.stillTyping = setTimeout(() => {
+                    //Clear data
+                    this.data = null;
+                    this.page = 1;
+
+                    if(this.search == null || this.search == "") {
+                        return this.loadBans();
+                    }
+
+                    //Move to fist page and find data
+                    this.$router.push(`/admin/bans/${this.page}`)
+                    axios.post(`/api/admin/bans/search?page=${this.page}`, {
+                        search: this.search
+                    }).then((response) => {
+                        this.data = response.data;
+                    })
+                }, 500)
             }
         },
         created() {
@@ -72,6 +101,9 @@
                 axios.get(`/api/admin/bans?page=${this.page}`).then((response) => {
                     this.data = response.data;
                 })
+            },
+            removeBan(id) {
+                this.data.data = this.data.data.filter(item => item.id != id);
             }
         },
         components: {

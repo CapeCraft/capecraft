@@ -11,11 +11,11 @@ library.add(faDiscord);
 // Solid
 import {
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
-    faCog
+    faCog, faTrash, faEraser, faIdBadge
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
-    faCog
+    faCog, faTrash, faEraser, faIdBadge
 );
 
 // Regular

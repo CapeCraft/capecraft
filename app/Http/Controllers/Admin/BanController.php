@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Models\PunishmentHistory;
 use App\Models\PunishmentProof;
-use Illuminate\Http\Request;
 use App\Classes\PlayerCache;
+use Illuminate\Http\Request;
 
 class BanController extends Controller {
 
@@ -20,9 +20,38 @@ class BanController extends Controller {
      */
     public function getBans(Request $request) {
         $page = $request->input('page');
-        return cache()->remember("banlist_$page", 150, function() {
+        return cache()->tags(['banlist'])->remember("banlist_$page", 150, function() {
             return PunishmentHistory::orderBy('id', 'DESC')->paginate(10);
         });
+    }
+
+    /**
+     * Search for some bans
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doBanSearch(Request $request) {
+        $request->validate([
+            'search' => 'required|min:1,max:255'
+        ]);
+
+        //ID
+        if(is_numeric($request->search)) {
+            return PunishmentHistory::where('id', $request->search)->orderBy('id', 'DESC')->paginate(10);
+        }
+
+        //Username/UUID
+        $player = PlayerCache::get($request->search);
+        if($player != null) {
+            $result = PunishmentHistory::where('uuid', $player->uuid)->orderBy('id', 'DESC');
+            if($result->exists()) {
+                return $result->paginate(10);
+            }
+        }
+
+        //Reason
+        return PunishmentHistory::where('reason', 'like', $request->search)->orderBy('id', 'DESC')->paginate(10);
     }
 
     /**
@@ -39,61 +68,30 @@ class BanController extends Controller {
     }
 
     /**
-     * Unbans a player with a command
+     * Deletes a ban
      *
      * @param  mixed $request
-     * @param  mixed $uuid
+     * @param  mixed $id
      * @return void
      */
-    public function doUnban(Request $request, $uuid) {
-        $response = Http::withToken(config('services.panel.key'))->post(config('services.panel.url'), [
-            'command' => config('app.debug') ? "bungee" : "unban $uuid"
-        ]);
+    public function deleteBan(Request $request, $id) {
+        $ban = PunishmentHistory::find($id);
+        if($ban != null) {
+            //Remove Cache
+            cache()->tags(['banlist'])->flush();
+            cache()->forget("ban_$id");
+            cache()->forget("player_$ban->uuid");
 
-        return response()->json(['success' => $response->successful()]);
-    }
+            //Delete proof
+            foreach($ban->proof as $proof) {
+                //TODO delete files
+                $proof->delete();
+            }
 
-    /**
-     * Get a specific player
-     *
-     * @param  mixed $request
-     * @param  mixed $uuid
-     * @return void
-     */
-    public function getPlayer(Request $request, $uuid) {
-        return cache()->remember("player_$uuid", 300, function() use ($uuid) {
-            $profile = PlayerCache::get($uuid);
-            $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC')->get();
-            return response()->json(['profile' => $profile, 'bans' => $bans]);
-        });
-    }
-
-    /**
-     * Add proof to the ban
-     *
-     * @param  mixed $request
-     * @return void
-     */
-    public function doAddProof(Request $request) {
-        $request->validate([
-            'id' => 'exists:capecraft.PunishmentHistory,id',
-            'type' => 'required|in:internal,external',
-            'label' => 'required|string|min:1|max:50',
-            'url' => 'url'
-        ]);
-
-        $proof = new PunishmentProof;
-        $proof->punishment_history_id = $request->id;
-        $proof->label = $request->label;
-        if($request->type == "internal") {
-            $proof->proof = "HASH";
-        } else {
-            $proof->proof = $request->url;
-            $proof->external = true;
+            //Delete the ban
+            $ban->delete();
         }
-        $proof->save();
-
-        return $proof;
+        return response()->json(['success' => true]);
     }
 
 }

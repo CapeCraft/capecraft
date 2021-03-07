@@ -49,7 +49,8 @@ class PlayerCache {
 
                 $result = (object) [
                     "username" => $username,
-                    "uuid" => $uuid
+                    "uuid" => $uuid,
+                    "name_history" => array_reverse($response->json()['name_history'])
                 ];
 
                 //Cache for username and uuid
@@ -84,7 +85,8 @@ class PlayerCache {
                 $result = (object) [
                     "bedrock" => true,
                     "username" => $username,
-                    "uuid" => $value
+                    "uuid" => $value,
+                    "name_history" => []
                 ];
 
                 //Cache for username and uuid

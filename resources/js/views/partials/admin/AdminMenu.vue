@@ -10,7 +10,7 @@
             <li class="nav-item">
                 <router-link class="nav-link" to="/admin/bans">Bans</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="user.group <= 2">
                 <router-link class="nav-link" to="/admin/staff">Staff</router-link>
             </li>
         </ul>

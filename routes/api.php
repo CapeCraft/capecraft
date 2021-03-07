@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\ProofController;
 use App\Http\Controllers\Admin\PlayerController;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\AdminStaffController;
 
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\StaffController;
@@ -32,6 +33,8 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::get('/player/{uuid}', [ PlayerController::class, 'getPlayer' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
     Route::post('/player/{uuid}/unban', [ PlayerController::class, 'doUnban' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
 
+    Route::get('/staff', [ AdminStaffController::class, 'getStaff' ]);
+    Route::post('/staff/create', [ AdminStaffController::class, 'doCreateStaff' ]);
 });
 
 Route::get('/server', [ ServerController::class, 'getServer' ]);

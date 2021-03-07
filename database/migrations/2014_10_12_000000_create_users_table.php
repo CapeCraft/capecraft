@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('uuid', 32);
             $table->string('password');
             $table->string('bio')->nullable();
-            $table->integer('rank')->nullable();
+            $table->integer('group')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

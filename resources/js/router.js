@@ -10,6 +10,7 @@ import AdminAccountPage from './views/pages/admin/AdminAccountPage'
 import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
 import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
 import AdminPlayerPage from './views/pages/admin/bans/AdminPlayerPage'
+import AdminStaffPage from './views/pages/admin/AdminStaffPage'
 import AdminLoginPage from './views/pages/admin/AdminLoginPage'
 
 import NotFoundPage from './views/errors/NotFoundPage'
@@ -83,6 +84,15 @@ const routes = [
             auth: true
         },
         component: AdminPlayerPage
+    },
+    {
+        path: '/admin/staff',
+        name: 'admin-staff',
+        meta: {
+            title: 'Admin Staff',
+            auth: true
+        },
+        component: AdminStaffPage
     },
     {
         path: '/admin/login',

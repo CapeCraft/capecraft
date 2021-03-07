@@ -50,10 +50,14 @@ class AccountController extends Controller {
      */
     public function doBioUpdate(Request $request) {
         $request->validate([
+            'uuid' => 'required|min:32|max:32',
             'bio' => 'required|min:1|max:255'
         ]);
 
-        $user = Auth()->user();
+        $user = User::where('uuid', $request->uuid)->first();
+        if($user->uuid != Auth()->user()->uuid && $user->group <= Auth()->user()->group) {
+            return response()->json(['success' => false], 400);
+        }
         $user->bio = $request->bio;
         $user->save();
 
@@ -71,9 +75,15 @@ class AccountController extends Controller {
             'password' => [ 'required', 'confirmed', 'min:6', 'max:50', 'regex:/^(?:(?=.*?[A-Z])(?:(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\])|(?=.*?[a-z])(?:(?=.*?[0-9])|(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\])))|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\]))[A-Za-z0-9-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\\\]{6,50}$/' ],
         ]);
 
-        Auth()->user()->forceFill([
+        $user = User::where('uuid', $request->uuid)->first();
+        if($user->uuid != Auth()->user()->uuid && $user->group <= Auth()->user()->group) {
+            return response()->json(['success' => false], 400);
+        }
+
+        $user->forceFill([
             'password' => Hash::make($request->password)
         ]);
+        $user->save();
 
         return response()->json(['success' => true]);
     }

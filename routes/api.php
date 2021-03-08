@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProofController;
 use App\Http\Controllers\Admin\PlayerController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AdminStaffController;
+use App\Http\Controllers\Admin\AdminContentController;
 
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\StaffController;
@@ -35,7 +36,13 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
 
     Route::get('/staff', [ AdminStaffController::class, 'getStaff' ]);
     Route::post('/staff/create', [ AdminStaffController::class, 'doCreateStaff' ]);
+    Route::post('/staff/delete', [ AdminStaffController::class, 'doDeleteStaff' ]);
+
+    Route::get('/content', [ AdminContentController::class, 'getAllContent' ]);
+    Route::get('/content/{slug}', [ AdminContentController::class, 'getContent' ]);
+    Route::post('/content/{slug}/save', [ AdminContentController::class, 'doSaveContent' ]);
 });
 
+Route::get('/content/{slug}', [ AdminContentController::class, 'getContent' ]);
 Route::get('/server', [ ServerController::class, 'getServer' ]);
 Route::get('/staff', [ StaffController::class, 'getStaff' ]);

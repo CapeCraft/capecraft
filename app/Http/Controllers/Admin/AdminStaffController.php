@@ -51,4 +51,30 @@ class AdminStaffController extends Controller {
         return response()->json(['success' => true, 'admin' => [ 'username' => $user->username, 'password' => $password ]]);
     }
 
+    /**
+     * Delete a staff member
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doDeleteStaff(Request $request) {
+        $request->validate([
+            'uuid' => 'required|min:32|max:32',
+        ]);
+
+        //Check if user exists
+        $user = User::where('uuid', $request->uuid)->first();
+        if($user == null) {
+            return response()->json(['success' => false], 400);
+        }
+
+        //Check user has the correct rights
+        if($user->uuid != Auth()->user()->uuid && $user->group <= Auth()->user()->group) {
+            return response()->json(['success' => false], 400);
+        }
+
+        $user->delete();
+        return response()->json(['success' => true ]);
+    }
+
 }

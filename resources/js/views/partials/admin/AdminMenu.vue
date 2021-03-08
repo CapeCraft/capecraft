@@ -13,6 +13,9 @@
             <li class="nav-item" v-if="user.group <= 2">
                 <router-link class="nav-link" to="/admin/staff">Staff</router-link>
             </li>
+            <li class="nav-item" v-if="user.group <= 2">
+                <router-link class="nav-link" to="/admin/rules">Rules</router-link>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto h-auto flex-wrap" style="min-width:15rem">
             <li class="nav-item dropdown with-arrow">

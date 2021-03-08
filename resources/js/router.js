@@ -2,6 +2,9 @@ import VueRouter from 'vue-router'
 
 //Pages
 import HomePage from './views/pages/HomePage'
+import GameRulesPage from './views/pages/GameRulesPage'
+import AfkRulesPage from './views/pages/AfkRulesPage'
+import AltRulesPage from './views/pages/AltRulesPage'
 import UnbanPage from './views/pages/UnbanPage'
 import StaffPage from './views/pages/StaffPage'
 
@@ -10,6 +13,7 @@ import AdminAccountPage from './views/pages/admin/AdminAccountPage'
 import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
 import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
 import AdminPlayerPage from './views/pages/admin/bans/AdminPlayerPage'
+import AdminRulesPage from './views/pages/admin/AdminRulesPage'
 import AdminStaffPage from './views/pages/admin/AdminStaffPage'
 import AdminLoginPage from './views/pages/admin/AdminLoginPage'
 
@@ -23,6 +27,30 @@ const routes = [
             title: 'Home'
         },
         component: HomePage
+    },
+    {
+        path: '/rules',
+        name: 'game-rules',
+        meta: {
+            title: 'Game Rules'
+        },
+        component: GameRulesPage
+    },
+    {
+        path: '/rules/afk',
+        name: 'afk-rules',
+        meta: {
+            title: 'AFK Rules'
+        },
+        component: AfkRulesPage
+    },
+    {
+        path: '/rules/alt',
+        name: 'alt-rules',
+        meta: {
+            title: 'Alt Rules'
+        },
+        component: AltRulesPage
     },
     {
         path: '/unban',
@@ -84,6 +112,15 @@ const routes = [
             auth: true
         },
         component: AdminPlayerPage
+    },
+    {
+        path: '/admin/rules',
+        name: 'admin-rules',
+        meta: {
+            title: 'Admin Rules',
+            auth: true
+        },
+        component: AdminRulesPage
     },
     {
         path: '/admin/staff',

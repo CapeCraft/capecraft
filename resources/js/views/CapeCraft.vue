@@ -47,6 +47,10 @@
     section, #header {
         min-height: 90vh;
     }
+
+    li > p {
+        display: inline;
+    }
 </style>
 
 <script>

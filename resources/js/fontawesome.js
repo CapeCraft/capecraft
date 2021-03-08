@@ -11,16 +11,14 @@ library.add(faDiscord);
 // Solid
 import {
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
-    faCog, faTrash, faEraser, faIdBadge
+    faCog, faTrash, faEraser, faIdBadge, faBold, faItalic, faStrikethrough, faUnderline, faParagraph, faListUl,
+    faListOl, faUndo, faRedo
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
-    faCog, faTrash, faEraser, faIdBadge
+    faCog, faTrash, faEraser, faIdBadge, faBold, faItalic, faStrikethrough, faUnderline, faParagraph, faListUl,
+    faListOl, faUndo, faRedo
 );
-
-// Regular
-// import { faCopyright } from '@fortawesome/free-regular-svg-icons';
-// library.add(faCopyright);
 
 // Export
 export { FontAwesomeIcon, FontAwesomeLayers };

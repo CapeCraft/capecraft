@@ -19,6 +19,7 @@ use App\Http\Controllers\StaffController;
 Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() {
     Route::get('/init', [ AdminController::class, 'getInit' ]);
     Route::post('/login', [ AccountController::class, 'doLogin' ])->withoutMiddleware('auth:sanctum');
+    Route::get('/user', [ AccountController:: class, 'getUser' ]);
 
     Route::post('/account/bio', [ AccountController::class, 'doBioUpdate' ]);
     Route::post('/account/password', [ AccountController::class, 'doPasswordUpdate' ]);

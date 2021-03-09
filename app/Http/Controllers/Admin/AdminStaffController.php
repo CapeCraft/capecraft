@@ -73,7 +73,12 @@ class AdminStaffController extends Controller {
             return response()->json(['success' => false], 400);
         }
 
+        //Delete user
         $user->delete();
+
+        //Clear cache
+        cache()->forget('staff');
+
         return response()->json(['success' => true ]);
     }
 

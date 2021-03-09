@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller {
 
     /**
+     * Get the users current profile
+     *
+     * @return void
+     */
+    public function getUser() {
+        $user = Auth()->user();
+
+        if($user == null) return response()->json(['success' => false], 400);
+
+        return response()->json($user);
+    }
+
+    /**
      * Logs the admin into their account
      *
      * @param  mixed $request
@@ -60,6 +73,9 @@ class AccountController extends Controller {
         }
         $user->bio = $request->bio;
         $user->save();
+
+        //Clear cache
+        cache()->forget('staff');
 
         return response()->json(['success' => true]);
     }

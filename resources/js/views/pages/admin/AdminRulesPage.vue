@@ -10,8 +10,8 @@
                 </select>
                 <hr>
                 <div v-if="selectedContent != null">
-                    <AdminEditor ref="editor" :editor="selectedContent.content"/>
-                    <button class="btn btn-block btn-primary" @click="saveContent">Save</button>
+                    <AdminEditor ref="editor" :content="selectedContent.content"/>
+                    <button class="btn btn-block btn-primary mt-10" @click="saveContent">Save</button>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
         },
         watch: {
             selectedSlug: function() {
+                this.selectedContent = null;
                 axios.get(`/api/admin/content/${this.selectedSlug}`).then((response) => {
                     let content = response.data.content;
                     content.content = decodeURIComponent(escape(atob(content.content)));

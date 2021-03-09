@@ -9,7 +9,7 @@
                 <hr>
                 <transition name="fade" mode="out-in">
                     <div key=1 v-if="data != null">
-                        <AdminBanList :bans="data.data" @remove="removeBan"/>
+                        <AdminBanList :bans="data.data" :hideDelete="true"/>
                         <hr>
                         <nav>
                             <ul class="pagination text-center">
@@ -101,9 +101,6 @@
                 axios.get(`/api/admin/bans?page=${this.page}`).then((response) => {
                     this.data = response.data;
                 })
-            },
-            removeBan(id) {
-                this.data.data = this.data.data.filter(item => item.id != id);
             }
         },
         components: {

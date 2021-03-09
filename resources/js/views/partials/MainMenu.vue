@@ -28,7 +28,9 @@
             <li class="nav-item">
                 <a class="nav-link" target="_blank" href="/discord">Discord</a>
             </li>
-
+        </ul>
+        <ul class="navbar-nav h-auto flex-wrap ml-auto" v-if="user">
+            <router-link class="nav-link" to="/admin"><font-awesome-icon icon="tachometer-alt" class="mr-10"/>Admin</router-link>
         </ul>
     </nav>
 </template>
@@ -59,3 +61,10 @@
         }
     }
 </style>
+
+<script>
+    import { mapState } from 'vuex'
+    export default {
+        computed: mapState(['user'])
+    }
+</script>

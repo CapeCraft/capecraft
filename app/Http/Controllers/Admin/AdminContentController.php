@@ -30,7 +30,10 @@ class AdminContentController extends Controller {
      * @return void
      */
     public function getContent(Request $request, $slug) {
-        $content = Content::where('slug', $slug)->first();
+        $content = cache()->remember("content_$slug", 604800, function() use ($slug) {
+            return Content::where('slug', $slug)->first();
+        });
+
         if($content !=  null) {
             return response()->json([ 'success' => true, 'content' => $content ], 200);
         } else {
@@ -49,6 +52,7 @@ class AdminContentController extends Controller {
         $content = Content::where('slug', $slug)->first();
         $content->content = $request->content;
         $content->save();
+        cache()->forget("content_$slug");
         return response()->json([ 'success' => true ], 200);
     }
 }

@@ -8,7 +8,7 @@
                     <th>Reason</th>
                     <th>Punishement</th>
                     <th>Issued By</th>
-                    <th></th>
+                    <th v-if="hideDelete !== true"></th>
                 </tr>
             </thead>
             <tbody>
@@ -18,7 +18,7 @@
                     <td>{{ban.reason}}</td>
                     <td>{{ban.punishmentType}}</td>
                     <td>{{ban.operator}}</td>
-                    <td><button class="btn btn-sm btn-danger" @click="removeBan(ban.id)"><font-awesome-icon icon="trash"/></button></td>
+                    <td v-if="hideDelete !== true"><button class="btn btn-sm btn-danger" @click="removeBan(ban.id)"><font-awesome-icon icon="trash"/></button></td>
                 </tr>
             </tbody>
         </table>
@@ -38,7 +38,8 @@
             }
         },
         props: {
-            bans: Array
+            bans: Array,
+            hideDelete: Boolean
         }
     }
 </script>

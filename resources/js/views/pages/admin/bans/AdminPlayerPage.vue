@@ -81,7 +81,7 @@
                     }
                 })
             },
-            removeBan() {
+            removeBan(id) {
                 this.player.bans = this.player.bans.filter(item => item.id != id);
             }
         },

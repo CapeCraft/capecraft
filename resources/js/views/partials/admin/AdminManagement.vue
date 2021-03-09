@@ -65,10 +65,16 @@
                     uuid: this.user.uuid,
                     password: this.password,
                     confirm_password: this.confirm_password
-                }).then((response) => {
+                }).then(() => {
                     this.showSaved();
                 })
-                console.log("Saving password")
+            },
+            showSaved() {
+                this.$store.dispatch('updateUser')
+                this.saved = true;
+                setTimeout(function() {
+                    this.saved = false
+                }, 5000);
             },
             checkPassword() {
                 const passwordRegex = /^(?:(?=.*?[A-Z])(?:(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\])|(?=.*?[a-z])(?:(?=.*?[0-9])|(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\])))|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\]))[A-Za-z0-9-!@#$%^&*()_[\]{},.<>+="£:;\'~`|\/\\]{6,50}$/

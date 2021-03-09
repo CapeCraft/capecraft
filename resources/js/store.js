@@ -17,6 +17,12 @@ export default new Vuex.Store({
             localStorage.removeItem('user')
             location.reload()
         },
+        updateUser(state, data) {
+            let userData = JSON.parse(localStorage.getItem('user'));
+            userData.user = data;
+            state.user = userData.user;
+            localStorage.setItem('user', JSON.stringify(userData))
+        },
         openModal(state, data) {
             if(data == 'close') {
                 halfmoon.toggleModal('modal')
@@ -31,6 +37,11 @@ export default new Vuex.Store({
         },
         logout({ commit }) {
             commit('clearUserData')
+        },
+        updateUser({ commit }) {
+            return axios.get('/api/admin/user').then((response) => {
+                commit('updateUser', response.data);
+            })
         },
         modal({ commit }, data) {
             commit('openModal', data)

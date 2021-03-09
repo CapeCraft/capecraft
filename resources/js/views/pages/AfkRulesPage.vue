@@ -12,8 +12,13 @@
     export default {
         data() {
             return {
-                content: "test"
+                content: null
             }
+        },
+        created() {
+            axios.get('/api/content/rules-afk').then((response) => {
+                this.content = decodeURIComponent(escape(atob(response.data.content.content)));
+            })
         }
     }
 </script>

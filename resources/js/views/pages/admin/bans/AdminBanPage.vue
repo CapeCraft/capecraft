@@ -67,14 +67,6 @@
                 this.ban = response.data;
             })
         },
-        filters: {
-            formatDate: function(value) {
-                let date = new Date(+value);
-                let banDate = `${date.getFullYear()}-${('0' + (date.getMonth()+1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
-                let banTime = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`
-                return `${banDate} ${banTime}`
-            }
-        },
         components: {
             AdminBanProof
         }

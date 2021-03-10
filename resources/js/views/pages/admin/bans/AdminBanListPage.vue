@@ -16,32 +16,10 @@
                 </div>
                 <hr>
                 <transition name="fade" mode="out-in">
-                    <div key=1 v-if="data != null">
-                        <AdminBanList :bans="data.data" :hideDelete="true"/>
+                    <div key=1 v-if="bans != null">
+                        <AdminBanList :bans="bans.data" :hideDelete="true"/>
                         <hr>
-                        <nav>
-                            <ul class="pagination text-center">
-                                <li class="page-item" v-if="data.current_page > 1">
-                                    <button @click="page--" class="btn page-link"><font-awesome-icon icon="angle-left" class="h-30"/></button>
-                                </li>
-                                <li class="page-item" v-for="index in 5" :key="data.current_page - (6 - index)">
-                                    <span v-if="data.current_page - (6 - index) > 0">
-                                        <button @click="page = data.current_page - (6 - index)" class="btn page-link">{{data.current_page - (6 - index)}}</button>
-                                    </span>
-                                </li>
-                                <li class="page-item active">
-                                    <button @click="page = data.current_page" class="btn page-link">{{data.current_page}}</button>
-                                </li>
-                                <li class="page-item" v-for="index in 5" :key="index + data.current_page">
-                                    <span v-if="data.current_page + index < data.last_page">
-                                        <button @click="page = index + data.current_page" class="btn page-link">{{index + data.current_page}}</button>
-                                    </span>
-                                </li>
-                                <li class="page-item" v-if="data.current_page < data.last_page">
-                                    <button @click="page++" class="btn page-link"><font-awesome-icon icon="angle-right" class="h-30"/></button>
-                                </li>
-                            </ul>
-                        </nav>
+                        <PaginationNav :data="bans" @page="page = $event"/>
                         <small class="text-muted">Data can be cached for up to 5 minutes</small>
                     </div>
                     <div key=2 v-else>
@@ -61,12 +39,13 @@
 
 <script>
     import AdminBanList from '../../../partials/admin/AdminBanList'
+    import PaginationNav from '../../../partials/PaginationNav'
 
     export default {
         data() {
             return {
                 page: 1,
-                data: null,
+                bans: null,
                 search: null,
                 noProof: false,
                 stillTyping: null
@@ -74,7 +53,7 @@
         },
         watch: {
             page: function() {
-                if(this.data != null) {
+                if(this.bans != null) {
                     this.$router.push(`/admin/bans/${this.page}`)
                     this.loadBans();
                     document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
@@ -95,23 +74,18 @@
         },
         methods: {
             loadBans() {
-                this.data = null;
+                this.bans = null;
                 if(!this.noProof && (this.search == null || this.search == "")) {
                     axios.get(`/api/admin/bans?page=${this.page}`).then((response) => {
-                        this.data = response.data;
+                        this.bans = response.data;
                     })
                 } else {
-                    axios.post(`/api/admin/bans/search?page=${this.page}`, {
-                        search: this.search,
-                        hasProof: !this.noProof
-                    }).then((response) => {
-                        this.data = response.data;
-                    })
+                    this.sendSearch();
                 }
             },
             doSearch() {
                 //Clear data
-                this.data = null;
+                this.bans = null;
                 this.page = 1;
 
                 if(!this.noProof && (this.search == null || this.search == "")) {
@@ -119,17 +93,21 @@
                 }
 
                 //Move to fist page and find data
-                this.$router.push(`/admin/bans/${this.page}`)
+                this.$router.push(`/admin/bans/${this.page}`) //TODO nav only if not there
+                this.sendSearch();
+            },
+            sendSearch() {
                 axios.post(`/api/admin/bans/search?page=${this.page}`, {
                     search: this.search,
                     hasProof: !this.noProof
                 }).then((response) => {
-                    this.data = response.data;
+                    this.bans = response.data;
                 })
             }
         },
         components: {
-            AdminBanList
+            AdminBanList,
+            PaginationNav
         }
     }
 </script>

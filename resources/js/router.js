@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 
 //Pages
 import HomePage from './views/pages/HomePage'
+import AnnouncementsPage from './views/pages/AnnouncementsPage'
 import GameRulesPage from './views/pages/GameRulesPage'
 import AfkRulesPage from './views/pages/AfkRulesPage'
 import AltRulesPage from './views/pages/AltRulesPage'
@@ -27,6 +28,14 @@ const routes = [
             title: 'Home'
         },
         component: HomePage
+    },
+    {
+        path: '/announcements',
+        name: 'announcements-page',
+        meta: {
+            title: 'Announcements'
+        },
+        component: AnnouncementsPage
     },
     {
         path: '/rules',

@@ -10,6 +10,10 @@
                             <div class="col-md-4 p-10">
                                 <img class="img-fluid" :src="`https://crafatar.com/renders/body/${player.profile.uuid}?overlay=true`">
                                 <hr>
+                                    <strong class="text-success" v-if="player.active == null">Player is not banned</strong>
+                                    <strong class="text-danger" v-else-if="player.active.end == -1">Player is banned permanently</strong>
+                                    <strong class="text-danger" v-else>Player is banned until {{player.active.end | formatDate}}</strong>
+                                <hr>
                                 <table class="table">
                                     <tr>
                                         <th>UUID</th>
@@ -21,7 +25,7 @@
                                     <table class="table">
                                         <tbody>
                                             <tr v-for="(name_history, index) in player.profile.name_history" :key="index">
-                                                <th>{{index}}</th>
+                                                <th>{{player.profile.name_history.length - index}}</th>
                                                 <td>{{name_history.name}}</td>
                                                 <td>{{name_history.changedToAt | formatDate}}</td>
                                             </tr>
@@ -52,8 +56,8 @@
 </template>
 
 <script>
-    import AdminBanList from '../../../partials/admin/AdminBanList'
-    import CheckAnimation from '../../../partials/CheckAnimation'
+    import AdminBanList from '../../partials/admin/AdminBanList'
+    import CheckAnimation from '../../partials/CheckAnimation'
 
     export default {
         data() {

@@ -36,6 +36,8 @@ class ProofController extends Controller {
         }
         $proof->save();
 
+        cache()->forget("ban_{$request->id}");
+
         return $proof;
     }
 

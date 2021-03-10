@@ -79,7 +79,10 @@ class PlayerCache {
                 'X-Authorization' => config('services.xbox.key')
             ])->retry(3, 100)->get("https://xbl.io/api/v2/account/$xuid");
             if($response->successful()) {
-                // dd($response->json());
+                if(!isset($response->json()['profileUsers'][0]['settings'][2]['value'])) {
+                    logger($response->json());
+                }
+
                 $username = $response->json()['profileUsers'][0]['settings'][2]['value'];
 
                 $result = (object) [

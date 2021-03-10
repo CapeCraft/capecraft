@@ -44,7 +44,7 @@
         },
         methods: {
             addInternal() {
-                axios.post('/api/admin/ban/proof', {
+                axios.post('/api/admin/proof', {
                     type: 'internal',
                     id: this.data.id,
                     label: this.proofLabel,
@@ -54,7 +54,7 @@
                 })
             },
             addExternal() {
-                axios.post('/api/admin/ban/proof', {
+                axios.post('/api/admin/proof', {
                     type: 'external',
                     id: this.data.id,
                     label: this.proofLabel,

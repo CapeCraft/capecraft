@@ -1,5 +1,5 @@
 <template>
-    <div class="table-responsive" v-if="bans.length > 0">
+    <div v-if="bans.length > 0">
         <table class="table">
             <thead>
                 <tr>

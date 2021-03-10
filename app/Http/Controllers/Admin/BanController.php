@@ -33,25 +33,33 @@ class BanController extends Controller {
      */
     public function doBanSearch(Request $request) {
         $request->validate([
-            'search' => 'required|min:1,max:255'
+            'search' => 'nullable|min:1|max:255',
+            'hasProof' => 'boolean'
         ]);
+
+        $punishmentHistory = PunishmentHistory::hasProof($request->hasProof);
+
+        //For when searching no proof only
+        if($request->search == null) {
+            return $punishmentHistory->paginate(10);
+        }
 
         //ID
         if(is_numeric($request->search)) {
-            return PunishmentHistory::where('id', $request->search)->orderBy('id', 'DESC')->paginate(10);
+            return $punishmentHistory->byId($request->search)->paginate(10);
         }
 
         //Username/UUID
         $player = PlayerCache::get($request->search);
         if($player != null) {
-            $result = PunishmentHistory::where('uuid', $player->uuid)->orderBy('id', 'DESC');
+            $result = $punishmentHistory->byPlayer($player);
             if($result->exists()) {
                 return $result->paginate(10);
             }
         }
 
         //Reason
-        return PunishmentHistory::where('reason', 'like', $request->search)->orderBy('id', 'DESC')->paginate(10);
+        return $punishmentHistory->byReason($request->search)->paginate(10);
     }
 
     /**

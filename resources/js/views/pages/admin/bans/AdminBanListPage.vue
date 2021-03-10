@@ -3,8 +3,16 @@
         <div class="col-10 text-center">
             <div class="card">
                 <h1 class="card-title">Bans</h1>
-                <div>
+                <div class="input-group">
                     <input type="text" class="form-control" placeholder="ID, Username, UUID, Reason" v-model="search">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <div class="custom-checkbox">
+                                <input type="checkbox" id="no-proof" v-model="noProof">
+                                <label for="no-proof">Only show no proof</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <transition name="fade" mode="out-in">
@@ -60,6 +68,7 @@
                 page: 1,
                 data: null,
                 search: null,
+                noProof: false,
                 stillTyping: null
             }
         },
@@ -74,22 +83,11 @@
             search: function() {
                 clearInterval(this.stillTyping);
                 this.stillTyping = setTimeout(() => {
-                    //Clear data
-                    this.data = null;
-                    this.page = 1;
-
-                    if(this.search == null || this.search == "") {
-                        return this.loadBans();
-                    }
-
-                    //Move to fist page and find data
-                    this.$router.push(`/admin/bans/${this.page}`)
-                    axios.post(`/api/admin/bans/search?page=${this.page}`, {
-                        search: this.search
-                    }).then((response) => {
-                        this.data = response.data;
-                    })
+                    this.doSearch();
                 }, 500)
+            },
+            noProof: function() {
+                this.doSearch()
             }
         },
         created() {
@@ -98,7 +96,34 @@
         methods: {
             loadBans() {
                 this.data = null;
-                axios.get(`/api/admin/bans?page=${this.page}`).then((response) => {
+                if(!this.noProof && (this.search == null || this.search == "")) {
+                    axios.get(`/api/admin/bans?page=${this.page}`).then((response) => {
+                        this.data = response.data;
+                    })
+                } else {
+                    axios.post(`/api/admin/bans/search?page=${this.page}`, {
+                        search: this.search,
+                        hasProof: !this.noProof
+                    }).then((response) => {
+                        this.data = response.data;
+                    })
+                }
+            },
+            doSearch() {
+                //Clear data
+                this.data = null;
+                this.page = 1;
+
+                if(!this.noProof && (this.search == null || this.search == "")) {
+                    return this.loadBans();
+                }
+
+                //Move to fist page and find data
+                this.$router.push(`/admin/bans/${this.page}`)
+                axios.post(`/api/admin/bans/search?page=${this.page}`, {
+                    search: this.search,
+                    hasProof: !this.noProof
+                }).then((response) => {
                     this.data = response.data;
                 })
             }

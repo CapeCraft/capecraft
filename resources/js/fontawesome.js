@@ -12,12 +12,12 @@ library.add(faDiscord);
 import {
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
     faCog, faTrash, faEraser, faIdBadge, faBold, faItalic, faStrikethrough, faUnderline, faParagraph, faListUl,
-    faListOl, faUndo, faRedo, faTachometerAlt
+    faListOl, faUndo, faRedo, faTachometerAlt, faPencilAlt
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
     faAngleDown, faMoneyBillWave, faCopyright, faCircleNotch, faSmile, faFrown, faAngleLeft, faAngleRight,
     faCog, faTrash, faEraser, faIdBadge, faBold, faItalic, faStrikethrough, faUnderline, faParagraph, faListUl,
-    faListOl, faUndo, faRedo, faTachometerAlt
+    faListOl, faUndo, faRedo, faTachometerAlt, faPencilAlt
 );
 
 // Export

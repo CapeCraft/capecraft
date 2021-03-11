@@ -13,7 +13,7 @@
                 <button @click="page = data.current_page" class="btn page-link">{{data.current_page}}</button>
             </li>
             <li class="page-item" v-for="index in 5" :key="index + data.current_page">
-                <span v-if="data.current_page + index < data.last_page">
+                <span v-if="data.current_page + index <= data.last_page">
                     <button @click="page = index + data.current_page" class="btn page-link">{{index + data.current_page}}</button>
                 </span>
             </li>

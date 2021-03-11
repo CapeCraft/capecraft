@@ -6,12 +6,29 @@
             <hr>
             <transition name="fade" mode="out-in">
                 <div key=1 v-if="announcements != null">
-                    <div v-for="announcement in announcements.data" :key="announcement.id" class="alert mb-10" :class="classSeverity(announcement.severity)">
-                        <h4 class="alert-header">{{announcement.title}}</h4>
-                        <div v-html="announcement.content"></div>
-                        <p class="text-right">{{announcement.created_at | formatDate}}</p>
-                    </div>
-                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Body</th>
+                                <th>Posted</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="announcement in announcements.data" :key="announcement.id" :class="classSeverity(announcement.severity)">
+                                <th>{{announcement.id}}</th>
+                                <td>{{announcement.title}}</td>
+                                <td>{{announcement.content}}</td>
+                                <td>{{announcement.created_at | formatDate}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary"><font-awesome-icon icon="pencil-alt"/> Edit</button>
+                                    <button class="btn btn-sm btn-danger"><font-awesome-icon icon="trash"/> Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <PaginationNav :data="announcements" @page="page = $event"/>
                 </div>
                 <div key=2 v-else>
@@ -23,7 +40,7 @@
 </template>
 
 <script>
-    import PaginationNav from '../partials/PaginationNav'
+    import PaginationNav from '../../partials/PaginationNav'
 
     export default {
         data() {
@@ -34,18 +51,14 @@
         },
         watch: {
             page: function() {
-                if(this.announcements != null) {
-                    this.$router.push(`/announcements/${this.page}`)
+                if(this.bans != null) {
+                    this.$router.push(`/admin/announcements/${this.page}`)
                     this.loadAnnouncements();
                     document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
                 }
             },
         },
         created() {
-            if(this.$route.params.page != null) {
-                this.page = this.$route.params.page
-            }
-
             this.loadAnnouncements();
         },
         methods: {
@@ -57,14 +70,14 @@
             },
             classSeverity: function(severity) {
                 if(severity == 1) {
-                    return "alert-danger";
+                    return "table-danger";
                 }
 
                 if(severity == 2) {
-                    return "alert-secondary"
+                    return "table-secondary"
                 }
 
-                return "alert-primary"
+                return "table-primary"
             }
         },
         filters: {

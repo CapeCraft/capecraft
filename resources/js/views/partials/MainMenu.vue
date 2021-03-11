@@ -7,6 +7,9 @@
             <li class="nav-item">
                 <router-link class="nav-link" to="/">Home</router-link>
             </li>
+            <li class="nav-item">
+                <router-link class="nav-link" to="/announcements">Announcements</router-link>
+            </li>
 
             <li class="nav-item dropdown with-arrow">
                 <a class="nav-link" data-toggle="dropdown">Rules<font-awesome-icon icon="angle-down" class="ml-5"/></a>

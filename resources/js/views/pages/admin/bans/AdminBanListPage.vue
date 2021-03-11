@@ -70,6 +70,10 @@
             }
         },
         created() {
+            if(this.$route.params.page != null) {
+                this.page = this.$route.params.page
+            }
+
             this.loadBans();
         },
         methods: {

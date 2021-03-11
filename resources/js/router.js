@@ -14,6 +14,7 @@ import AdminAccountPage from './views/pages/admin/AdminAccountPage'
 import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
 import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
 import AdminPlayerPage from './views/pages/admin/AdminPlayerPage'
+import AdminAnnouncementsPage from './views/pages/admin/AdminAnnouncementsPage'
 import AdminRulesPage from './views/pages/admin/AdminRulesPage'
 import AdminStaffPage from './views/pages/admin/AdminStaffPage'
 import AdminLoginPage from './views/pages/admin/AdminLoginPage'
@@ -30,7 +31,7 @@ const routes = [
         component: HomePage
     },
     {
-        path: '/announcements',
+        path: '/announcements/:page?',
         name: 'announcements-page',
         meta: {
             title: 'Announcements'
@@ -94,6 +95,15 @@ const routes = [
             auth: true
         },
         component: AdminAccountPage
+    },
+    {
+        path: '/admin/announcements',
+        name: 'Announcements',
+        meta: {
+            title: 'Admin Announcements',
+            auth: true
+        },
+        component: AdminAnnouncementsPage
     },
     {
         path: '/admin/bans/:page?',

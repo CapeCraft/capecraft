@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminContentController;
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ServerController;
+use App\Http\Controllers\UnbanController;
 use App\Http\Controllers\StaffController;
 
 /**
@@ -47,10 +48,18 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
 
 Route::get('/announcements', [ AnnouncementController::class, 'getAnnouncements' ]);
 Route::get('/content/{slug}', [ AdminContentController::class, 'getContent' ]);
+Route::post('/unban', [ UnbanController::class, 'doUnban' ]);
 Route::get('/server', [ ServerController::class, 'getServer' ]);
 Route::get('/staff', [ StaffController::class, 'getStaff' ]);
 
+//TODO DELETE
 Route::get('/cache', function() {
     cache()->flush();
     return ['success' => true];
+});
+
+//TODO delete
+Route::get('/unban', function() {
+    $unbanRequest = \App\Models\UnbanRequest::find(1);
+    return new App\Mail\UnbanRequestMail($unbanRequest);
 });

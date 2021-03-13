@@ -13,7 +13,7 @@
                                 <th>Title</th>
                                 <th>Body</th>
                                 <th>Posted</th>
-                                <th></th>
+                                <th><button class="btn btn-sm btn-primary">New Announcement</button></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +29,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <hr>
                     <PaginationNav :data="announcements" @page="page = $event"/>
                 </div>
                 <div key=2 v-else>
@@ -51,7 +52,7 @@
         },
         watch: {
             page: function() {
-                if(this.bans != null) {
+                if(this.announcements != null) {
                     this.$router.push(`/admin/announcements/${this.page}`)
                     this.loadAnnouncements();
                     document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
@@ -59,6 +60,10 @@
             },
         },
         created() {
+            if(this.$route.params.page != null) {
+                this.page = this.$route.params.page
+            }
+
             this.loadAnnouncements();
         },
         methods: {

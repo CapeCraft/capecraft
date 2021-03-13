@@ -97,7 +97,7 @@ const routes = [
         component: AdminAccountPage
     },
     {
-        path: '/admin/announcements',
+        path: '/admin/announcements/:page?',
         name: 'Announcements',
         meta: {
             title: 'Admin Announcements',

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Hoyvoy\CrossDatabase\Eloquent\Model;
 
 class PunishmentHistory extends Model {
 
@@ -18,7 +18,7 @@ class PunishmentHistory extends Model {
      * @return void
      */
     public function proof() {
-        return $this->setConnection('mysql')->hasMany(PunishmentProof::class);
+        return $this->hasMany(PunishmentProof::class);
     }
 
     /**

@@ -14,7 +14,7 @@ class StaffController extends Controller {
      */
     public function getStaff() {
         $cache = cache()->remember('staff', 604800, function() {
-            $users = User::all();
+            $users = User::orderBy('group', 'ASC')->get();
             foreach($users as $user) {
                 $staff[$user->group_name][] = [
                     'uuid' => $user->uuid,

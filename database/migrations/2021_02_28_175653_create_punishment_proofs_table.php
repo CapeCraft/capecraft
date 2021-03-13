@@ -17,7 +17,7 @@ class CreatePunishmentProofsTable extends Migration
             $table->id();
             $table->bigInteger('punishment_history_id');
             $table->string('label', 50);
-            $table->string('proof');
+            $table->string('proof', 1000);
             $table->boolean('external')->default(false);
             $table->timestamps();
         });

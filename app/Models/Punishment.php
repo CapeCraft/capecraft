@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Hoyvoy\CrossDatabase\Eloquent\Model;
 
 class Punishment extends Model {
 

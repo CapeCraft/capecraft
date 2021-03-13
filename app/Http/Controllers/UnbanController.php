@@ -21,12 +21,13 @@ class UnbanController extends Controller {
     public function doUnban(Request $request) {
         $request->validate([
             'ban_type' => 'required|in:minecraft,discord',
-            'email' => 'required|email|confirmed',
+            'email' => 'required|email|confirmed|unique:unban_requests,email',
             'before_ban' => 'required|min:50|max:1000',
             'why_unban' => 'required|min:50|max:1000',
             'what_different' => 'required|min:50|max:1000',
             'tac' => 'required'
         ], [
+            'email.unique' => "You've already sent an unban request in the last 24 hours. Please wait for a response",
            'before_ban.required' => 'The "What happened before you were banned?" field is required',
            'why_unban.required' => 'The "Why should we unban you?" field is required',
            'what_different.required' => 'The "What will you do to avoid being banned again?" field is required',
@@ -75,6 +76,29 @@ class UnbanController extends Controller {
         $unbanRequest->save();
 
         Mail::to(config('mail.to.address'))->queue(new UnbanRequestMail($unbanRequest));
+
+        return response()->json(['success' => true]);
+    }
+
+    /**
+     * Do a discord unban
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doDiscordUnban(Request $request) {
+        $unbanRequest = new UnbanRequest;
+        $unbanRequest->ban_type = $request->ban_type;
+        $unbanRequest->email = $request->email;
+        $unbanRequest->username = $request->username;
+        $unbanRequest->before_ban = strip_tags($request->before_ban);
+        $unbanRequest->why_unban = strip_tags($request->why_unban);
+        $unbanRequest->what_different = strip_tags($request->what_different);
+        $unbanRequest->save();
+
+        Mail::to(config('mail.to.address'))->queue(new UnbanRequestMail($unbanRequest));
+
+        return response()->json(['success' => true]);
     }
 
 }

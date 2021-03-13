@@ -21,6 +21,7 @@ php artisan up
 For new installations, you must enter a crontab entry
 ```
 * * * * * php /home/capecraft/artisan queue:work --sleep=3 --tries=3 --max-time=601 --timeout=600 --stop-when-empty
+* * * * * php /home/capecraft/artisan schedule:run
 ```
 
 ## Built With

@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-8 card">
+        <div class="col-md-8 card">
             <h1 class="text-center">Unban Request</h1>
             <hr>
             <div v-if="!unbanSent">
@@ -126,8 +126,9 @@
                     why_unban: this.why_unban,
                     what_different: this.what_different,
                     tac: this.tac
-                }).then((response) => {
-                    if(response.data.success) this.unbanSent = true;
+                }).then(() => {
+                    this.unbanSent = true;
+                    document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
                 }).catch((response) => {
                     this.errors = response.response.data.errors;
                     document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });

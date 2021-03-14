@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-10">
+        <div class="col-md-10">
             <div class="card">
                 <h1 class="card-title text-center">{{user.username}}</h1>
                 <div class="row justify-content-center">

@@ -20,7 +20,7 @@
         </table>
         <div key=2 v-else-if="state == states.UPLOADING">
             <div class="row justify-content-center">
-                <div class="col-8">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="proof-type">Proof Type</label>
                         <select class="form-control" id="proof-type" v-model="proofType">

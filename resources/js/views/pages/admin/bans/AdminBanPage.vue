@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-10 text-center">
+        <div class="col-md-10 text-center">
             <div class="card">
                 <h1 class="card-title">Ban <span v-if="ban != null">#{{ban.id}}</span></h1>
                 <hr>

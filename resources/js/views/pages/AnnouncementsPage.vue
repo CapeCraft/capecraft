@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-8 card">
+        <div class="col-md-8 card">
             <h1 class="text-center mb-0">Announcements</h1>
             <p class="text-center my-0">This page will contain past and present announcements.</p>
             <hr>

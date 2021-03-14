@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-10 text-center">
+        <div class="col-md-10 text-center">
             <div class="card">
                 <h1 class="card-title" v-if="player != null">{{player.profile.username}}</h1>
                 <hr>
@@ -14,12 +14,14 @@
                                     <strong class="text-danger" v-else-if="player.active.end == -1">Player is banned permanently</strong>
                                     <strong class="text-danger" v-else>Player is banned until {{player.active.end | formatDate}}</strong>
                                 <hr>
-                                <table class="table">
-                                    <tr>
-                                        <th>UUID</th>
-                                        <td><kbd>{{player.profile.uuid}}</kbd></td>
-                                    </tr>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>UUID</th>
+                                            <td><kbd>{{player.profile.uuid}}</kbd></td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 <div class="alert text-left" v-if="player.profile.name_history.length > 1">
                                     <strong>Name History</strong>
                                     <table class="table">
@@ -27,7 +29,7 @@
                                             <tr v-for="(name_history, index) in player.profile.name_history" :key="index">
                                                 <th>{{player.profile.name_history.length - index}}</th>
                                                 <td>{{name_history.name}}</td>
-                                                <td>{{name_history.changedToAt | formatDate}}</td>
+                                                <td v-if="name_history.changedToAt != null">{{name_history.changedToAt | formatDate}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

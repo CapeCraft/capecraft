@@ -7,7 +7,7 @@
                 <a class="text-white" href="mailto:staff@capecraft.net">staff@capecraft.net</a>
             </div>
             <div class="col text-right">
-                <ul class="navbar-nav d-inline-flex">
+                <ul class="navbar-nav d-md-inline-flex d-none">
                     <li class="nav-item">
                         <router-link class="nav-link" to="/">Home</router-link>
                     </li>

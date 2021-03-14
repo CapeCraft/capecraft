@@ -46,7 +46,7 @@
         methods: {
             doLogin() {
                 this.loading = true;
-                axios.post('/api/admin/login', {
+                axios.post('/api/admin/account/login', {
                     username: this.username,
                     password: this.password,
                     remember_me: this.remember_me

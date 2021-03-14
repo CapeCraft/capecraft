@@ -10,11 +10,18 @@ import UnbanPage from './views/pages/UnbanPage'
 import StaffPage from './views/pages/StaffPage'
 
 import AdminPage from './views/pages/admin/AdminPage'
+
 import AdminAccountPage from './views/pages/admin/AdminAccountPage'
 import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
 import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
+
 import AdminPlayerPage from './views/pages/admin/AdminPlayerPage'
-import AdminAnnouncementsPage from './views/pages/admin/AdminAnnouncementsPage'
+
+import AdminAnnouncementsPage from './views/pages/admin/announcements/AdminAnnouncementsPage'
+import AdminNewAnnouncementPage from './views/pages/admin/announcements/AdminNewAnnouncementPage'
+import AdminEditAnnouncementPage from './views/pages/admin/announcements/AdminEditAnnouncementPage'
+import AdminDeleteAnnouncementPage from './views/pages/admin/announcements/AdminDeleteAnnouncementPage'
+
 import AdminRulesPage from './views/pages/admin/AdminRulesPage'
 import AdminStaffPage from './views/pages/admin/AdminStaffPage'
 import AdminLoginPage from './views/pages/admin/AdminLoginPage'
@@ -89,16 +96,43 @@ const routes = [
     },
     {
         path: '/admin/account',
-        name: 'My Profile',
+        name: 'my-profile',
         meta: {
-            title: 'Admin',
+            title: 'My Profile',
             auth: true
         },
         component: AdminAccountPage
     },
     {
+        path: '/admin/announcements/new',
+        name: 'new-announcements',
+        meta: {
+            title: 'New Announcement',
+            auth: true
+        },
+        component: AdminNewAnnouncementPage
+    },
+    {
+        path: '/admin/announcements/:id/edit',
+        name: 'edit-announcement',
+        meta: {
+            title: 'Admin Announcements',
+            auth: true
+        },
+        component: AdminEditAnnouncementPage
+    },
+    {
+        path: '/admin/announcements/:id/delete',
+        name: 'delere-announcement',
+        meta: {
+            title: 'Admin Announcements',
+            auth: true
+        },
+        component: AdminDeleteAnnouncementPage
+    },
+    {
         path: '/admin/announcements/:page?',
-        name: 'Announcements',
+        name: 'admin-nnouncements',
         meta: {
             title: 'Admin Announcements',
             auth: true

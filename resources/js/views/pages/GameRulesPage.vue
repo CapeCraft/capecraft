@@ -1,7 +1,7 @@
 <template>
     <section class="row justify-content-center">
         <div class="col-8 card">
-            <h1 class="text-center">Game Rule</h1>
+            <h1 class="text-center">Game Rules</h1>
             <hr>
             <div v-html="content"></div>
         </div>

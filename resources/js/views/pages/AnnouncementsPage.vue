@@ -8,7 +8,7 @@
                 <div key=1 v-if="announcements != null">
                     <div v-for="announcement in announcements.data" :key="announcement.id" class="alert mb-10" :class="classSeverity(announcement.severity)">
                         <h4 class="alert-header">{{announcement.title}}</h4>
-                        <div v-html="announcement.content"></div>
+                        <div :inner-html.prop="announcement.content | decode"></div>
                         <p class="text-right">{{announcement.created_at | formatDate}}</p>
                     </div>
                     <hr>
@@ -68,8 +68,8 @@
             }
         },
         filters: {
-            truncate: function(content) {
-                return content.length > 300 ? content.slice(0, 300) : content;
+            decode: function(content) {
+                return decodeURIComponent(escape(atob(content)));
             }
         },
         components: {

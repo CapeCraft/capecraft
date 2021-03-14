@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar bg-very-dark h-auto d-block d-md-flex">
-        <router-link :to="{ name: 'home' }" style="width:15%">
+        <router-link to="/" style="width:15%">
             <img class="img-fluid" src="/images/logo/logo.png">
         </router-link>
         <ul class="navbar-nav h-auto flex-wrap">

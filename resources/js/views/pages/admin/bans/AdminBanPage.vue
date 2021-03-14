@@ -14,7 +14,7 @@
                                     <tbody>
                                         <tr>
                                             <th>Username</th>
-                                            <td><router-link :to="'/admin/player/' + ban.uuid">{{ban.name}}</router-link></td>
+                                            <td><router-link :to="`/admin/player/${ban.uuid}`">{{ban.name}}</router-link></td>
                                         </tr>
                                         <tr>
                                             <th>Reason</th>

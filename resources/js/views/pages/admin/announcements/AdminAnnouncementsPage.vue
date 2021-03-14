@@ -13,18 +13,18 @@
                                 <th>Title</th>
                                 <th>Body</th>
                                 <th>Posted</th>
-                                <th><button class="btn btn-sm btn-primary">New Announcement</button></th>
+                                <th><router-link to="/admin/announcements/new" class="btn btn-sm btn-primary">New Announcement</router-link></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="announcement in announcements.data" :key="announcement.id" :class="classSeverity(announcement.severity)">
                                 <th>{{announcement.id}}</th>
                                 <td>{{announcement.title}}</td>
-                                <td>{{announcement.content}}</td>
+                                <td>{{announcement.content | decode | truncate}}</td>
                                 <td>{{announcement.created_at | formatDate}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-secondary"><font-awesome-icon icon="pencil-alt"/> Edit</button>
-                                    <button class="btn btn-sm btn-danger"><font-awesome-icon icon="trash"/> Delete</button>
+                                    <router-link :to="`/admin/announcements/${announcement.id}/edit`" class="btn btn-sm btn-secondary"><font-awesome-icon icon="pencil-alt"/> Edit</router-link>
+                                    <router-link :to="`/admin/announcements/${announcement.id}/delete`" class="btn btn-sm btn-danger"><font-awesome-icon icon="trash"/> Delete</router-link>
                                 </td>
                             </tr>
                         </tbody>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import PaginationNav from '../../partials/PaginationNav'
+    import PaginationNav from '../../../partials/PaginationNav'
 
     export default {
         data() {
@@ -88,6 +88,9 @@
         filters: {
             truncate: function(content) {
                 return content.length > 300 ? content.slice(0, 300) : content;
+            },
+            decode: function(content) {
+                return decodeURIComponent(escape(atob(content))).replace(/(<([^>]+)>)/gi, "");
             }
         },
         components: {

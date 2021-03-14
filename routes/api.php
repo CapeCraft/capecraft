@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PlayerController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminContentController;
+use App\Http\Controllers\Admin\AdminAnnouncementController;
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ServerController;
@@ -20,11 +21,16 @@ use App\Http\Controllers\StaffController;
  */
 Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() {
     Route::get('/init', [ AdminController::class, 'getInit' ]);
-    Route::post('/login', [ AccountController::class, 'doLogin' ])->withoutMiddleware('auth:sanctum');
-    Route::get('/user', [ AccountController:: class, 'getUser' ]);
 
-    Route::post('/account/bio', [ AccountController::class, 'doBioUpdate' ]);
-    Route::post('/account/password', [ AccountController::class, 'doPasswordUpdate' ]);
+    /**
+     * /admin/account endpoints
+     */
+    Route::group(['prefix' => '/account'], function() {
+        Route::post('/login', [ AccountController::class, 'doLogin' ])->withoutMiddleware('auth:sanctum');
+        Route::get('/user', [ AccountController:: class, 'getUser' ]);
+        Route::post('/bio', [ AccountController::class, 'doBioUpdate' ]);
+        Route::post('/password', [ AccountController::class, 'doPasswordUpdate' ]);
+    });
 
     Route::get('/bans', [ BanController::class, 'getBans' ]);
     Route::post('/bans/search', [ BanController::class, 'doBanSearch' ]);
@@ -37,13 +43,34 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::get('/player/{uuid}', [ PlayerController::class, 'getPlayer' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
     Route::post('/player/{uuid}/unban', [ PlayerController::class, 'doUnban' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
 
-    Route::get('/staff', [ AdminStaffController::class, 'getStaff' ]);
-    Route::post('/staff/create', [ AdminStaffController::class, 'doCreateStaff' ]);
-    Route::post('/staff/delete', [ AdminStaffController::class, 'doDeleteStaff' ]);
+    /**
+     * /announcements/account endpoints
+     */
+    Route::group(['prefix' => '/announcements'], function() {
+        Route::get('/', [ AnnouncementController::class, 'getAnnouncements' ]);
+        Route::get('/{id}', [ AdminAnnouncementController::class, 'getAnnouncement' ])->where(['id' => '[0-9]']);
+        Route::post('/{id}/edit', [ AdminAnnouncementController::class, 'doEditAnnouncement' ])->where(['id' => '[0-9]']);
+        Route::post('/{id}/delete', [ AdminAnnouncementController::class, 'doDeleteAnnouncement' ])->where(['id' => '[0-9]']);
+        Route::post('/new', [ AdminAnnouncementController::class, 'doNewAnnouncement' ]);
+    });
 
-    Route::get('/content', [ AdminContentController::class, 'getAllContent' ]);
-    Route::get('/content/{slug}', [ AdminContentController::class, 'getContent' ]);
-    Route::post('/content/{slug}/save', [ AdminContentController::class, 'doSaveContent' ]);
+    /**
+     * /staff/account endpoints
+     */
+    Route::group(['prefix' => '/staff'], function() {
+        Route::get('/', [ AdminStaffController::class, 'getStaff' ]);
+        Route::post('/create', [ AdminStaffController::class, 'doCreateStaff' ]);
+        Route::post('/delete', [ AdminStaffController::class, 'doDeleteStaff' ]);
+    });
+
+    /**
+     * /content/account endpoints
+     */
+    Route::group(['prefix' => '/content'], function() {
+        Route::get('/', [ AdminContentController::class, 'getAllContent' ]);
+        Route::get('/{slug}', [ AdminContentController::class, 'getContent' ]);
+        Route::post('/{slug}/save', [ AdminContentController::class, 'doSaveContent' ]);
+    });
 });
 
 Route::get('/announcements', [ AnnouncementController::class, 'getAnnouncements' ]);
@@ -52,14 +79,14 @@ Route::post('/unban', [ UnbanController::class, 'doUnban' ]);
 Route::get('/server', [ ServerController::class, 'getServer' ]);
 Route::get('/staff', [ StaffController::class, 'getStaff' ]);
 
-//TODO DELETE
-Route::get('/cache', function() {
-    cache()->flush();
-    return ['success' => true];
-});
+if(config('app.debug')) {
+    Route::get('/cache', function() {
+        cache()->flush();
+        return ['success' => true];
+    });
 
-//TODO delete
-Route::get('/unban', function() {
-    $unbanRequest = \App\Models\UnbanRequest::find(1);
-    return new App\Mail\UnbanRequestMail($unbanRequest);
-});
+    Route::get('/unban', function() {
+        $unbanRequest = \App\Models\UnbanRequest::find(1);
+        return new App\Mail\UnbanRequestMail($unbanRequest);
+    });
+}

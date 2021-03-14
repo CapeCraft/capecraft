@@ -55,8 +55,7 @@
                 axios.post('/api/admin/account/bio', {
                     uuid: this.user.uuid,
                     bio: this.staffBio
-                }).then((response) => {
-                    //TODO update the user
+                }).then(() => {
                     this.showSaved();
                 })
             },

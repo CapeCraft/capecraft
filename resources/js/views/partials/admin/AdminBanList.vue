@@ -13,8 +13,8 @@
             </thead>
             <tbody>
                 <tr v-for="ban in bans" :key="ban.id">
-                    <th><router-link :to="'/admin/ban/' + ban.id">{{ban.id}}</router-link></th>
-                    <td><router-link :to="'/admin/player/' + ban.uuid">{{ban.name}}</router-link></td>
+                    <th><router-link :to="`/admin/ban/${ban.id}`">{{ban.id}}</router-link></th>
+                    <td><router-link :to="`/admin/player/${ban.uuid}`">{{ban.name}}</router-link></td>
                     <td>{{ban.reason}}</td>
                     <td>{{ban.punishmentType}}</td>
                     <td>{{ban.operator}}</td>

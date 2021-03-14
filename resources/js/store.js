@@ -39,7 +39,7 @@ export default new Vuex.Store({
             commit('clearUserData')
         },
         updateUser({ commit }) {
-            return axios.get('/api/admin/user').then((response) => {
+            return axios.get('/api/admin/account/user').then((response) => {
                 commit('updateUser', response.data);
             })
         },

@@ -4,11 +4,7 @@
             <h1 class="text-center">Unban Request</h1>
             <hr>
             <div v-if="!unbanSent">
-                <div class="invalid-feedback" v-if="errors != null">
-                    <ul>
-                        <li v-for="error in errors" :key="error[0]">{{error[0]}}</li>
-                    </ul>
-                </div>
+                <FormErrors :errors="errors"/>
                 <label for="ban-type">Where have you been banned?</label>
                 <select class="form-control" id="ban-type" v-model="ban_type">
                     <option value="" disabled="disabled">Select a platform</option>
@@ -83,6 +79,8 @@
 </template>
 
 <script>
+    import FormErrors from '../partials/FormErrors'
+
     export default {
         data() {
             return {
@@ -136,6 +134,9 @@
                     this.tac = false;
                 })
             }
+        },
+        components: {
+            FormErrors
         }
     }
 </script>

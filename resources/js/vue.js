@@ -17,10 +17,7 @@ Vue.component('font-awesome-layers', FontAwesomeLayers);
 
 // Common Filter
 Vue.filter('formatDate', function(value) {
-    if(/^\d+$/.test(value)) {
-        value = +value;
-    }
-
+    if(/^\d+$/.test(value)) value = +value;
     let date = new Date(value);
     let formatDate = `${date.getFullYear()}-${('0' + (date.getMonth()+1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
     let formatTime = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Hoyvoy\CrossDatabase\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class PunishmentProof extends Model {
 

@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-8">
                                 <strong>Proof</strong>
-                                <AdminBanProof :ban="ban"/>
+                                <AdminBanProof :ban="ban" @updateBan="updateBan"/>
                             </div>
                         </div>
                     </div>
@@ -63,9 +63,17 @@
             }
         },
         created() {
-            axios.get(`/api/admin/ban/${this.$route.params.id}`).then((response) => {
-                this.ban = response.data;
-            })
+            this.getBan();
+        },
+        methods: {
+            updateBan() {
+                this.getBan();
+            },
+            getBan() {
+                axios.get(`/api/admin/ban/${this.$route.params.id}`).then((response) => {
+                    this.ban = response.data;
+                })
+            }
         },
         components: {
             AdminBanProof

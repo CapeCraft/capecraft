@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Hoyvoy\CrossDatabase\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class PunishmentHistory extends Model {
 
@@ -29,7 +29,12 @@ class PunishmentHistory extends Model {
      * @return void
      */
     public function scopeHasProof($query, $hasProof) {
-        return $hasProof ? $query->orderBy('id', 'DESC') : $query->doesntHave('proof')->orderBy('id', 'DESC');
+        if(!$hasProof) {
+            $proofIds = PunishmentProof::select('punishment_history_id')->distinct()->get();
+            return $query->orderBy('id', 'DESC')->whereNotIn('id', $proofIds);
+        } else {
+            return $query->orderBy('id', 'DESC');
+        }
     }
 
     /**

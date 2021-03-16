@@ -64,14 +64,83 @@
 
             </div>
         </editor-menu-bar>
-
+        <editor-menu-bubble class="menububble" :editor="editor" @hide="hideLinkMenu" v-slot="{ commands, isActive, getMarkAttrs, menu }">
+            <div class="menububble" :class="{ 'is-active': menu.isActive }" :style="`left: ${menu.left}px; bottom: ${menu.bottom}px;`">
+                <form class="menububble__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
+                    <input class="menububble__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
+                    <button class="menububble__button" @click="setLinkUrl(commands.link, null)" type="button">
+                        <font-awesome-icon icon="unlink" />
+                    </button>
+                </form>
+                <template v-else>
+                    <button class="menububble__button" @click="showLinkMenu(getMarkAttrs('link'))" :class="{ 'is-active': isActive.link() }">
+                        <span>{{ isActive.link() ? 'Update Link' : 'Add Link'}}</span>
+                        <font-awesome-icon icon="link" />
+                    </button>
+                </template>
+            </div>
+        </editor-menu-bubble>
         <editor-content class="editor__content mt-10" :editor="editor" />
     </div>
 </template>
 
-<style>
+<style lang="scss">
+    .menububble {
+        position: absolute;
+        display: flex;
+        z-index: 20;
+        background: #111417;
+        border-radius: 5px;
+        padding: 0.3rem;
+        margin-bottom: 0.5rem;
+        transform: translateX(-50%);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.2s, visibility 0.2s;
+
+        &.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &__button {
+            display: inline-flex;
+            background: transparent;
+            border: 0;
+            color: #ffffff;
+            padding: 0.2rem 0.5rem;
+            margin-right: 0.2rem;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                background-color: rgba(#ffffff, 0.1);
+            }
+
+            &.is-active {
+                background-color: rgba(#ffffff, 0.2);
+            }
+        }
+
+        &__form {
+            display: flex;
+            align-items: center;
+        }
+
+        &__input {
+            font: inherit;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+        }
+    }
+
     .editor__content > div {
-        border: 1px solid white;
+        border: 1px solid #ffffff;
         border-radius: 5px;
         padding: 0.5rem;
     }
@@ -79,7 +148,7 @@
 
 <script>
     import {
-        Editor, EditorContent, EditorMenuBar
+        Editor, EditorContent, EditorMenuBar, EditorMenuBubble
     } from 'tiptap'
     import {
         Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, History,
@@ -90,6 +159,7 @@
         components: {
             EditorContent,
             EditorMenuBar,
+            EditorMenuBubble
         },
         data() {
             return {
@@ -115,9 +185,28 @@
                         new Underline(),
                         new History(),
                     ],
-                    content: this.content
+                    content: this.content,
                 }),
+                linkUrl: null,
+                linkMenuIsActive: false,
             }
+        },
+        methods: {
+            showLinkMenu(attrs) {
+                this.linkUrl = attrs.href
+                this.linkMenuIsActive = true
+                this.$nextTick(() => {
+                    this.$refs.linkInput.focus()
+                })
+            },
+            hideLinkMenu() {
+                this.linkUrl = null
+                this.linkMenuIsActive = false
+            },
+            setLinkUrl(command, url) {
+                command({ href: url })
+                this.hideLinkMenu()
+            },
         },
         beforeDestroy() {
             this.editor.destroy()

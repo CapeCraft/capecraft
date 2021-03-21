@@ -97,7 +97,9 @@
                 }
 
                 //Move to fist page and find data
-                this.$router.push(`/admin/bans/${this.page}`) //TODO nav only if not there
+                if(this.$route.params.page != null && this.$route.params.page != this.page) {
+                    this.$router.push(`/admin/bans/${this.page}`)
+                }
                 this.sendSearch();
             },
             sendSearch() {

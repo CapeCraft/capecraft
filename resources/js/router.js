@@ -7,6 +7,7 @@ import GameRulesPage from './views/pages/GameRulesPage'
 import AfkRulesPage from './views/pages/AfkRulesPage'
 import AltRulesPage from './views/pages/AltRulesPage'
 import UnbanPage from './views/pages/UnbanPage'
+import RanksPage from './views/pages/RanksPage'
 import StaffPage from './views/pages/StaffPage'
 
 import AdminPage from './views/pages/admin/AdminPage'
@@ -23,6 +24,7 @@ import AdminEditAnnouncementPage from './views/pages/admin/announcements/AdminEd
 import AdminDeleteAnnouncementPage from './views/pages/admin/announcements/AdminDeleteAnnouncementPage'
 
 import AdminRulesPage from './views/pages/admin/AdminRulesPage'
+import AdminRanksPage from './views/pages/admin/AdminRanksPage'
 import AdminStaffPage from './views/pages/admin/AdminStaffPage'
 import AdminLoginPage from './views/pages/admin/AdminLoginPage'
 
@@ -76,6 +78,14 @@ const routes = [
             title: 'Unban Request'
         },
         component: UnbanPage
+    },
+    {
+        path: '/ranks',
+        name: 'ranks',
+        meta: {
+            title: 'Ranks'
+        },
+        component: RanksPage
     },
     {
         path: '/staff',
@@ -183,6 +193,15 @@ const routes = [
             auth: true
         },
         component: AdminStaffPage
+    },
+    {
+        path: '/admin/ranks',
+        name: 'admin-ranks',
+        meta: {
+            title: 'Admin Ranks',
+            auth: true
+        },
+        component: AdminRanksPage
     },
     {
         path: '/admin/login',

@@ -16,4 +16,7 @@ mix.disableNotifications();
 mix.js("resources/js/app.js", "public/js").vue();
 mix.sass("resources/sass/app.scss", "public/css");
 mix.copyDirectory("resources/images", "public/images");
-mix.version();
+
+if(mix.inProduction()) {
+    mix.version();
+}

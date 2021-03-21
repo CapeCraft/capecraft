@@ -40,6 +40,12 @@ class CreateContentsTable extends Migration
         $content->name = "Alt Rules";
         $content->content = "";
         $content->save();
+
+        $content = new Content;
+        $content->slug = Str::of('ranks');
+        $content->name = "Ranks";
+        $content->content = "";
+        $content->save();
     }
 
     /**

@@ -3,6 +3,7 @@
         <div class="col-md-8 card">
             <h1 class="text-center">Admin Rules</h1>
             <hr>
+            <div class="alert alert-success" v-if="saved">Saved successfully</div>
             <div>
                 <label for="content-selector" class="required">Select a content to edit</label>
                 <select v-model="selectedSlug" class="form-control" id="content-selector">
@@ -23,6 +24,7 @@
     export default {
         data() {
             return {
+                saved: false,
                 selectedSlug: null,
                 selectedContent: null,
                 contents: null
@@ -52,6 +54,12 @@
                 axios.post(`/api/admin/content/${this.selectedSlug}/save`, {
                     content: base64
                 });
+
+                this.saved = true;
+                document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    this.saved = false;
+                }, 5000)
             }
         },
         components: {

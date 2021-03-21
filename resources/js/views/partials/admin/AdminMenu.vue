@@ -17,6 +17,9 @@
                 <router-link class="nav-link" to="/admin/rules">Rules</router-link>
             </li>
             <li class="nav-item" v-if="user.group <= 2">
+                <router-link class="nav-link" to="/admin/ranks">Ranks</router-link>
+            </li>
+            <li class="nav-item" v-if="user.group <= 2">
                 <router-link class="nav-link" to="/admin/staff">Staff</router-link>
             </li>
         </ul>

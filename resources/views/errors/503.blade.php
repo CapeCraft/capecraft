@@ -26,7 +26,6 @@
         <div>
             <h1>We'll be back soon!</h1>
             <p>We're performing some crucial maintenance to make our site better!</p>
-            <p>Your capes, ears and elytras will continue to work in the background.</p>
             <small>Wait here and we will redirect you as soon as we are done!</small>
         </div>
     </body>

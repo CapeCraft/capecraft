@@ -27,8 +27,6 @@ For new installations, you must enter a crontab entry
 ## Built With
 *  [Laravel](https://laravel.com/) - The web framework used
 
-*  [Intervention](http://image.intervention.io/) - Used for Image manipulation
-
 *  [Halfmoon](https://www.gethalfmoon.com/) - CSS/JS Styling
 
 *  [Font Awesome](https://fontawesome.com/) - Icons

@@ -3,6 +3,7 @@
         <div class="col-md-8 card">
             <h1 class="text-center">Admin Ranks</h1>
             <hr>
+            <div class="alert alert-success" v-if="saved">Saved successfully</div>
             <div v-if="content != null">
                 <AdminEditor ref="editor" :content="content"/>
                 <button class="btn btn-block btn-primary mt-10" @click="saveContent">Save</button>
@@ -16,6 +17,7 @@
     export default {
         data() {
             return {
+                saved: false,
                 content: null
             }
         },

@@ -52,7 +52,8 @@ class BanController extends Controller {
         //Username/UUID
         $player = PlayerCache::get($request->search);
         if($player != null) {
-            $result = $punishmentHistory->byPlayer($player);
+            $result = clone $punishmentHistory;
+            $result->byPlayer($player);
             if($result->exists()) {
                 return $result->paginate(10);
             }

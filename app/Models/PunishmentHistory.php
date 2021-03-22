@@ -67,6 +67,6 @@ class PunishmentHistory extends Model {
      * @return void
      */
     public function scopeByReason($query, $string) {
-        return $query->where('reason', 'like', $string);
+        return $query->where('reason', 'like', "%$string%");
     }
 }

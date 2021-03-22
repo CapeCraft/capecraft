@@ -6,7 +6,7 @@
                     <th>ID</th>
                     <th>Username</th>
                     <th>Reason</th>
-                    <th>Punishement</th>
+                    <th>Punishment</th>
                     <th>Issued By</th>
                     <th v-if="hideDelete !== true"></th>
                 </tr>

@@ -48,7 +48,10 @@
                             </div>
                         </div>
                     </div>
-                    <div key=2 v-else>
+                    <div key=2 v-else-if="error">
+                        <h3>That player doesn't exist or an error occured. Please try again later</h3>
+                    </div>
+                    <div key=3 v-else>
                         <h3><font-awesome-icon icon="cog" spin/> Loading...</h3>
                     </div>
                 </transition>
@@ -64,6 +67,7 @@
     export default {
         data() {
             return {
+                error: false,
                 player: null,
                 unbanned: false
             }
@@ -72,7 +76,7 @@
             axios.get(`/api/admin/player/${this.$route.params.uuid}`).then((response) => {
                 this.player = response.data;
             }).catch(() => {
-                alert("error");
+                this.error = true;
             })
         },
         methods: {

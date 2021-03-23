@@ -38,11 +38,15 @@ class PlayerController extends Controller {
     public function getPlayer(Request $request, $uuid) {
         return cache()->remember("player_$uuid", 300, function() use ($uuid) {
             $profile = PlayerCache::get($uuid);
-            $active = Punishment::where(['uuid' => $uuid])->where(function($query) {
-                $query->where('punishmentType', 'BAN')->orWhere('punishmentType', 'TEMP_BAN');
-            })->orderBy('id', 'DESC')->first();
-            $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC')->get();
-            return response()->json(['profile' => $profile, 'active' => $active, 'bans' => $bans]);
+            if($profile != null) {
+                $active = Punishment::where(['uuid' => $uuid])->where(function($query) {
+                    $query->where('punishmentType', 'BAN')->orWhere('punishmentType', 'TEMP_BAN');
+                })->orderBy('id', 'DESC')->first();
+                $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC')->get();
+                return response()->json(['profile' => $profile, 'active' => $active, 'bans' => $bans]);
+            } else {
+                return response()->json(['success' => false], 400);
+            }
         });
     }
 }

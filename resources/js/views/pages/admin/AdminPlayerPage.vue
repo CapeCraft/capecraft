@@ -10,9 +10,12 @@
                             <div class="col-md-4 p-10">
                                 <img class="img-fluid" :src="`https://crafatar.com/renders/body/${player.profile.uuid}?overlay=true`">
                                 <hr>
-                                    <strong class="text-success" v-if="player.active == null">Player is not banned</strong>
-                                    <strong class="text-danger" v-else-if="player.active.end == -1">Player is banned permanently</strong>
-                                    <strong class="text-danger" v-else>Player is banned until {{player.active.end | formatDate}}</strong>
+                                <div v-if="punishment != null">
+                                    <strong class="text-success" v-if="punishment.active == null">Player is not banned</strong>
+                                    <strong class="text-danger" v-else-if="punishment.active.end == -1">Player is banned permanently</strong>
+                                    <strong class="text-danger" v-else>Player is banned until {{punishment.active.end | formatDate}}</strong>
+                                </div>
+                                <strong v-else><font-awesome-icon icon="cog" spin/> Loading...</strong>
                                 <hr>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -44,7 +47,8 @@
                                 </button>
                             </div>
                             <div class="col-md-8">
-                                <AdminBanList :bans="player.bans" @remove="removeBan"/>
+                                <AdminBanList v-if="punishment != null" :bans="punishment.bans" @remove="removeBan"/>
+                                <h3 v-else><font-awesome-icon icon="cog" spin/> Loading...</h3>
                             </div>
                         </div>
                     </div>
@@ -69,12 +73,19 @@
             return {
                 error: false,
                 player: null,
+                punishment: null,
                 unbanned: false
             }
         },
         created() {
             axios.get(`/api/admin/player/${this.$route.params.uuid}`).then((response) => {
                 this.player = response.data;
+            }).catch(() => {
+                this.error = true;
+            })
+
+            axios.get(`/api/admin/player/${this.$route.params.uuid}/bans`).then((response) => {
+                this.punishment = response.data;
             }).catch(() => {
                 this.error = true;
             })

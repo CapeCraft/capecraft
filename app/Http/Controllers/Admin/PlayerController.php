@@ -39,11 +39,31 @@ class PlayerController extends Controller {
         return cache()->remember("player_$uuid", 300, function() use ($uuid) {
             $profile = PlayerCache::get($uuid);
             if($profile != null) {
-                $active = Punishment::where(['uuid' => $uuid])->where(function($query) {
-                    $query->where('punishmentType', 'BAN')->orWhere('punishmentType', 'TEMP_BAN');
-                })->orderBy('id', 'DESC')->first();
-                $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC')->get();
-                return response()->json(['profile' => $profile, 'active' => $active, 'bans' => $bans]);
+                return response()->json(['profile' => $profile]);
+            } else {
+                return response()->json(['success' => false], 400);
+            }
+        });
+    }
+
+    /**
+     * Gets the bans for a player
+     *
+     * @param  mixed $request
+     * @param  mixed $uuid
+     * @return void
+     */
+    public function getPlayerBans(Request $request, $uuid) {
+        return cache()->remember("player_{$uuid}_bans", 300, function() use ($uuid) {
+            // Get active punishment
+            $active = Punishment::where(['uuid' => $uuid])->where(function($query) {
+                $query->where('punishmentType', 'BAN')->orWhere('punishmentType', 'TEMP_BAN');
+            })->orderBy('id', 'DESC')->first();
+
+            // Get past punishment
+            $bans = PunishmentHistory::where(['uuid' => $uuid])->orderBy('id', 'DESC');
+            if($bans->exists()) {
+                return response()->json(['active' => $active, 'bans' => $bans->get()]);
             } else {
                 return response()->json(['success' => false], 400);
             }

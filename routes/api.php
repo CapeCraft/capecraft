@@ -41,6 +41,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth:sanctum'], function() 
     Route::post('/proof/{id}/delete', [ ProofController::class, 'doDeleteProof' ]);
 
     Route::get('/player/{uuid}', [ PlayerController::class, 'getPlayer' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
+    Route::get('/player/{uuid}/bans', [ PlayerController::class, 'getPlayerBans' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
     Route::post('/player/{uuid}/unban', [ PlayerController::class, 'doUnban' ])->where(['uuid' => '[a-fA-F0-9]{32}']);
 
     /**

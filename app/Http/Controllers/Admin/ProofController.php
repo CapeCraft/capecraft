@@ -41,4 +41,19 @@ class ProofController extends Controller {
         return $proof;
     }
 
+    /**
+     * Removes the proof
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function doDeleteProof(Request $request, $id) {
+        $proof = PunishmentProof::find($id);
+        if($proof != null) {
+            cache()->forget("ban_{$proof->punishment_history_id}");
+            $proof->delete();
+        }
+        return response()->json(['success', true]);
+    }
+
 }

@@ -5,6 +5,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Label</th>
+                    <th>Link</th>
                     <th class="text-right">
                         <button class="btn btn-sm btn-primary" @click="addBan">Upload Proof</button>
                     </th>
@@ -15,10 +16,11 @@
                     <td>{{proof.id}}</td>
                     <td>{{proof.label}}</td>
                     <td><a :href="proof.proof" target="_blank">{{proof.proof}}</a></td>
+                    <td class="text-right"><button class="btn btn-sm btn-danger" @click="removeProof(proof.id)"><font-awesome-icon icon="trash"/></button></td>
                 </tr>
             </tbody>
         </table>
-        <div key=2 v-else-if="state == states.UPLOADING">
+        <div key=2 v-else-if="state == states.UPLOAD">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -53,6 +55,9 @@
                 </div>
             </div>
         </div>
+        <div key=3 v-else-if="state == states.LOADING">
+            <h3><font-awesome-icon icon="cog" spin/> Loading...</h3>
+        </div>
     </transition>
 </template>
 
@@ -60,7 +65,7 @@
     export default {
         data() {
             return {
-                states: { WAITING: 'waiting', UPLOADING: 'uploading' },
+                states: { WAITING: 'waiting', UPLOAD: 'upload', LOADING: 'loading' },
                 state: 'waiting',
                 proofType: "",
                 proofLabel: "",
@@ -69,9 +74,10 @@
         },
         methods: {
             addBan: function() {
-                this.state = this.states.UPLOADING
+                this.state = this.states.UPLOAD
             },
             addInternal() {
+                this.state = this.states.LOADING
                 axios.post('/api/admin/proof', {
                     type: 'internal',
                     id: this.ban.id,
@@ -83,12 +89,20 @@
                 })
             },
             addExternal() {
+                this.state = this.states.LOADING
                 axios.post('/api/admin/proof', {
                     type: 'external',
                     id: this.ban.id,
                     label: this.proofLabel,
                     url: this.externalUrl
                 }).then(() => {
+                    this.$emit('updateBan')
+                    this.state = this.states.WAITING
+                })
+            },
+            removeProof(id) {
+                this.state = this.states.LOADING
+                axios.post(`/api/admin/proof/${id}/delete`).then(() => {
                     this.$emit('updateBan')
                     this.state = this.states.WAITING
                 })

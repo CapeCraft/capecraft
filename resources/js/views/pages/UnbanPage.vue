@@ -108,10 +108,6 @@
                 if(this.what_different == "") return false;
                 if(!this.tac) return false;
 
-                if(this.before_ban.length < 50 || this.before_ban.length > 1000) return false;
-                if(this.why_unban.length < 50 || this.why_unban.length > 1000) return false;
-                if(this.what_different.length < 50 || this.what_different.length > 1000) return false;
-
                 return true;
             },
             submitRequest() {

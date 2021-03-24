@@ -35,7 +35,7 @@ class UnbanRequestMail extends Mailable
      */
     public function build() {
         return $this->replyTo($this->unbanRequest->email, $this->unbanRequest->username)
-                    ->subect($this->unbanRequest->username . " - Unban Request")
+                    ->subject($this->unbanRequest->username . " - Unban Request")
                     ->markdown('unban_email', [ 'unbanRequest' => $this->unbanRequest ]);
     }
 }

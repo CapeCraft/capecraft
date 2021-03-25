@@ -103,7 +103,7 @@
                 })
             },
             removeBan(id) {
-                this.player.bans = this.player.bans.filter(item => item.id != id);
+                this.punishment.bans = this.punishment.bans.filter(item => item.id != id);
             }
         },
         computed: {

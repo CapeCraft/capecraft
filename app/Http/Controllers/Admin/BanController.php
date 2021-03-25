@@ -89,7 +89,7 @@ class BanController extends Controller {
             //Remove Cache
             cache()->tags(['banlist'])->flush();
             cache()->forget("ban_$id");
-            cache()->forget("player_$ban->uuid");
+            cache()->forget("player_{$ban->uuid}_bans");
 
             //Delete proof
             foreach($ban->proof as $proof) {

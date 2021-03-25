@@ -65,7 +65,7 @@ class PlayerController extends Controller {
             if($bans->exists()) {
                 return response()->json(['active' => $active, 'bans' => $bans->get()]);
             } else {
-                return response()->json(['success' => false], 400);
+                return response()->json(['active' => [], 'bans' => []]);
             }
         });
     }

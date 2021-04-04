@@ -68,7 +68,7 @@
                         <label for="tac">I am in good faith to believe that I deserve to be unbanned and all information supplied is true. I also understand that I can submit this form only once every 24 hours.</label>
                     </div>
                     <hr>
-                    <button class="btn btn-primary btn-block btn-lg" :disabled="!validForm()" @click="submitRequest">Submit Unban Request</button>
+                    <button class="btn btn-primary btn-block btn-lg" :disabled="!validForm() || sendingUnban" @click="submitRequest">Submit Unban Request</button>
                 </div>
             </div>
             <div v-else>
@@ -84,6 +84,7 @@
     export default {
         data() {
             return {
+                sendingUnban: false,
                 unbanSent: false,
                 errors: null,
                 ban_type: '',
@@ -111,6 +112,7 @@
                 return true;
             },
             submitRequest() {
+                this.sendingUnban = true;
                 //Submit values
                 axios.post('/api/unban', {
                     ban_type: this.ban_type,
@@ -129,6 +131,7 @@
                     this.errors = response.response.data.errors;
                     document.getElementsByClassName('content-wrapper')[0].scrollTo({ top: 0, behavior: 'smooth' });
                     this.tac = false;
+                    this.sendingUnban = false;
                 })
             }
         },

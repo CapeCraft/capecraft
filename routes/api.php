@@ -86,8 +86,8 @@ if(config('app.debug')) {
         return ['success' => true];
     });
 
-    Route::get('/unban', function() {
-        $unbanRequest = \App\Models\UnbanRequest::find(1);
+    Route::get('/unban/{id}', function($id) {
+        $unbanRequest = \App\Models\UnbanRequest::find($id);
         return new App\Mail\UnbanRequestMail($unbanRequest);
     });
 }

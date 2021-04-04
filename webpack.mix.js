@@ -11,12 +11,25 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.disableNotifications();
+ mix.disableNotifications();
 
-mix.js("resources/js/app.js", "public/js").vue();
-mix.sass("resources/sass/app.scss", "public/css");
-mix.copyDirectory("resources/images", "public/images");
+ mix.js("resources/js/app.js", "public/js").vue()
+ mix.sass("resources/sass/app.scss", "public/css")
+ mix.copyDirectory("resources/images", "public/images")
 
-if(mix.inProduction()) {
-    mix.version();
-}
+ /**
+  * Add @ for gettign to root of directory
+  */
+ mix.webpackConfig({
+     resolve: {
+         extensions: ['.js', '.vue', '.json'],
+         alias: {
+             'vue$': 'vue/dist/vue.esm.js',
+             '@': __dirname + '/resources/js',
+         }
+     }
+     });
+
+ if(mix.inProduction()) {
+     mix.version();
+ }

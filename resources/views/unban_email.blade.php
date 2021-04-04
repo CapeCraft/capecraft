@@ -1,5 +1,5 @@
 @component('mail::message')
-# {{$unbanRequest->username}} - Unban Request
+# `{{$unbanRequest->username}}` - Unban Request
     {{$unbanRequest->uuid}}
     {{$unbanRequest->email}}
 
@@ -21,5 +21,5 @@
 {{$unbanRequest->what_different}}
 
 Thanks,<br>
-{{$unbanRequest->username}}
+`{{$unbanRequest->username}}`
 @endcomponent

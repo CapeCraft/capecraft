@@ -79,7 +79,7 @@
 </template>
 
 <script>
-    import FormErrors from '../partials/FormErrors'
+    import FormErrors from '@/views/partials/FormErrors'
 
     export default {
         data() {

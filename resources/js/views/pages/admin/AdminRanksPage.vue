@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import AdminEditor from '../../partials/admin/AdminEditor'
+    import AdminEditor from '@/views/partials/admin/AdminEditor'
     export default {
         data() {
             return {

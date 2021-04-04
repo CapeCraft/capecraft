@@ -2,16 +2,16 @@ import Vue from 'vue';
 
 // VueX
 import Vuex from 'vuex';
-import Store from './store'
+import Store from '@/store'
 Vue.use(Vuex);
 
 //Router
 import VueRouter from 'vue-router'
-import Router from './router'
+import Router from '@/router'
 Vue.use(VueRouter);
 
 // Font Awesome
-import { FontAwesomeIcon, FontAwesomeLayers } from './fontawesome'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@/fontawesome'
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('font-awesome-layers', FontAwesomeLayers);
 
@@ -25,7 +25,7 @@ Vue.filter('formatDate', function(value) {
 });
 
 // Layout
-import CapeCraft from './views/CapeCraft'
+import CapeCraft from '@/views/CapeCraft'
 
 const app = new Vue({
     el: '#app',

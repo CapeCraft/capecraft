@@ -55,7 +55,7 @@
 </template>
 
 <script>
-    import AdminBanProof from '../../../partials/admin/AdminBanProof'
+    import AdminBanProof from '@/views/partials/admin/AdminBanProof'
     export default {
         data() {
             return {

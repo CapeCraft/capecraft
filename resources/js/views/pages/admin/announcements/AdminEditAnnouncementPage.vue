@@ -34,8 +34,8 @@
 </template>
 
 <script>
-    import FormErrors from '../../../partials/FormErrors'
-    import AdminEditor from '../../../partials/admin/AdminEditor'
+    import FormErrors from '@/views/partials/FormErrors'
+    import AdminEditor from '@/views/partials/admin/AdminEditor'
 
     export default {
         data() {

@@ -1,34 +1,34 @@
 import VueRouter from 'vue-router'
 
 //Pages
-import HomePage from './views/pages/HomePage'
-import AnnouncementsPage from './views/pages/AnnouncementsPage'
-import GameRulesPage from './views/pages/GameRulesPage'
-import AfkRulesPage from './views/pages/AfkRulesPage'
-import AltRulesPage from './views/pages/AltRulesPage'
-import UnbanPage from './views/pages/UnbanPage'
-import RanksPage from './views/pages/RanksPage'
-import StaffPage from './views/pages/StaffPage'
+import HomePage from '@/views/pages/HomePage'
+import AnnouncementsPage from '@/views/pages/AnnouncementsPage'
+import GameRulesPage from '@/views/pages/GameRulesPage'
+import AfkRulesPage from '@/views/pages/AfkRulesPage'
+import AltRulesPage from '@/views/pages/AltRulesPage'
+import UnbanPage from '@/views/pages/UnbanPage'
+import RanksPage from '@/views/pages/RanksPage'
+import StaffPage from '@/views/pages/StaffPage'
 
-import AdminPage from './views/pages/admin/AdminPage'
+import AdminPage from '@/views/pages/admin/AdminPage'
 
-import AdminAccountPage from './views/pages/admin/AdminAccountPage'
-import AdminBanListPage from './views/pages/admin/bans/AdminBanListPage'
-import AdminBanPage from './views/pages/admin/bans/AdminBanPage'
+import AdminAccountPage from '@/views/pages/admin/AdminAccountPage'
+import AdminBanListPage from '@/views/pages/admin/bans/AdminBanListPage'
+import AdminBanPage from '@/views/pages/admin/bans/AdminBanPage'
 
-import AdminPlayerPage from './views/pages/admin/AdminPlayerPage'
+import AdminPlayerPage from '@/views/pages/admin/AdminPlayerPage'
 
-import AdminAnnouncementsPage from './views/pages/admin/announcements/AdminAnnouncementsPage'
-import AdminNewAnnouncementPage from './views/pages/admin/announcements/AdminNewAnnouncementPage'
-import AdminEditAnnouncementPage from './views/pages/admin/announcements/AdminEditAnnouncementPage'
-import AdminDeleteAnnouncementPage from './views/pages/admin/announcements/AdminDeleteAnnouncementPage'
+import AdminAnnouncementsPage from '@/views/pages/admin/announcements/AdminAnnouncementsPage'
+import AdminNewAnnouncementPage from '@/views/pages/admin/announcements/AdminNewAnnouncementPage'
+import AdminEditAnnouncementPage from '@/views/pages/admin/announcements/AdminEditAnnouncementPage'
+import AdminDeleteAnnouncementPage from '@/views/pages/admin/announcements/AdminDeleteAnnouncementPage'
 
-import AdminRulesPage from './views/pages/admin/AdminRulesPage'
-import AdminRanksPage from './views/pages/admin/AdminRanksPage'
-import AdminStaffPage from './views/pages/admin/AdminStaffPage'
-import AdminLoginPage from './views/pages/admin/AdminLoginPage'
+import AdminRulesPage from '@/views/pages/admin/AdminRulesPage'
+import AdminRanksPage from '@/views/pages/admin/AdminRanksPage'
+import AdminStaffPage from '@/views/pages/admin/AdminStaffPage'
+import AdminLoginPage from '@/views/pages/admin/AdminLoginPage'
 
-import NotFoundPage from './views/errors/NotFoundPage'
+import NotFoundPage from '@/views/errors/NotFoundPage'
 
 const routes = [
     {

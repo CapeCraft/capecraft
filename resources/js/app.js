@@ -1,7 +1,7 @@
-require("./bootstrap");
+require("@/bootstrap");
 
 // VueJS
-require("./vue")
+require("@/vue")
 
 // Halfmoon
 const halfmoon = require('halfmoon');

@@ -55,10 +55,10 @@
 
 <script>
     import { mapState } from 'vuex'
-    import ModalElement from './partials/ModalElement'
-    import MainMenu from './partials/MainMenu'
-    import AdminMenu from './partials/admin/AdminMenu'
-    import MainFooter from './partials/MainFooter'
+    import ModalElement from '@/views/partials/ModalElement'
+    import MainMenu from '@/views/partials/MainMenu'
+    import AdminMenu from '@/views/partials/admin/AdminMenu'
+    import MainFooter from '@/views/partials/MainFooter'
     export default {
         watch: {
             $route: {

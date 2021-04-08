@@ -10,7 +10,7 @@ git pull
 sudo chown -R www-data:www-data *
 sudo chmod g+w . -R
 composer install
-npm install
+npm ci
 php artisan view:clear
 php artisan config:clear
 php artisan storage:link

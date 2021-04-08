@@ -22,14 +22,12 @@ const mix = require('laravel-mix');
   */
  mix.webpackConfig({
      resolve: {
-         extensions: ['.js', '.vue', '.json'],
-         alias: {
-             'vue$': 'vue/dist/vue.esm.js',
-             '@': __dirname + '/resources/js',
-         }
-     }
-     });
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': __dirname + '/resources/js',
+        }
+    }
+});
 
- if(mix.inProduction()) {
-     mix.version();
- }
+mix.version();

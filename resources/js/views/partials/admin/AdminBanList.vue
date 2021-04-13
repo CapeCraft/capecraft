@@ -8,6 +8,7 @@
                     <th>Reason</th>
                     <th>Punishment</th>
                     <th>Issued By</th>
+                    <td>Date Issued</td>
                     <th v-if="hideDelete !== true"></th>
                 </tr>
             </thead>
@@ -18,6 +19,7 @@
                     <td>{{ban.reason}}</td>
                     <td>{{ban.punishmentType}}</td>
                     <td>{{ban.operator}}</td>
+                    <td>{{ban.start | formatDate}}</td>
                     <td v-if="hideDelete !== true"><button class="btn btn-sm btn-danger" @click="removeBan(ban.id)"><font-awesome-icon icon="trash"/></button></td>
                 </tr>
             </tbody>

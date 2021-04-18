@@ -8,7 +8,7 @@
                     <th>Reason</th>
                     <th>Punishment</th>
                     <th>Issued By</th>
-                    <td>Date Issued</td>
+                    <th>Date Issued</th>
                     <th v-if="hideDelete !== true"></th>
                 </tr>
             </thead>

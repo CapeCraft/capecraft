@@ -60,6 +60,17 @@ class PunishmentHistory extends Model {
     }
 
     /**
+     * Find a punishment by a legacy player
+     *
+     * @param  mixed $query
+     * @param  mixed $string
+     * @return void
+     */
+    public function scopeByLegacyName($query, $string) {
+        return $query->where('name', 'like', "%$string%");
+    }
+
+    /**
      * Find punishments by reason
      *
      * @param  mixed $query

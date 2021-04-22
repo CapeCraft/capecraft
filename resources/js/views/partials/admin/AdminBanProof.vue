@@ -15,7 +15,7 @@
                 <tr v-for="proof in ban.proof" :key="proof.id">
                     <td>{{proof.id}}</td>
                     <td>{{proof.label}}</td>
-                    <td><a :href="proof.proof" target="_blank">{{proof.proof}}</a></td>
+                    <td style="word-break: break-all"><a :href="proof.proof" target="_blank">{{proof.proof}}</a></td>
                     <td class="text-right"><button class="btn btn-sm btn-danger" @click="removeProof(proof.id)"><font-awesome-icon icon="trash"/></button></td>
                 </tr>
             </tbody>

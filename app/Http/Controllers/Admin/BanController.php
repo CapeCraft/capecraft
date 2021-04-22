@@ -59,6 +59,13 @@ class BanController extends Controller {
             }
         }
 
+        //Try a legacy username
+        $result = clone $punishmentHistory;
+        $result->byLegacyName($request->search);
+        if($result->exists()) {
+            return $result->paginate(10);
+        }
+
         //Reason
         return $punishmentHistory->byReason($request->search)->paginate(10);
     }

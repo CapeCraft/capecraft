@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import MainNavbarContent from './MainNavbarContent'
+    import MainNavbarContent from '@/views/partials/MainNavbarContent'
 
     export default {
         components: {

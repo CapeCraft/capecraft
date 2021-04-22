@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import PaginationNav from '../../../partials/PaginationNav'
+    import PaginationNav from '@/views/partials/PaginationNav'
 
     export default {
         data() {

@@ -38,8 +38,8 @@
 </style>
 
 <script>
-    import AdminBanList from '../../../partials/admin/AdminBanList'
-    import PaginationNav from '../../../partials/PaginationNav'
+    import AdminBanList from '@/views/partials/admin/AdminBanList'
+    import PaginationNav from '@/views/partials/PaginationNav'
 
     export default {
         data() {

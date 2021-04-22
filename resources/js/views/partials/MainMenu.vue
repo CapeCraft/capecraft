@@ -39,7 +39,7 @@
 
 <script>
     import { mapState } from 'vuex'
-    import MainNavbarContent from './MainNavbarContent'
+    import MainNavbarContent from '@/views/partials/MainNavbarContent'
 
     export default {
         computed: mapState(['user']),

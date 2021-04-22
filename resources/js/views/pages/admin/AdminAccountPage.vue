@@ -16,7 +16,7 @@
 
 
 <script>
-    import AdminManagement from '../../partials/admin/AdminManagement'
+    import AdminManagement from '@/views/partials/admin/AdminManagement'
     import { mapState } from 'vuex'
     export default {
         components: {

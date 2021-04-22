@@ -65,8 +65,8 @@
 </template>
 
 <script>
-    import AdminBanList from '../../partials/admin/AdminBanList'
-    import CheckAnimation from '../../partials/CheckAnimation'
+    import AdminBanList from '@/views/partials/admin/AdminBanList'
+    import CheckAnimation from '@/views/partials/CheckAnimation'
 
     export default {
         data() {

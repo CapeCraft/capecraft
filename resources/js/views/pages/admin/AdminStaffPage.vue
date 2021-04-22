@@ -79,7 +79,7 @@
 
 <script>
 import { mapState } from 'vuex'
-    import AdminManagement from '../../partials/admin/AdminManagement'
+    import AdminManagement from '@/views/partials/admin/AdminManagement'
 
     export default {
         data() {

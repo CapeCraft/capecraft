@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Site Maintenance | CapeCraft.net</title>
+        <title>Farewell | CapeCraft.net</title>
         <meta http-equiv="refresh" content="10">
         <style>
             body {
@@ -19,14 +19,23 @@
                 color: rgba(255,255,255,.8);
             }
 
+            .img-fluid {
+                width: 400px;
+            }
+
 
         </style>
     </head>
     <body>
         <div>
-            <h1>We'll be back soon!</h1>
+            <img class="img-fluid" src="/images/logo/logo-grass.png"/>
+            <h1>Thank you for playing CapeCraft!</h1>
+            <p>CapeCraft has been running for 3 years, and sadly, it has reached the end of it's life.</p>
+            <p>We want to personally thank you all for your time and dedication put into this server.</p>
+            <small>Please email staff@capecraft.net to enquire about donation refunds.</small>
+            {{-- <h1>We'll be back soon!</h1>
             <p>We're performing some crucial maintenance to make our site better!</p>
-            <small>Wait here and we will redirect you as soon as we are done!</small>
+            <small>Wait here and we will redirect you as soon as we are done!</small> --}}
         </div>
     </body>
 </html>
